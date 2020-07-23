@@ -5,7 +5,6 @@
 ## Dokumentaatio
 
 - [Määrittelydokumentti](dokumentaatio/maarittely.md)
-- [Toteutusdokumentti](dokumentaatio/toteutus.md)
 
 ## Viikkoraportit
 
