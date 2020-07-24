@@ -10,9 +10,7 @@ Pelilauta on tallennettu tekstitiedostoon (sisällytetään jar-pakettiin)
 
 Tehtäessä päätöstä herra X:n siirrosta tarvitaan tieto, minne kustakin ruudusta pääsee. Samoin tietoa tarvitaan kun etsiville esitetään kulloinkin valittavissa olevat vaihtoehdot.
 
-Tietorakenne: Vieruslistat toteutetaan yhteen suuntaan linkitettyinä listoina, joiden ensimmäisten alkioiden osoittimet sijoitetaan taulukkoon
-
-*Vaihtoehtoisesti* käytetään vieruslistoihin isoa taulukkoa (tällöin kuluu hieman ylimääräistä tilaa, mutta toteutus on todennäköisesti nopeampi). Tuloksena olisi ehkä kuitenkin selkeämpi rajapinta.
+Tietorakenne: Vieruslistat toteutetaan taulukkoon perustuvalla tietorakenteella.
 
 Aikavaativuudet: Tiedon lisääminen ja tietyn ruudun vieruslistan hakeminen O(1)
 
@@ -28,7 +26,7 @@ Aikavaativuus: Tiedon lisääminen ja haku O(1)
 
 Arvioitaessa herra X:n siirtoa on tarpeen tietää, kuinka nopeasti etsivät saavuttaisivat kyseisen ruudun. Koska etäisyysarvioita etsivien sijainneista vaihtoehtoisille X:n etenemissuunnille tehdään pelin kuluessa paljon, lienee järkevää laskea ruutujen väliset etäisyydet etukäteen.
 
-Kun pelilauta on ladattu, lasketaan kaikkien ruutujen välisistä etäisyyksistä etäisyysmatriisi *Vaihtoehto 1* Floydin ja Warshallin algoritmilla. Koska kaikki etäisyydet ovat symmetrisiä, muokataan algoritmia niin että etäisyydet lasketaan ja tallennetaan vain yhteen kertaan.
+Kun pelilauta on ladattu, lasketaan kaikkien ruutujen välisistä etäisyyksistä etäisyysmatriisi *Vaihtoehto 1* Floydin ja Warshallin algoritmilla. Koska kaikki etäisyydet ovat symmetrisiä, muokataan algoritmia niin että etäisyydet lasketaan ja tallennetaan vain yhteen kertaan. Algoritmia voitaneen tehostaa myös ottamaan huomioon se, että ruutujen enimmäisetäisyys kartalla on vain kymmenen vuoroa.
 
 Tietorakenne: Taulukko, tilavaativuus O(n<sup>2</sup>)
 
@@ -40,7 +38,7 @@ Aikavaativuudet: Taulukon muodostaminen O(n<sup>3</sup>), tiedon hakeminen O(1)
 
 *Vaihtoehto 4:* Käytetään muita algoritmeja etäisyyksien laskemiseen.
 
-Koska kartan lataaminen ja etäisyyksien laskeminen tehdään ohjelman alussa, voisi tässä toteuttaa vertailun eri metodien välille.
+Koska kartan lataaminen ja etäisyyksien laskeminen tehdään ohjelman alussa, tarvittaessa voisi tässä toteuttaa vertailun eri metodien välille.
 
 ### Satunnaislukujen tuottaminen
 
