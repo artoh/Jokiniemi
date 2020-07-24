@@ -8,4 +8,4 @@
 
 ## Viikkoraportit
 
-- Viikko 1
+- [Viikko 1](dokumentaatio/viikko1/viikko1.md)
