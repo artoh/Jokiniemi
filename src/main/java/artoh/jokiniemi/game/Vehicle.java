@@ -16,5 +16,5 @@ public enum Vehicle {
     When Mister X used "DOUBLED"-card, the detectives still in the same
     place and get "DOUBLED" status in the log
     */
-    DOUBLED
+    DOUBLED  
 }

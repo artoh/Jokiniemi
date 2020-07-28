@@ -24,7 +24,7 @@ public class GameLog {
      * @return True if positon of Mr X is visibe
      */
     public boolean isVisibleTurn(int turn) {
-       throw new UnsupportedOperationException();  
+        throw new UnsupportedOperationException();  
     }
     
     /**

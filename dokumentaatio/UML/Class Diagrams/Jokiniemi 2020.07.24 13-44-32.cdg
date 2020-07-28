@@ -2,66 +2,7 @@
 
 <ClassDiagram name="Jokiniemi">
   <ClassDiagramComponents>
-    <Interface name="BoardDistanceInterface" package="artoh.jokiniemi.algorithm" visibility="public" xPosition="20.0" yPosition="20.0">
-      <Methods>
-        <Method name="init" returnType="void" visibility="public">
-          <Argument type="GameBoardInterface" name="gameboard"/>
-        </Method>
-        <Method name="distance" returnType="int" visibility="public">
-          <Argument type="int" name="from"/>
-          <Argument type="int" name="to"/>
-        </Method>
-      </Methods>
-    </Interface>
-    <Interface name="RandomizeInterface" package="artoh.jokiniemi.algorithm" visibility="public" xPosition="320.0" yPosition="20.0">
-      <Methods>
-        <Method name="next" returnType="int" visibility="public">
-          <Argument type="int" name="max"/>
-        </Method>
-      </Methods>
-    </Interface>
-    <Interface name="AIInterface" package="artoh.jokiniemi.ai" visibility="public" xPosition="620.0" yPosition="20.0">
-      <Methods>
-        <Method name="startGame" returnType="void" visibility="public"/>
-        <Method name="doAITurn" returnType="void" visibility="public"/>
-      </Methods>
-    </Interface>
-    <Interface name="GameBoardInterface" package="artoh.jokiniemi.game" visibility="public" xPosition="920.0" yPosition="20.0">
-      <Methods>
-        <Method name="init" returnType="void" visibility="public">
-          <Argument type="int" name="squares"/>
-        </Method>
-        <Method name="addConnection" returnType="void" visibility="public">
-          <Argument type="Vehicle" name="vehicle"/>
-          <Argument type="int" name="from"/>
-          <Argument type="int" name="to"/>
-        </Method>
-        <Method name="squareCount" returnType="int" visibility="public"/>
-        <Method name="connectionsCount" returnType="int" visibility="public">
-          <Argument type="int" name="square"/>
-        </Method>
-        <Method name="connectionTo" returnType="int" visibility="public">
-          <Argument type="int" name="square"/>
-          <Argument type="int" name="index"/>
-        </Method>
-        <Method name="connectionVehicle" returnType="Vehicle" visibility="public">
-          <Argument type="int" name="square"/>
-          <Argument type="int" name="index"/>
-        </Method>
-      </Methods>
-    </Interface>
-    <Enum name="Vehicle" package="artoh.jokiniemi.game" visibility="public" xPosition="1220.0" yPosition="20.0">
-      <Literals>
-        <Literal name="START_SQUARE"/>
-        <Literal name="TAXI"/>
-        <Literal name="BUS"/>
-        <Literal name="UNDERGROUD"/>
-        <Literal name="FERRY"/>
-        <Literal name="BLACK_CARD"/>
-        <Literal name="DOUBLED"/>
-      </Literals>
-    </Enum>
-    <Class name="GameLog" package="artoh.jokiniemi.game" visibility="public" xPosition="1520.0" yPosition="20.0">
+    <Class name="GameLog" package="artoh.jokiniemi.game" visibility="public" xPosition="338.0" yPosition="836.0">
       <Fields>
         <Field name="turn" type="int" visibility="private"/>
         <Field name="turns" type="int" visibility="private"/>
@@ -96,7 +37,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="StartPlaceRandomizer" package="artoh.jokiniemi.game" visibility="public" xPosition="1820.0" yPosition="20.0">
+    <Class name="StartPlaceRandomizer" package="artoh.jokiniemi.game" visibility="public" xPosition="684.0" yPosition="5.0">
       <Fields>
         <Field name="randomizer" type="RandomizeInterface" visibility="protected"/>
       </Fields>
@@ -114,7 +55,7 @@
         <Method name="getStartPlaceForDetective" returnType="int" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="Game" package="artoh.jokiniemi.game" visibility="public" xPosition="2120.0" yPosition="20.0">
+    <Class name="Game" package="artoh.jokiniemi.game" visibility="public" xPosition="1030.0" yPosition="429.0">
       <Fields>
         <Field name="gameLog" type="GameLog" visibility="private" isFinal="true"/>
         <Field name="randomizer" type="RandomizeInterface" visibility="private" isFinal="true"/>
@@ -143,7 +84,7 @@
         <Method name="gameBoard" returnType="GameBoardInterface" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="BoardFileReader" package="artoh.jokiniemi.io" visibility="public" xPosition="20.0" yPosition="420.0">
+    <Class name="BoardFileReader" package="artoh.jokiniemi.io" visibility="public" xPosition="491.0" yPosition="475.0">
       <Fields/>
       <Constructors/>
       <Methods>
@@ -152,19 +93,78 @@
         </Method>
       </Methods>
     </Class>
+    <Interface name="BoardDistanceInterface" package="artoh.jokiniemi.algorithm" visibility="public" xPosition="41.0" yPosition="37.0">
+      <Methods>
+        <Method name="init" returnType="void" visibility="public">
+          <Argument type="GameBoardInterface" name="gameboard"/>
+        </Method>
+        <Method name="distance" returnType="int" visibility="public">
+          <Argument type="int" name="from"/>
+          <Argument type="int" name="to"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Interface name="RandomizeInterface" package="artoh.jokiniemi.algorithm" visibility="public" xPosition="405.0" yPosition="37.0">
+      <Methods>
+        <Method name="next" returnType="int" visibility="public">
+          <Argument type="int" name="max"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Interface name="AIInterface" package="artoh.jokiniemi.ai" visibility="public" xPosition="1443.0" yPosition="138.0">
+      <Methods>
+        <Method name="startGame" returnType="void" visibility="public"/>
+        <Method name="doAITurn" returnType="void" visibility="public"/>
+      </Methods>
+    </Interface>
+    <Interface name="GameBoardInterface" package="artoh.jokiniemi.game" visibility="public" xPosition="48.0" yPosition="571.0">
+      <Methods>
+        <Method name="init" returnType="void" visibility="public">
+          <Argument type="int" name="squares"/>
+        </Method>
+        <Method name="addConnection" returnType="void" visibility="public">
+          <Argument type="Vehicle" name="vehicle"/>
+          <Argument type="int" name="from"/>
+          <Argument type="int" name="to"/>
+        </Method>
+        <Method name="squareCount" returnType="int" visibility="public"/>
+        <Method name="connectionsCount" returnType="int" visibility="public">
+          <Argument type="int" name="square"/>
+        </Method>
+        <Method name="connectionTo" returnType="int" visibility="public">
+          <Argument type="int" name="square"/>
+          <Argument type="int" name="index"/>
+        </Method>
+        <Method name="connectionVehicle" returnType="Vehicle" visibility="public">
+          <Argument type="int" name="square"/>
+          <Argument type="int" name="index"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Enum name="Vehicle" package="artoh.jokiniemi.game" visibility="public" xPosition="1238.0" yPosition="43.0">
+      <Literals>
+        <Literal name="START_SQUARE"/>
+        <Literal name="TAXI"/>
+        <Literal name="BUS"/>
+        <Literal name="UNDERGROUD"/>
+        <Literal name="FERRY"/>
+        <Literal name="BLACK_CARD"/>
+        <Literal name="DOUBLED"/>
+      </Literals>
+    </Enum>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="randomizer" source="artoh.jokiniemi.game.Game" target="artoh.jokiniemi.algorithm.RandomizeInterface" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="gameLog" source="artoh.jokiniemi.game.Game" target="artoh.jokiniemi.game.GameLog" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.game.Game" target="artoh.jokiniemi.game.Game" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="randomizer" source="artoh.jokiniemi.game.StartPlaceRandomizer" target="artoh.jokiniemi.algorithm.RandomizeInterface" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="artoh.jokiniemi.algorithm.BoardDistanceInterface" target="artoh.jokiniemi.game.Game" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="artoh.jokiniemi.game.GameLog" target="artoh.jokiniemi.algorithm.RandomizeInterface" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="artoh.jokiniemi.game.GameBoardInterface" target="artoh.jokiniemi.game.Vehicle" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="artoh.jokiniemi.game.Game" target="artoh.jokiniemi.ai.AIInterface" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.game.GameLog" target="artoh.jokiniemi.game.Vehicle" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="gameLog" source="artoh.jokiniemi.game.Game" target="artoh.jokiniemi.game.GameLog" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="gameboard" source="artoh.jokiniemi.game.Game" target="artoh.jokiniemi.game.GameBoardInterface" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.algorithm.BoardDistanceInterface" target="artoh.jokiniemi.game.Game" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="artoh.jokiniemi.game.Game" target="artoh.jokiniemi.algorithm.RandomizeInterface" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="randomizer" source="artoh.jokiniemi.game.StartPlaceRandomizer" target="artoh.jokiniemi.algorithm.RandomizeInterface" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.game.GameLog" target="artoh.jokiniemi.algorithm.RandomizeInterface" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="randomizer" source="artoh.jokiniemi.game.Game" target="artoh.jokiniemi.algorithm.RandomizeInterface" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="artoh.jokiniemi.game.Game" target="artoh.jokiniemi.game.Game" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="artoh.jokiniemi.game.GameLog" target="artoh.jokiniemi.game.Vehicle" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="artoh.jokiniemi.io.BoardFileReader" target="artoh.jokiniemi.game.Game" sourceCardinality="1..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>

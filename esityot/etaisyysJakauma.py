@@ -15,7 +15,7 @@ for i in range(0,12):
     jakauma.append(0)
 
 
-file = open("../src/main/resources/lauta.txt", mode='r')
+file = open("../src/main/resources/board.txt", mode='r')
 for i in range(0,5):
     file.readline()
 rivi = file.readline()
