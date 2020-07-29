@@ -37,10 +37,11 @@ public class BoardFileReaderTest {
 
         int indexes[] = {1,1,1};
         MockRandomizer mock = new MockRandomizer(indexes);
+        StartPlaceRandomizer starter = new StartPlaceRandomizer(mock);
         
-        Game game = new Game(mock);
+        Game game = new Game(starter);       
         
-        assertTrue( reader.readBoard(game));
+        assertTrue( reader.readBoard(game, starter));
         
         assertEquals(199, game.gameBoard().squareCount());
         

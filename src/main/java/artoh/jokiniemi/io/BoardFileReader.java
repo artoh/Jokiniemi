@@ -31,7 +31,7 @@ public class BoardFileReader {
      * @param game The Game object
      * @return True if success
      */
-    public boolean readBoard(Game game) {
+    public boolean readBoard(Game game, StartPlaceRandomizer starter) {
         
         try {
             FileReader reader = new FileReader(getResourceFile("board.txt"));
@@ -48,8 +48,8 @@ public class BoardFileReader {
             initTurnTable(game.log(), br.readLine());
             
             // Start lists
-            initStartList(game.startPlacer(), br.readLine());
-            initStartList(game.startPlacer(), br.readLine());
+            initStartList(starter, br.readLine());
+            initStartList(starter, br.readLine());
             
             String line;            
             while ((line = br.readLine()) != null) {

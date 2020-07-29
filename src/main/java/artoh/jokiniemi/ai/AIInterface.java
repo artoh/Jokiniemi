@@ -5,6 +5,8 @@
  */
 package artoh.jokiniemi.ai;
 
+import artoh.jokiniemi.game.Game;
+
 /**
  * Interface for Game AI
  * 
@@ -15,7 +17,7 @@ public interface AIInterface {
     /**
      * Called when start a new gmae
      */
-    public void startGame();
+    public void startGame(Game game);
     
     /**
      * Called to do the turn of AI

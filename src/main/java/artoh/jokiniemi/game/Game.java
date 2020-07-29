@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package artoh.jokiniemi.game;
 
 import artoh.jokiniemi.ai.AIInterface;
-import artoh.jokiniemi.algorithm.RandomizeInterface;
 
 /**
  *
@@ -15,11 +9,10 @@ import artoh.jokiniemi.algorithm.RandomizeInterface;
 public class Game {
 
     
-    public Game(RandomizeInterface randomizer) {
+    public Game(StartPlaceInterface startPlacer) {
         this.gameLog = new GameLog();
-        this.randomizer = randomizer;        
         this.gameboard = new GameBoard();
-        this.startplacer = new StartPlaceRandomizer(randomizer);
+        this.startplacer = startPlacer;
     }    
     
     public enum GameStatus {
@@ -52,9 +45,14 @@ public class Game {
         this.blackCardsLeft = this.BLACK_CARDS_TOTAL;
         this.doubleCardsLeft = this.DOUBLE_CARDS_TOTAL;
         
+        this.detectivesCount = detectives;
+        this.ai = ai;
         this.gameLog.newGame(detectives, startplacer);
         
-        throw new UnsupportedOperationException();
+        this.status = GameStatus.RUNNING;
+
+        ai.startGame(this);
+        ai.doAITurn();
     }
     
     /**
@@ -74,7 +72,30 @@ public class Game {
      * @return Status of the game after this move (and move of AI)
      */
     public GameStatus doMove(int player, int square, Vehicle vehicle, boolean doubled) {
-        throw new UnsupportedOperationException();
+               
+        gameLog.logTurn(player, square, vehicle, doubled);        
+        
+        if (player > 0) {
+            this.detectivesMoved++;            
+        } else {
+            if (vehicle == Vehicle.BLACK_CARD) {
+                this.blackCardsLeft--;
+            } 
+            if (doubled) {
+                this.doubleCardsLeft--;
+            }
+        }
+        
+        checkStatus();
+        
+        if (player > 0 &&
+            this.status == GameStatus.RUNNING &&
+            this.detectivesCount == this.detectivesMoved) {
+            ai.doAITurn();
+            this.detectivesMoved = 0;
+        }
+        
+        return this.status;
     }
     
     /**
@@ -82,7 +103,7 @@ public class Game {
      * @return Amount of cards
      */
     public int doubleCardsLeft() {
-        throw new UnsupportedOperationException();
+        return this.doubleCardsLeft;
     }
     
     /**
@@ -90,7 +111,7 @@ public class Game {
      * @return amount of tickets
      */
     public int blackCardsLeft() {
-        throw new UnsupportedOperationException();
+        return this.blackCardsLeft;
     }
     
     /**
@@ -99,15 +120,7 @@ public class Game {
      */
     public GameLog log() {
         return this.gameLog;
-    }
-    
-    /**
-     * The Randomizer object
-     * @return Randomizer object
-     */
-    public RandomizeInterface randomizer() {
-        return this.randomizer;
-    }
+    }        
     
     /**
      * The Game Board object
@@ -121,15 +134,60 @@ public class Game {
      * The StartPlaceRandomizer object
      * @return Start placer object
      */
-    public StartPlaceRandomizer startPlacer() {
+    public StartPlaceInterface startPlacer() {
         return this.startplacer;
     }
     
+    /**
+     * Return count of detectives
+     * @return Count of detectives
+     */
+    public int detectives() {
+        return this.detectivesCount;
+    }
+    
+    /**
+     * Return game status
+     * @return Game status
+     */
+    public GameStatus gameStatus() {
+        return this.status;
+    }
+    
+    /**
+     * Update status of the game
+     * 
+     * Check if
+     * - some detective is in same square as Mr X: Detectives win
+     * - all the turns are gone and Mr is still free: Mr X win
+     * 
+     * @return Game status
+     */
+    private GameStatus checkStatus() {
+        
+        int mrXposition = gameLog.currentPosition(0);
+        
+        for (int i = 1; i < this.detectivesCount + 1; i++) {
+            if (gameLog.currentPosition(i) == mrXposition) {
+                this.status = GameStatus.DETECTIVES_WIN;
+            }
+        }
+        
+        if (gameLog.currentTurn() == gameLog.turnsTotal() - 1 && 
+            this.detectivesCount == this.detectivesMoved &&
+            this.status == GameStatus.RUNNING) {
+            this.status = GameStatus.MRX_WINS;
+        }
+        
+        return this.status;
+    }
+   
+    
     
     private final GameLog gameLog;
-    private final RandomizeInterface randomizer;
     private final GameBoardInterface gameboard;
-    private final StartPlaceRandomizer startplacer;
+    private final StartPlaceInterface startplacer;
+    private AIInterface ai;
 
     private final static int BLACK_CARDS_TOTAL = 5;
     private final static int DOUBLE_CARDS_TOTAL = 2;
@@ -137,6 +195,9 @@ public class Game {
     private int blackCardsLeft;
     private int doubleCardsLeft;
     
-    private final GameStatus gamestatus = GameStatus.NOT_STARTED;
+    private int detectivesCount;
+    private int detectivesMoved;
+    
+    private GameStatus status = GameStatus.NOT_STARTED;
     
 }

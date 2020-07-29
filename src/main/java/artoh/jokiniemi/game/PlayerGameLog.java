@@ -21,8 +21,8 @@ public class PlayerGameLog {
     public PlayerGameLog(int turns, int initialPosition) {
         this.turnsPlayed = 0;
         
-        this.squares = new int[turns];
-        this.vehicles = new int[turns];
+        this.squares = new int[turns + 1];
+        this.vehicles = new int[turns + 1];
         
         this.squares[0] = initialPosition;
         this.vehicles[0] = Vehicle.START_SQUARE.ordinal();
@@ -36,6 +36,7 @@ public class PlayerGameLog {
      * @return Turns played
      */
     public int addTurn(int square, Vehicle vehicle) {
+        
         this.turnsPlayed++;
         this.squares[this.turnsPlayed] = square;
         this.vehicles[this.turnsPlayed] = vehicle.ordinal();

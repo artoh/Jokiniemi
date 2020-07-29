@@ -44,7 +44,7 @@ public class GameLog {
      * @param detectives Count of detectives
      * @param starter Start placer object
      */
-    public void newGame(int detectives, StartPlaceRandomizer starter) {
+    public void newGame(int detectives, StartPlaceInterface starter) {
         
         this.logs = new PlayerGameLog[detectives + 1];
         this.logs[0] = new PlayerGameLog(turnsTotal(), starter.startNewGameAndGetStartPlaceForMisterX());
