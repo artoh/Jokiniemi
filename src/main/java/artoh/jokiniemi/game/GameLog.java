@@ -9,10 +9,6 @@ import artoh.jokiniemi.algorithm.RandomizeInterface;
  */
 public class GameLog {
     
-    private int turn = 0;
-    private int turns = 0;
-    
-    static final private int TURNS_TOTAL = 25;
     
     public GameLog() {
         
@@ -28,13 +24,33 @@ public class GameLog {
     }
     
     /**
+     * Init the game log
+     * @param turns Total amount of turns in the game
+     */
+    public void init(int turns) {
+        this.turns_total = turns;
+        this.visible = new boolean[turns];
+        for(int i=0; i<turns;i++) {
+            this.visible[i] = false;
+        }
+    }
+    
+    /**
+     * Set a turn as visible turn for Mister X
+     * @param turn Index of turn
+     */
+    public void setVisibleTurn(int turn) {
+        this.visible[turn] = true;
+    }
+    
+    /**
      * Start a new game. Mark the initial positions of Mr X and detectives.
      * 
      * @param detectives Count of detectives
      * @param randomizer Randomizer object
      */
     public void newGame(int detectives, RandomizeInterface randomizer) {
-        
+        this.turn = 0;
     }
     
     /**
@@ -50,7 +66,7 @@ public class GameLog {
      * @return Amount of turn
      */
     public int turnsTotal() {
-        return TURNS_TOTAL;
+        return turns_total;
     }
     
     /**
@@ -85,5 +101,9 @@ public class GameLog {
     public Vehicle vehicle(int player, int turn) {
         throw new UnsupportedOperationException();
     }
+    
+    private int turn = 0;
+    private int turns_total = 0;    
+    private boolean[] visible;
     
 }
