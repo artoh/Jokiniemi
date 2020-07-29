@@ -2,8 +2,6 @@ package artoh.jokiniemi.game;
 
 import artoh.jokiniemi.algorithm.RandomizeInterface;
 
-import java.lang.UnsupportedOperationException;
-
 /**
  * Get the start places for Mister X and the players
  * 
@@ -24,6 +22,8 @@ public class StartPlaceRandomizer {
      */
     public StartPlaceRandomizer(RandomizeInterface randomizer) {
         this.randomizer = randomizer;
+        this.detectivePlaces = new IntegerArray(DEFAULT_PLACE_CAPACITY);
+        this.mrXPlaces = new IntegerArray(DEFAULT_PLACE_CAPACITY);        
     }
     
     /**
@@ -34,7 +34,11 @@ public class StartPlaceRandomizer {
      * @param square  Square number
      */
     public void addStartPlace(boolean misterX, int square) {
-        throw new UnsupportedOperationException();
+        if( misterX ) {
+            mrXPlaces.push(square);
+        } else {
+            detectivePlaces.push(square);
+        }
     }
     
     /**
@@ -43,7 +47,10 @@ public class StartPlaceRandomizer {
      * @return Square number 
      */
     public int startNewGameAndGetStartPlaceForMisterX() {
-        throw new UnsupportedOperationException();
+        this.usedDetectivePlaces = new boolean[detectivePlaces.count()];
+        this.detectivesPlaced = 0;
+        
+        return mrXPlaces.at( this.randomizer.next( this.mrXPlaces.count()) -1 );
     }
     
     /**
@@ -53,7 +60,20 @@ public class StartPlaceRandomizer {
      * @return Square number
      */
     public int getStartPlaceForDetective() {
-        throw new UnsupportedOperationException();
+        int index = this.randomizer.next( this.detectivePlaces.count() - this.detectivesPlaced ) - 1;
+        for(int i=0; i<index; i++) {
+            if( usedDetectivePlaces[i]) {
+                index++;
+            }
+        }
+        this.usedDetectivePlaces[index] = true;
+        return this.detectivePlaces.at(index);
     }
     
+    private final int DEFAULT_PLACE_CAPACITY = 16;
+    
+    private IntegerArray detectivePlaces;
+    private IntegerArray mrXPlaces;
+    private boolean[] usedDetectivePlaces;
+    private int detectivesPlaced;    
 }
