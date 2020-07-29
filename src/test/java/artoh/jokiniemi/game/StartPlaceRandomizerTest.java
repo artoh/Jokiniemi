@@ -57,7 +57,7 @@ public class StartPlaceRandomizerTest {
     }
     
     
-    public class MockRandomizer implements RandomizeInterface {
+    static public class MockRandomizer implements RandomizeInterface {
 
         public MockRandomizer(int[] values) {
             this.values = values;

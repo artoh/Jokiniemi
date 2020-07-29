@@ -17,8 +17,8 @@ public class Square {
     public Square() {
         this.connections = 0;
         this.capacity = INITIAL_CAPACITY;
-        this.squares=new int[this.capacity];
-        this.vehicles=new int[this.capacity];
+        this.squares = new int[this.capacity];
+        this.vehicles = new int[this.capacity];
     }
     
     /**
@@ -31,13 +31,13 @@ public class Square {
     public void addConnection(Vehicle vehicle, int toSquare) {
         // If the data tables are full, doubles the sizes of the data tables and
         // copy the data tables to the new ones
-        if(this.capacity == this.connections) {
+        if (this.capacity == this.connections) {
             this.capacity = this.capacity * 2;
             int[] newSquares = new int[this.capacity];
             int[] newVehicles = new int[this.capacity];
-            for(int i=0; i<this.connections;i++) {
-                newSquares[i]=this.squares[i];
-                newVehicles[i]=this.vehicles[i];
+            for (int i = 0; i < this.connections; i++) {
+                newSquares[i] = this.squares[i];
+                newVehicles[i] = this.vehicles[i];
             }
             this.squares = newSquares;
             this.vehicles = newVehicles;
@@ -74,19 +74,21 @@ public class Square {
     public Vehicle connectionVehicle(int index) {
         int vehicle = this.vehicles[index];
         
-        if( vehicle == Vehicle.TAXI.ordinal())
+        if (vehicle == Vehicle.TAXI.ordinal()) {
             return Vehicle.TAXI;
-        else if( vehicle == Vehicle.BUS.ordinal())
+        } else if (vehicle == Vehicle.BUS.ordinal()) {
             return Vehicle.BUS;
-        else if( vehicle == Vehicle.UNDERGROUD.ordinal())
+        } else if (vehicle == Vehicle.UNDERGROUD.ordinal()) {
             return Vehicle.UNDERGROUD;
-        else if( vehicle == Vehicle.FERRY.ordinal())
+        } else if (vehicle == Vehicle.FERRY.ordinal()) {
             return Vehicle.FERRY;
-        else return Vehicle.START_SQUARE;   
+        } else { 
+            return Vehicle.START_SQUARE;   
+        }
                     
     }
     
-    private final int INITIAL_CAPACITY = 8;
+    private final static int INITIAL_CAPACITY = 8;
     
     private int capacity;
     private int connections;

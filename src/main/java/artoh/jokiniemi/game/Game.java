@@ -131,8 +131,8 @@ public class Game {
     private final GameBoardInterface gameboard;
     private final StartPlaceRandomizer startplacer;
 
-    private final int BLACK_CARDS_TOTAL = 5;
-    private final int DOUBLE_CARDS_TOTAL = 2;
+    private final static int BLACK_CARDS_TOTAL = 5;
+    private final static int DOUBLE_CARDS_TOTAL = 2;
     
     private int blackCardsLeft;
     private int doubleCardsLeft;

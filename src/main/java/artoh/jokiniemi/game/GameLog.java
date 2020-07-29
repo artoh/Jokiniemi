@@ -26,7 +26,7 @@ public class GameLog {
      * @param turns Total amount of turns in the game
      */
     public void init(int turns) {
-        this.turns_total = turns;
+        this.turnsTotal = turns;
         this.visible = new boolean[turns];        
     }
     
@@ -48,8 +48,8 @@ public class GameLog {
         
         this.logs = new PlayerGameLog[detectives + 1];
         this.logs[0] = new PlayerGameLog(turnsTotal(), starter.startNewGameAndGetStartPlaceForMisterX());
-        for(int i=0; i < detectives; i++) {
-            this.logs[i+1] = new PlayerGameLog(turnsTotal(), starter.getStartPlaceForDetective());
+        for (int i = 0; i < detectives; i++) {
+            this.logs[i + 1] = new PlayerGameLog(turnsTotal(), starter.getStartPlaceForDetective());
         }        
     }
     
@@ -66,7 +66,7 @@ public class GameLog {
      * @return Amount of turn
      */
     public int turnsTotal() {
-        return turns_total;
+        return turnsTotal;
     }
     
     /**
@@ -80,8 +80,8 @@ public class GameLog {
     public void logTurn(int player, int square, Vehicle vehicle, boolean doubled) {
         this.logs[player].addTurn(square, vehicle);
         
-        if(doubled) {
-            for(int i=1; i<this.logs.length;i++) {
+        if (doubled) {
+            for (int i = 1; i < this.logs.length; i++) {
                 this.logs[i].addTurn(this.logs[i].currentPosition(), Vehicle.DOUBLED);
             }
         }
@@ -117,7 +117,7 @@ public class GameLog {
         return this.logs[player].vehicle(turn);
     }
     
-    private int turns_total = 0;    
+    private int turnsTotal = 0;    
     private boolean[] visible;
     private PlayerGameLog[] logs;
     

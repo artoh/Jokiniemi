@@ -59,18 +59,19 @@ public class PlayerGameLog {
     public Vehicle vehicle(int turn) {
         int ordinal = this.vehicles[turn];
         
-        if( ordinal == Vehicle.TAXI.ordinal())
+        if (ordinal == Vehicle.TAXI.ordinal()) {
             return Vehicle.TAXI;
-        else if( ordinal == Vehicle.BUS.ordinal())
+        } else if (ordinal == Vehicle.BUS.ordinal()) {
             return Vehicle.BUS;
-        else if( ordinal == Vehicle.UNDERGROUD.ordinal())
+        } else if (ordinal == Vehicle.UNDERGROUD.ordinal()) {
             return Vehicle.UNDERGROUD;
-        else if( ordinal == Vehicle.BLACK_CARD.ordinal())
+        } else if (ordinal == Vehicle.BLACK_CARD.ordinal()) {
             return Vehicle.BLACK_CARD;
-        else if( ordinal == Vehicle.DOUBLED.ordinal())
+        } else if (ordinal == Vehicle.DOUBLED.ordinal()) {
             return Vehicle.DOUBLED;
-        else
+        } else {
             return Vehicle.START_SQUARE;
+        }
     }
             
     /**

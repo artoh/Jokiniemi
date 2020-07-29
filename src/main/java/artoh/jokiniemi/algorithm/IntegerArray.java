@@ -28,11 +28,11 @@ public class IntegerArray {
      * @param value Integer to append
      */
     public void push(int value) {
-        if( capacity == counter) {
+        if (capacity == counter) {
             capacity = capacity * 2;
             int newArray[] = new int[capacity];
-            for(int i=0; i < counter; i++) {
-                newArray[i]=data[i];
+            for (int i = 0; i < counter; i++) {
+                newArray[i] = data[i];
             }
             data = newArray;
         }

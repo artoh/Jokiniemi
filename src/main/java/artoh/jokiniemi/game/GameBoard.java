@@ -10,7 +10,7 @@ public class GameBoard implements GameBoardInterface {
     @Override
     public void init(int squares) {
         this.squares = new Square[squares];
-        for(int i=0; i < squares; i++) {
+        for (int i = 0; i < squares; i++) {
             this.squares[i] = new Square();
         }
     }
@@ -19,7 +19,7 @@ public class GameBoard implements GameBoardInterface {
     public void addConnection(Vehicle vehicle, int from, int to) {
         // All the connections all two-directionals
         this.squares[from - 1].addConnection(vehicle, to);
-        this.squares[to-1].addConnection(vehicle, from);
+        this.squares[to - 1].addConnection(vehicle, from);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class GameBoard implements GameBoardInterface {
 
     @Override
     public int connectionsCount(int square) {
-        return this.squares[square-1].connectionsCount();
+        return this.squares[square - 1].connectionsCount();
     }
 
     @Override

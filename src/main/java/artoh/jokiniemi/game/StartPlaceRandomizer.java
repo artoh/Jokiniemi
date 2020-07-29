@@ -23,8 +23,8 @@ public class StartPlaceRandomizer {
      */
     public StartPlaceRandomizer(RandomizeInterface randomizer) {
         this.randomizer = randomizer;
-        this.detectivePlaces = new IntegerArray(DEFAULT_PLACE_CAPACITY);
-        this.mrXPlaces = new IntegerArray(DEFAULT_PLACE_CAPACITY);        
+        this.detectivePlaces = new IntegerArray(DEFAULT_PLACES_CAPACITY);
+        this.mrXPlaces = new IntegerArray(DEFAULT_PLACES_CAPACITY);        
     }
     
     /**
@@ -35,7 +35,7 @@ public class StartPlaceRandomizer {
      * @param square  Square number
      */
     public void addStartPlace(boolean misterX, int square) {
-        if( misterX ) {
+        if (misterX) {
             mrXPlaces.push(square);
         } else {
             detectivePlaces.push(square);
@@ -49,9 +49,9 @@ public class StartPlaceRandomizer {
      */
     public int startNewGameAndGetStartPlaceForMisterX() {
         this.usedDetectivePlaces = new boolean[detectivePlaces.count()];
-        this.detectivesPlaced = 0;
+        this.detectivesPlaced = 0;                       
         
-        return mrXPlaces.at( this.randomizer.next( this.mrXPlaces.count()) -1 );
+        return mrXPlaces.at(this.randomizer.next(this.mrXPlaces.count()) - 1);
     }
     
     /**
@@ -61,9 +61,9 @@ public class StartPlaceRandomizer {
      * @return Square number
      */
     public int getStartPlaceForDetective() {
-        int index = this.randomizer.next( this.detectivePlaces.count() - this.detectivesPlaced ) - 1;
-        for(int i=0; i<index; i++) {
-            if( usedDetectivePlaces[i]) {
+        int index = this.randomizer.next(this.detectivePlaces.count() - this.detectivesPlaced) - 1;
+        for (int i = 0; i < index; i++) {
+            if (usedDetectivePlaces[i]) {
                 index++;
             }
         }
@@ -71,7 +71,7 @@ public class StartPlaceRandomizer {
         return this.detectivePlaces.at(index);
     }
     
-    private final int DEFAULT_PLACE_CAPACITY = 16;
+    private static final int DEFAULT_PLACES_CAPACITY = 16;
     
     private IntegerArray detectivePlaces;
     private IntegerArray mrXPlaces;
