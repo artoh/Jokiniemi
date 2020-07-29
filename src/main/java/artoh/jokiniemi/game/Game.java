@@ -14,9 +14,6 @@ import artoh.jokiniemi.algorithm.RandomizeInterface;
  */
 public class Game {
 
-    private final GameLog gameLog;
-    private final RandomizeInterface randomizer;
-    private final GameBoardInterface gameboard;
     
     public Game(RandomizeInterface randomizer) {
         this.randomizer = randomizer;
@@ -113,5 +110,15 @@ public class Game {
     public GameBoardInterface gameBoard() {
         return this.gameboard;
     }
+    
+    private final GameLog gameLog;
+    private final RandomizeInterface randomizer;
+    private final GameBoardInterface gameboard;
+
+    private final int BLACK_CARDS_TOTAL = 5;
+    private final int DOUBLE_CARDS_TOTAL = 2;
+    
+    private int blackCardsLeft;
+    private int doubleCardsLeft;
     
 }
