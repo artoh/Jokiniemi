@@ -34,6 +34,8 @@ public class VeryStupidAI implements AIInterface {
         
         for (int i = 0; i < game.gameBoard().connectionsCount(currentPosition); i++) {
             // Stupid can't use the ferry
+            // Stupid is not a idiot and dosn't go to the same square where 
+            // detective stands.
             if (game.gameBoard().connectionVehicle(currentPosition, i) != Vehicle.FERRY &&
                 !isDetectivePresent(game.gameBoard().connectionTo(currentPosition, i))) {
                 possibleIndexes.push(i);
