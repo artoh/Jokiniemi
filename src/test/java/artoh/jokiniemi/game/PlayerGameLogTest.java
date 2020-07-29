@@ -50,7 +50,9 @@ public class PlayerGameLogTest {
         
         assertEquals(40, log.position(0));
         assertEquals(80, log.position(1));
-        assertEquals(Vehicle.BLACK_CARD, log.vehicle(1));
+        
+        assertEquals(Vehicle.BLACK_CARD, log.vehicle(1));        
+        assertEquals(1, log.turn());
     }
 
     @Test
@@ -58,7 +60,8 @@ public class PlayerGameLogTest {
         PlayerGameLog log = new PlayerGameLog(1001,1);
         
         for(int i=1; i<1000;i++) {
-            log.addTurn(i+10, Vehicle.TAXI);
+            assertEquals(i,log.addTurn(i+10, Vehicle.TAXI));
+            assertEquals(i+10, log.currentPosition());
         }
         for(int i=1; i<1000; i++) {
             assertEquals(i+10, log.position(i));

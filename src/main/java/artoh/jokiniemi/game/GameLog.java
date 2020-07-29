@@ -1,7 +1,5 @@
 package artoh.jokiniemi.game;
 
-import artoh.jokiniemi.algorithm.RandomizeInterface;
-
 /**
  * Keep a log of positons and vehicles of mr X and detectives
  * 
@@ -20,7 +18,7 @@ public class GameLog {
      * @return True if positon of Mr X is visibe
      */
     public boolean isVisibleTurn(int turn) {
-        throw new UnsupportedOperationException();  
+        return this.visible[turn];
     }
     
     /**
@@ -29,10 +27,7 @@ public class GameLog {
      */
     public void init(int turns) {
         this.turns_total = turns;
-        this.visible = new boolean[turns];
-        for(int i=0; i<turns;i++) {
-            this.visible[i] = false;
-        }
+        this.visible = new boolean[turns];        
     }
     
     /**
@@ -47,10 +42,15 @@ public class GameLog {
      * Start a new game. Mark the initial positions of Mr X and detectives.
      * 
      * @param detectives Count of detectives
-     * @param randomizer Randomizer object
+     * @param starter Start placer object
      */
-    public void newGame(int detectives, RandomizeInterface randomizer) {
-        this.turn = 0;
+    public void newGame(int detectives, StartPlaceRandomizer starter) {
+        
+        this.logs = new PlayerGameLog[detectives + 1];
+        this.logs[0] = new PlayerGameLog(turnsTotal(), starter.startNewGameAndGetStartPlaceForMisterX());
+        for(int i=0; i < detectives; i++) {
+            this.logs[i+1] = new PlayerGameLog(turnsTotal(), starter.getStartPlaceForDetective());
+        }        
     }
     
     /**
@@ -58,7 +58,7 @@ public class GameLog {
      * @return Number of turn
      */
     public int currentTurn() {
-        return turn;
+        return this.logs[0].turn();
     }
     
     /**
@@ -76,10 +76,15 @@ public class GameLog {
      * @param square Square number
      * @param vehicle Vehicle used to go here
      * @param doubled Mr X use the Double card
-     * @return Turn number
      */
-    public int logTurn(int player, int square, Vehicle vehicle, boolean doubled) {
-        throw new UnsupportedOperationException();
+    public void logTurn(int player, int square, Vehicle vehicle, boolean doubled) {
+        this.logs[player].addTurn(square, vehicle);
+        
+        if(doubled) {
+            for(int i=1; i<this.logs.length;i++) {
+                this.logs[i].addTurn(this.logs[i].currentPosition(), Vehicle.DOUBLED);
+            }
+        }
     }
     
     /**
@@ -89,7 +94,17 @@ public class GameLog {
      * @return Square of player position
      */
     public int position(int player, int turn) {
-        throw new UnsupportedOperationException();
+        return this.logs[player].position(turn);
+    }
+    
+    
+    /**
+     * Return players current position
+     * @param player Number of player (0: mrX, 1..n detectives)
+     * @return Square of player position
+     */
+    public int currentPosition(int player) {
+        return this.logs[player].currentPosition();
     }
     
     /**
@@ -99,11 +114,11 @@ public class GameLog {
      * @return Vehicle used to move
      */
     public Vehicle vehicle(int player, int turn) {
-        throw new UnsupportedOperationException();
+        return this.logs[player].vehicle(turn);
     }
     
-    private int turn = 0;
     private int turns_total = 0;    
     private boolean[] visible;
+    private PlayerGameLog[] logs;
     
 }

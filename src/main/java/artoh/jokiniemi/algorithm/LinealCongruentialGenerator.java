@@ -20,7 +20,7 @@ public class LinealCongruentialGenerator implements RandomizeInterface {
     public int next(int max) {
         
         state = (multiplier * this.state + addition) % modulus;
-        int value =  (((int)(1 + this.state)) % max );
+        int value =  (((((int)this.state)) % max )+1);
         return ( value < 0 ? 0 - value : value);
     }
     

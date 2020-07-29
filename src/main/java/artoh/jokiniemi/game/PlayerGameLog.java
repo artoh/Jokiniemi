@@ -33,11 +33,13 @@ public class PlayerGameLog {
      * 
      * @param square Number of square of the new position
      * @param vehicle Vechicle used to go to this position
+     * @return Turns played
      */
-    public void addTurn(int square, Vehicle vehicle) {
+    public int addTurn(int square, Vehicle vehicle) {
         this.turnsPlayed++;
         this.squares[this.turnsPlayed] = square;
         this.vehicles[this.turnsPlayed] = vehicle.ordinal();
+        return this.turnsPlayed;
     }
     
     /**
@@ -71,6 +73,22 @@ public class PlayerGameLog {
             return Vehicle.START_SQUARE;
     }
             
+    /**
+     * Current positiof of playes
+     * @return Number of square
+     */
+    public int currentPosition() {
+        return squares[turnsPlayed];
+    }
+    
+    /**
+     * Turns playes
+     * @return Number of turns played
+     */
+    public int turn() {
+        return turnsPlayed;
+    }
+    
     private int turnsPlayed;
     private int squares[];
     private int vehicles[];

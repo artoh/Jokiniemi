@@ -5,6 +5,7 @@
  */
 package artoh.jokiniemi.game;
 
+import artoh.jokiniemi.algorithm.IntegerArray;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

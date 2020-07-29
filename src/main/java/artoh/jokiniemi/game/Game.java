@@ -16,9 +16,10 @@ public class Game {
 
     
     public Game(RandomizeInterface randomizer) {
-        this.randomizer = randomizer;
         this.gameLog = new GameLog();
-        this.gameboard = null;
+        this.randomizer = randomizer;        
+        this.gameboard = new GameBoard();
+        this.startplacer = new StartPlaceRandomizer(randomizer);
     }    
     
     public enum GameStatus {
@@ -48,6 +49,11 @@ public class Game {
      * @param ai The AI object
      */
     public void startGame(int detectives, AIInterface ai) {
+        this.blackCardsLeft = this.BLACK_CARDS_TOTAL;
+        this.doubleCardsLeft = this.DOUBLE_CARDS_TOTAL;
+        
+        this.gameLog.newGame(detectives, startplacer);
+        
         throw new UnsupportedOperationException();
     }
     
@@ -111,14 +117,26 @@ public class Game {
         return this.gameboard;
     }
     
+    /**
+     * The StartPlaceRandomizer object
+     * @return Start placer object
+     */
+    public StartPlaceRandomizer startPlacer() {
+        return this.startplacer;
+    }
+    
+    
     private final GameLog gameLog;
     private final RandomizeInterface randomizer;
     private final GameBoardInterface gameboard;
+    private final StartPlaceRandomizer startplacer;
 
     private final int BLACK_CARDS_TOTAL = 5;
     private final int DOUBLE_CARDS_TOTAL = 2;
     
     private int blackCardsLeft;
     private int doubleCardsLeft;
+    
+    private final GameStatus gamestatus = GameStatus.NOT_STARTED;
     
 }
