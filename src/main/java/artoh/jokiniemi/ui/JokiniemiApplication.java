@@ -16,11 +16,12 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 /**
- *
+ * Application class to initialize the game and launch the Main Window
+ * 
  * @author arto
  */
 public class JokiniemiApplication extends Application {
-
+    
     @Override
     public void start(Stage stage) throws Exception {
         Game game = initGame();
@@ -31,7 +32,11 @@ public class JokiniemiApplication extends Application {
         }
         
     }   
-    
+
+    /**
+     * Load gameboard and rules
+     * @return Initialized Game object
+     */
     private Game initGame() {
         RandomizeInterface randomizer = new LinealCongruentialGenerator();
         StartPlaceRandomizer starter = new StartPlaceRandomizer(randomizer);

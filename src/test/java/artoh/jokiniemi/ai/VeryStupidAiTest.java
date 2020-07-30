@@ -39,11 +39,13 @@ public class VeryStupidAiTest {
         ai = new VeryStupidAI(new LinealCongruentialGenerator());
         
         game.log().init(5);
-        game.gameBoard().init(5);
+        game.gameBoard().init(6);
         game.gameBoard().addConnection(Vehicle.TAXI, 1, 2);
-        game.gameBoard().addConnection(Vehicle.FERRY, 1, 5);
-        game.gameBoard().addConnection(Vehicle.BUS, 2, 4);        
+        game.gameBoard().addConnection(Vehicle.TAXI, 2, 3);
         game.gameBoard().addConnection(Vehicle.TAXI, 2, 5);
+        game.gameBoard().addConnection(Vehicle.TAXI, 2, 6);
+        game.gameBoard().addConnection(Vehicle.TAXI, 3, 4);
+        game.gameBoard().addConnection(Vehicle.FERRY, 1, 6);
         
     }
         
@@ -55,26 +57,22 @@ public class VeryStupidAiTest {
     public void simpleGame() {
         game.startGame(1, ai);
         
-        assertTrue( ai.isDetectivePresent(3));
-        assertFalse( ai.isDetectivePresent(4));
+        assertTrue( ai.isDetectivePresent(4));
+        assertFalse( ai.isDetectivePresent(3));
         
         assertEquals(2, game.log().currentPosition(0));
         
-        game.doMove(1, 4, Vehicle.TAXI, false);
+        game.doMove(1, 3, Vehicle.TAXI, false);
+        assertTrue( ai.isDetectivePresent(3));
+        assertFalse( ai.isDetectivePresent(4));
         
         assertEquals( Game.GameStatus.RUNNING, game.gameStatus());
         
-        game.doMove(1, 2, Vehicle.BUS, false);
-        
+        game.doMove(1, 2, Vehicle.BUS, false);        
         assertEquals( Game.GameStatus.DETECTIVES_WIN, game.gameStatus());
         
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
     
     public class MockStarter implements StartPlaceInterface {
 
@@ -85,7 +83,7 @@ public class VeryStupidAiTest {
 
         @Override
         public int getStartPlaceForDetective() {
-            return 3;
+            return 4;
         }
         
     }

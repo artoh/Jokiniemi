@@ -42,7 +42,8 @@ public class VeryStupidAI implements AIInterface {
             }
         }
         
-        int index = possibleIndexes.count() == 0 ? 0 : randomizer.next(possibleIndexes.count()) - 1;
+        int indexToIndex = possibleIndexes.count() == 0 ? 0 : randomizer.next(possibleIndexes.count()) - 1;
+        int index = possibleIndexes.at(indexToIndex);
         
         game.doMove(0, game.gameBoard().connectionTo(currentPosition, index), 
                 game.gameBoard().connectionVehicle(currentPosition, index), false);        

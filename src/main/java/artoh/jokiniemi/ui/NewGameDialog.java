@@ -23,6 +23,10 @@ import javafx.scene.layout.VBox;
 
 /**
  *
+ *  Dialog to start a new game
+ * 
+ *  User select count of detectives and level of the game.
+ * 
  * @author arto
  */
 public class NewGameDialog {
@@ -36,6 +40,9 @@ public class NewGameDialog {
     private ToggleGroup levelGroup;
     private RadioButton veryEasyLevel;
     
+    /**
+     * Init the dialog
+     */
     NewGameDialog() {
         dialog = new Dialog<>();
         dialog.setTitle("Uusi peli");
@@ -54,6 +61,9 @@ public class NewGameDialog {
         
     }
     
+    /**
+     * Init radio buttons to select detective count
+     */
     void initDetectiveCoutSelection() {
         detectiveGroup = new ToggleGroup();
         detectives4 = new RadioButton("4 etsivää");
@@ -64,6 +74,9 @@ public class NewGameDialog {
         detectives5.setSelected(true);
     }
     
+    /**
+     * Init radio button to select level
+     */
     void initLevelSelection() {
         levelGroup = new ToggleGroup();
         veryEasyLevel = new RadioButton("Hyvin helppo");
@@ -71,6 +84,11 @@ public class NewGameDialog {
         veryEasyLevel.setSelected(true);
     }
     
+    /**
+     * Start new game with selections in the dialog
+     * 
+     * @param game Game object
+     */
     void startGame(Game game) {
         int detectives = detectives4.isSelected() ? 4 : 5;
         RandomizeInterface randomizer = new LinealCongruentialGenerator();
@@ -79,10 +97,14 @@ public class NewGameDialog {
         game.startGame(detectives, ai);
     }
     
+    /**
+     * Static function to show the dialog and start a new game.
+     * @param game 
+     */
     static public void newGame(Game game) {
         
         NewGameDialog newgame = new NewGameDialog();
-        if (newgame.dialog.showAndWait() != null ) {        
+        if (newgame.dialog.showAndWait() != null) {        
             newgame.startGame(game);
         }
     }

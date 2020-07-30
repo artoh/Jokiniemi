@@ -16,7 +16,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 /**
- *
+ * Widget showing a singel log event
+ * 
  * @author arto
  */
 public class LogWidget extends Group {
@@ -24,11 +25,14 @@ public class LogWidget extends Group {
     private Text vehicleText;
     private Text positionText;
     
+    /**
+     * Constructor
+     */
     public LogWidget() {
-        rect = new Rectangle(120,60,Color.TRANSPARENT);
-        vehicleText = new Text(20,20,"");
+        rect = new Rectangle(120, 60, Color.TRANSPARENT);
+        vehicleText = new Text(20, 20, "");
         
-        positionText = new Text(20,48,"");
+        positionText = new Text(20, 48, "");
         vehicleText.setFont(Font.font(null, FontWeight.BOLD, 18));
         positionText.setFont(Font.font(null, FontWeight.NORMAL, 32));
         
@@ -37,6 +41,9 @@ public class LogWidget extends Group {
         this.getChildren().add(positionText);
     }
     
+    /**
+     * Show widget as button to ask detective to make his move
+     */
     public void askForMove() {
         rect.setVisible(true);
         rect.setFill(Color.DARKGREY);
@@ -49,6 +56,14 @@ public class LogWidget extends Group {
         vehicleText.setText("");
     }
     
+    /**
+     * Show a single event
+     * 
+     * @param vehicle Vehicle used
+     * @param position Position in board (number of square)
+     * @param hidden Is this hidden position of Mister X
+     * @param button Show like button to select next move
+     */
     public void show(Vehicle vehicle, int position, boolean hidden, boolean button) {
         if (position == 0) {
             rect.setVisible(false);
@@ -70,15 +85,15 @@ public class LogWidget extends Group {
             } else if (vehicle == Vehicle.BUS) {
                 rect.setFill(Color.CYAN);
                 vehicleText.setText("BUSSI");
-            } else if( vehicle == Vehicle.UNDERGROUD) {
+            } else if (vehicle == Vehicle.UNDERGROUD) {
                 rect.setFill(Color.RED);
                 vehicleText.setText("METRO");
-            } else if( vehicle == Vehicle.BLACK_CARD) {
+            } else if (vehicle == Vehicle.BLACK_CARD) {
                 rect.setFill(Color.BLACK);
                 vehicleText.setText(" ???");
                 vehicleText.setFill(Color.WHITE);
                 positionText.setFill(Color.WHITE);
-            } else if( vehicle == Vehicle.DOUBLED) {
+            } else if (vehicle == Vehicle.DOUBLED) {
                 rect.setFill(Color.BLUEVIOLET);
                 positionText.setFill(Color.WHITE);
                 vehicleText.setText("");
