@@ -1,6 +1,6 @@
 package artoh.jokiniemi.game;
 
-import artoh.jokiniemi.algorithm.IntegerArray;
+import artoh.jokiniemi.struct.IntegerArray;
 import artoh.jokiniemi.algorithm.RandomizeInterface;
 
 /**

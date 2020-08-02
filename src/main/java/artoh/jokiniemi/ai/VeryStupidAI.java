@@ -5,7 +5,7 @@
  */
 package artoh.jokiniemi.ai;
 
-import artoh.jokiniemi.algorithm.IntegerArray;
+import artoh.jokiniemi.struct.IntegerArray;
 import artoh.jokiniemi.algorithm.RandomizeInterface;
 import artoh.jokiniemi.game.Game;
 import artoh.jokiniemi.game.Vehicle;

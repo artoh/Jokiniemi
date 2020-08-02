@@ -171,7 +171,7 @@ public class Game {
         for (int i = 1; i <= this.detectivesCount; i++) {
             if (gameLog.currentPosition(i) == mrXposition) {
                 this.status = GameStatus.DETECTIVES_WIN;
-            } else if ( gameLog.position(i, gameLog.currentTurn()) > 0) {
+            } else if (gameLog.position(i, gameLog.currentTurn()) > 0) {
                 this.detectivesMoved++;
             }
         }        
