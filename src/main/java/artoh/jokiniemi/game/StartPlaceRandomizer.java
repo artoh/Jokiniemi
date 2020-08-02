@@ -52,7 +52,7 @@ public class StartPlaceRandomizer implements StartPlaceInterface {
         int random = this.randomizer.next(this.detectivePlaces.count() - this.detectivesPlaced);
         int index = -1;
         
-        for (int i=0; i < random; i++) {
+        for (int i = 0; i < random; i++) {
             index++;
             while (usedDetectivePlaces[index]) {
                 index++;

@@ -44,7 +44,7 @@ public class VeryStupidAI implements AIInterface {
                 // Asked by my son because of he was not able to wait for
                 // better AI implementation when testing UI and game partials...
                 boolean detectiveNear = false;
-                for (int j=0; j < game.gameBoard().connectionsCount(squareTo); j++) {
+                for (int j = 0; j < game.gameBoard().connectionsCount(squareTo); j++) {
                     if (isDetectivePresent(game.gameBoard().connectionTo(squareTo, j))) {
                         detectiveNear = true;
                     }
@@ -57,7 +57,7 @@ public class VeryStupidAI implements AIInterface {
         }
         
         // If there are any "good" places, use good indexes instead of possible
-        if( goodIndexes.count() > 0) {
+        if (goodIndexes.count() > 0) {
             possibleIndexes = goodIndexes;
         }
         
