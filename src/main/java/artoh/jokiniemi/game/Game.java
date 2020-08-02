@@ -42,13 +42,14 @@ public class Game {
      * @param ai The AI object
      */
     public void startGame(int detectives, AIInterface ai) {
+        
         this.blackCardsLeft = this.BLACK_CARDS_TOTAL;
         this.doubleCardsLeft = this.DOUBLE_CARDS_TOTAL;
         
         this.detectivesCount = detectives;
         this.ai = ai;
         this.gameLog.newGame(detectives, startplacer);
-        
+                
         this.status = GameStatus.RUNNING;
 
         ai.startGame(this);
@@ -72,12 +73,10 @@ public class Game {
      * @return Status of the game after this move (and move of AI)
      */
     public GameStatus doMove(int player, int square, Vehicle vehicle, boolean doubled) {
-               
+
         gameLog.logTurn(player, square, vehicle, doubled);        
         
-        if (player > 0) {
-            this.detectivesMoved++;            
-        } else {
+        if (player == 0) {
             if (vehicle == Vehicle.BLACK_CARD) {
                 this.blackCardsLeft--;
             } 
@@ -90,9 +89,8 @@ public class Game {
         
         if (player > 0 &&
             this.status == GameStatus.RUNNING &&
-            this.detectivesCount == this.detectivesMoved) {
-            ai.doAITurn();
-            this.detectivesMoved = 0;
+            this.detectivesMoved == this.detectivesCount)  {
+                ai.doAITurn();                     
         }
         
         return this.status;
@@ -157,6 +155,8 @@ public class Game {
     /**
      * Update status of the game
      * 
+     * Update the count of moved detectives in this turn
+     * 
      * Check if
      * - some detective is in same square as Mr X: Detectives win
      * - all the turns are gone and Mr is still free: Mr X win
@@ -166,23 +166,24 @@ public class Game {
     private GameStatus checkStatus() {
         
         int mrXposition = gameLog.currentPosition(0);
+        this.detectivesMoved = 0;
         
-        for (int i = 1; i < this.detectivesCount + 1; i++) {
+        for (int i = 1; i <= this.detectivesCount; i++) {
             if (gameLog.currentPosition(i) == mrXposition) {
                 this.status = GameStatus.DETECTIVES_WIN;
+            } else if( gameLog.position(i, gameLog.currentTurn()) > 0) {
+                this.detectivesMoved++;
             }
-        }
+        }        
         
-        if (gameLog.currentTurn() == gameLog.turnsTotal() - 1 && 
+        if (gameLog.currentTurn() == gameLog.turnsTotal() -1 && 
             this.detectivesCount == this.detectivesMoved &&
             this.status == GameStatus.RUNNING) {
             this.status = GameStatus.MRX_WINS;
         }
         
         return this.status;
-    }
-   
-    
+    }    
     
     private final GameLog gameLog;
     private final GameBoardInterface gameboard;

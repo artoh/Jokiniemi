@@ -30,20 +30,41 @@ public class VeryStupidAI implements AIInterface {
     public void doAITurn() {
         int currentPosition = game.log().currentPosition(0);
         
-        IntegerArray possibleIndexes = new IntegerArray(10);
+        IntegerArray possibleIndexes = new IntegerArray(10);    // No detective in same square
+        IntegerArray goodIndexes = new IntegerArray(10);    // No detective next to this square
         
         for (int i = 0; i < game.gameBoard().connectionsCount(currentPosition); i++) {
             // Stupid can't use the ferry
             // Stupid is not a idiot and dosn't go to the same square where 
             // detective stands.
+            int squareTo = game.gameBoard().connectionTo(currentPosition, i);
             if (game.gameBoard().connectionVehicle(currentPosition, i) != Vehicle.FERRY &&
-                !isDetectivePresent(game.gameBoard().connectionTo(currentPosition, i))) {
+                !isDetectivePresent(squareTo)) {
+                // A bit more clever... check the next square, too.
+                // Asked by my son because of he was not able to wait for
+                // better AI implementation when testing UI and game partials...
+                boolean detectiveNear = false;
+                for (int j=0; j < game.gameBoard().connectionsCount(squareTo); j++) {
+                    if (isDetectivePresent(game.gameBoard().connectionTo(squareTo, j))) {
+                        detectiveNear = true;
+                    }
+                }
                 possibleIndexes.push(i);
+                if (!detectiveNear) {
+                    goodIndexes.push(i);
+                }
             }
         }
         
-        int indexToIndex = possibleIndexes.count() == 0 ? 0 : randomizer.next(possibleIndexes.count()) - 1;
-        int index = possibleIndexes.at(indexToIndex);
+        // If there are any "good" places, use good indexes instead of possible
+        if( goodIndexes.count() > 0) {
+            possibleIndexes = goodIndexes;
+        }
+        
+                                
+        int index = possibleIndexes.count() == 0 
+                ? 0 
+                : possibleIndexes.at(randomizer.next(possibleIndexes.count()) - 1);
         
         game.doMove(0, game.gameBoard().connectionTo(currentPosition, index), 
                 game.gameBoard().connectionVehicle(currentPosition, index), false);        

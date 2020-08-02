@@ -15,11 +15,11 @@ public class LinearCongruentialGeneratorTest {
     }
 
     @Test
-    public void randomBetweenZeroAndMax() {
+    public void randomBetweenOneAndMax() {
         RandomizeInterface randomizer = new LinealCongruentialGenerator();
         for(int i=10; i<100;i++) {
             int random = randomizer.next(i);
-            assertTrue( random >= 0);
+            assertTrue( random >= 1);
             assertTrue( random <= i);
         }
     }

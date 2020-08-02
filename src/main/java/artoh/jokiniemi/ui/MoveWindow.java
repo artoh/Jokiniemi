@@ -33,12 +33,27 @@ public class MoveWindow {
         
         this.game = game;
         this.detective = detective;
-        this.mainWindow = mainWindow;        
+        this.mainWindow = mainWindow;   
+        this.turn = game.log().currentTurn();
         
         Group group = initWidgets();
         Scene scene = new Scene(group);
         this.stage.setScene(scene);  
         this.stage.setTitle("Valitse siirto etsivälle " + detective);
+    }
+    
+    /**
+     * Is there a detective on the square
+     * @param square Square number
+     * @return True is reserved
+     */
+    private boolean isReserved(int square) {
+        for (int i = 1; i <= game.detectives(); i++) {
+            if (game.log().currentPosition(i) == square) {
+                return true;
+            }
+        }
+        return false;
     }
     
     /**
@@ -62,9 +77,9 @@ public class MoveWindow {
             Vehicle vehicle = game.gameBoard().connectionVehicle(currentPosition, i);
             int squareTo = game.gameBoard().connectionTo(currentPosition, i);
             
-            if (vehicle == Vehicle.FERRY) {
+            if (vehicle == Vehicle.FERRY || isReserved(squareTo)) {
                 continue;
-            }
+            }            
             
             MoveWidget widget = new MoveWidget(vehicle, squareTo, this);
             group.getChildren().add(widget);
@@ -89,7 +104,10 @@ public class MoveWindow {
      * @param square  Selected target square (square number)
      */
     public void doMove(Vehicle vehicle, int square) {
-        game.doMove(this.detective, square, vehicle, false);
+        if (game.log().position(this.detective, turn) == 0 &&
+            game.log().currentTurn() == turn) {
+            game.doMove(this.detective, square, vehicle, false);
+        }
         stage.close();
         mainWindow.update();
     }
@@ -105,6 +123,7 @@ public class MoveWindow {
     private final Game game;
     private final int detective;
     private final MainWindow mainWindow;
+    private final int turn;
     
     /**
      * Ask for next move and make the move. Called by MainWindow when

@@ -60,7 +60,7 @@ public class GameTest {
    public void mrXWins() {
        int doubles = game.doubleCardsLeft();
        
-       for (int i=0; i < 2; i++) {
+       for (int i=0; i < 3; i++) {
            assertEquals(Game.GameStatus.RUNNING,  game.doMove(1, i+10, Vehicle.TAXI, false));           
            game.doMove(2, i+20, Vehicle.TAXI, false);
        }
@@ -104,8 +104,10 @@ public class GameTest {
                 case 2:
                     game.doMove(0, 53, Vehicle.TAXI, true);
                     game.doMove(0, 54, Vehicle.UNDERGROUD, false);
+                    break;
                 case 4:
                     game.doMove(0, 55, Vehicle.TAXI, false);
+                    break;
             }
             turn++;
         }

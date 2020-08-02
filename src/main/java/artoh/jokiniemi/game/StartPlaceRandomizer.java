@@ -49,11 +49,13 @@ public class StartPlaceRandomizer implements StartPlaceInterface {
     @Override
     public int getStartPlaceForDetective() {
         
-        int index = this.randomizer.next(this.detectivePlaces.count() - this.detectivesPlaced) - 1;
-        for (int i = 0; i < index; i++) {
-            if (usedDetectivePlaces[i]) {
+        int random = this.randomizer.next(this.detectivePlaces.count() - this.detectivesPlaced);
+        int index = -1;
+        
+        for (int i=0; i < random; i++) {
+            index++;
+            while (usedDetectivePlaces[index]) {
                 index++;
-                i++;
             }
         }
         this.detectivesPlaced++;

@@ -36,7 +36,7 @@ public class MainWindow {
      */
     public MainWindow(Game game) {
         this.game = game;
-        this.widgets = new LogWidget[6][game.log().turnsTotal()];
+        this.widgets = new LogWidget[6][game.log().turnsTotal()];        
     }
     
     /**
@@ -159,7 +159,8 @@ public class MainWindow {
                         && t.getX() > 214 
                         && game.gameStatus() == Game.GameStatus.RUNNING) {
                     int detective = (int) ((t.getX() - 75) / 140);
-                    if (detective <= game.detectives()) {
+                    if (detective <= game.detectives() &&
+                        game.log().position(detective, game.log().currentTurn()) == 0) {
                         MoveWindow.doTurn(thisWindow, game, detective);
                     }                    
                 }                
@@ -253,5 +254,5 @@ public class MainWindow {
     private Game game;
     Group mainGroup;
     private LogWidget[][] widgets;
-    Text statusText;
+    Text statusText;    
 }
