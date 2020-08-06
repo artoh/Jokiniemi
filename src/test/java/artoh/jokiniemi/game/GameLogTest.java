@@ -28,6 +28,19 @@ public class GameLogTest {
     }
     
     @Test
+    public void turnsLeft() {
+        StartPlaceRandomizer starter = new StartPlaceRandomizer(new LinealCongruentialGenerator());
+        starter.addStartPlace(true, 10);
+        starter.addStartPlace(false, 20);
+        
+        GameLog log = new GameLog();        
+        log.init(25);        
+        log.newGame(1, starter);
+        
+        assertEquals(24, log.turnsLeft());
+    }
+    
+    @Test
     public void visibleTurnsTest() {
         GameLog log = new GameLog();
         log.init(25);
@@ -35,6 +48,14 @@ public class GameLogTest {
         log.setVisibleTurn(10);
         assertFalse(log.isVisibleTurn(3));
         assertTrue(log.isVisibleTurn(10));
+    }
+    
+    @Test
+    public void visibleTurnsAfterEnd() {
+        GameLog log = new GameLog();
+        log.init(25);
+        assertFalse(log.isVisibleTurn(26));                
+        assertFalse(log.isVisibleTurn(35));                                
     }
     
     @Test

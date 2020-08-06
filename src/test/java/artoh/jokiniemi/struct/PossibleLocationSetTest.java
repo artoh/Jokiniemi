@@ -102,6 +102,39 @@ public class PossibleLocationSetTest {
         PossibleLocationsSet newerSet = newSet.nextSet(Vehicle.TAXI, false);
         assertEquals(5, newerSet.count());
     }
+    
+    @Test
+    public void onlyTaxi3() {
+        set.init(3);
+        assertTrue(set.onlyTaxiPossible());
+    }
+    
+    @Test 
+    public void busToo() {
+        set.init(3);
+        PossibleLocationsSet newSet = set.nextSet(Vehicle.TAXI, true);
+        assertFalse(newSet.onlyTaxiPossible());        
+    }
+    
+    @Test
+    public void ferry2() {
+        set.init(2);
+        PossibleLocationsSet newSet = set.nextSet(Vehicle.TAXI, true);
+        assertTrue(newSet.ferryPossible());
+    }
+    
+    @Test
+    public void dontFerry6() {
+        set.init(6);
+        PossibleLocationsSet newSet = set.nextSet(Vehicle.TAXI, true);
+        assertFalse(newSet.ferryPossible());        
+    }
+    
+    @Test
+    public void allAvailableAfterFill() {
+        set.fill();
+        assertEquals(20, set.count());
+    }
 
     public class MockStarter implements StartPlaceInterface {
 

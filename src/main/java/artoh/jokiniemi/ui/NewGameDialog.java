@@ -94,7 +94,7 @@ public class NewGameDialog {
         AIInterface ai;
         
         if (veryEasyLevel.isSelected()) {
-             ai = new VeryStupidAI(new LinealCongruentialGenerator());
+            ai = new VeryStupidAI(new LinealCongruentialGenerator());
         } else {
             BoardDistanceInterface distances = new FloydWarshallDistance();
             distances.init(game.gameBoard());

@@ -8,6 +8,9 @@ import artoh.jokiniemi.game.Vehicle;
  * 
  * Kaikki etäisyydet lasketaan valmiiksi jo alustamisen yhteydessä init()-funktiossa
  * 
+ * Laskettaessa aikavaativuus O(n^3) ja tilavaativuus O(n^2)
+ * Laskennan jälkeen haettaessa aikavaativuus O(1) ja tilavaativuus O(n^2)
+ * 
  * @author arto
  */
 public class FloydWarshallDistance implements BoardDistanceInterface {

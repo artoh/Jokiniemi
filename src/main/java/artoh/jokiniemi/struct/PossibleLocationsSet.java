@@ -1,28 +1,38 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package artoh.jokiniemi.struct;
 
 import artoh.jokiniemi.game.Game;
 import artoh.jokiniemi.game.Vehicle;
 
 /**
- * Set for possible location of Mister X
+ * Mr X:n mahdollisten sijaintien seuraaminen etsivien kannalta
  * 
- * AI keeps list of possible locations of Mister X
- * (squares to where it is possible to go from squre where
- * Mister X was visible, using the tickets Mr X has used).
+ * Ohjelma pitää yllä listaa kaikista mahdollista ruuduista, joihin Mister X
+ * olisi voinut päätyä lähtemällä näyttäytymisruudustaan liikkeelle
+ * niillä matkalipuilla, joita on käyttänyt.
+ * 
+ * Tämän tiedon perusteella tekoäly voi yrittää valita sellaisia
+ * kulkuneuvoja ja käyttää mustia lippua sellaisella tavalla, että
+ * etsivät voivat mahdollisimman huonosti päätellä Mister X:n
+ * todellisen sijainnin
+ * 
+ * Tallennusmuotona on binääritaulukko, jossa on jokaisen ruudun osalta tieto
+ * siitä, voisiko Mr X olla kyseisessä ruudussa. nextSet()-funktio luo 
+ * seuraavalle siirrolle uuden binääritaulukon, johon tulevat kaikki
+ * ne ruudut, joihin edellisen vuoron mahdollisista ruuduista pääsee
+ * käyttäen sitä matkalippua, joka on valittuna. Algoritmisesti tässä
+ * on siis kyse leveyshausta tehokkuudella O(n^m), mutta koska yhteyksen
+ * määrä ruutua kohti on pieni, on haun toteuttaminen pelin kartalla
+ * (enintään 199 ruutua) kuitenkin nopeaa.
+ * 
  * 
  * @author arto
  */
 public class PossibleLocationsSet {
     
     /**
-     * Constructor
+     * Muodostaja
      * 
-     * @param game Game object
+     * @param game Game-olio
      */
     public PossibleLocationsSet(Game game) {
         this.game = game;               
@@ -31,42 +41,40 @@ public class PossibleLocationsSet {
     }
 
     /**
-     * Fill the possibilities table with trues.
-     * When the game begins, all the squares are possible...
+     * Merkitsee kaikki ruudut mahdollisiksi
+     * 
+     * Kun peli alkaa, eivät etsivät tiedä Mr X:n sijaintia ja siksi
+     * aluksi kaikki ruudut ovat mahdollisia
      */
     public void fill() {
-        for (int i=1; i < this.possible.length; i++) {
+        for (int i = 1; i < this.possible.length; i++) {
             this.possible[i] = true;
         }
+        update();
     }
     
     /**
-     * Remove possible location
+     * Kun Mr X näyttäytyy, alustaa Mr X:n sijainnilla.
      * 
-     * Used to remove location the player just left
+     * Tällöin etsivät tietävät, missä Mr X on, ja Mr X:n sijainti
+     * on ainoa mahdollinen ruutu.
      * 
-     * @param square Square number
-     */
-    public void removeLocation(int square) {
-        this.possible[square] = false;
-    }
-    
-    /**
-     * When Mr X is visible, init this object with this square
-     * 
-     * @param square Square of visible Mister X
+     * @param square Peliruudun numero, missä Mr X näyttäytyi.
      */
     public void init(int square) {
-        for (int i=0; i < possible.length; i++) {
+        for (int i = 0; i < possible.length; i++) {
             this.possible[i] = false;
         }        
         this.possible[square] = true;
+        update();
     }
     
     /**
-     * Remove locations of detectives. Needed to update this set
-     * after move of detectives because of it is impossible to have
-     * Mister X with same location than some detective has.
+     * Poistaa etsivien sijainnit.
+     * 
+     * Kun etsivät ovat liikkuneet, pitää heidän sijaintinsa poistaa
+     * mahdollisten sijaintien listasta, koska Mr X ei voi 
+     * olla samassa ruudussa kuin etsivä.
      */
     public void removeDetectiveLocations() {
         for (int i = 1; i <= game.detectives(); i++) {
@@ -75,29 +83,26 @@ public class PossibleLocationsSet {
                 possible[location] = false;
             }
         }
+        update();
     }        
     
     /**
-     * Count of possible squares of Mister X
-     * @return Count of squares
+     * Mr X:n mahdollisten sijaintien lukumäärä
+     * @return Ruutujen lukumäärä
      */
     public int count() {
-        int count = 0;
-        for (int i = 1; i < possible.length; i++) {
-            if (possible[i] == true) {
-                count++;
-            }
-        }
-        return count;
+        System.out.println("SQ " + squareCount);
+        return squareCount;
     }
     
     /**
-     * Construct a new Possible Location Set including the possible locations
-     * of Mister X after moving with given ticket type.
+     * Muodostaa uuden mahdollisten sijaintien taulun, jossa on kaikki
+     * Mr X:n mahdolliset sijainnit sen jälkeen, kun hän on 
+     * liikkunut tietyn tyyppisellä lipulla.
      * 
-     * @param vehicle Vehicle ti use
-     * @param cleanDetectiveLocations Remove locations of detectives from this set
-     * @return New set including possible locations
+     * @param vehicle Matkalipun tyyppi, jolla liikuttu
+     * @param cleanDetectiveLocations Poistetaanko ne sijainnit, joissa etsivät ovat
+     * @return Uusi taulukko, jossa mahdolliset sijainnit
      */
     public PossibleLocationsSet nextSet(Vehicle vehicle, boolean cleanDetectiveLocations) {
         
@@ -115,43 +120,66 @@ public class PossibleLocationsSet {
         }
         if (cleanDetectiveLocations) {
             newSet.removeDetectiveLocations();
+        } else {
+            newSet.update();
         }
         
         return newSet;
     }
     
+    
     /**
-     * Is taxi only possible vehicle from possible squares?
+     * Onko taksi ainoa mahdollinen kulkuneuvo?
      * 
-     * @return True if taxi is the only possible vehicle
+     * Mr X:n ei kannata käyttää mustaa lippua, jos taksi olisi kuitenkin ainoa
+     * kulkuneuvo kaikissa niissä ruuduissa, joissa Mr X mahdollisesti olisi.
+     * 
+     * @return Tosi, jos taksi on ainoa mahdollinen kulkuneuvo mahdollisista ruuduista.
      */
     public boolean onlyTaxiPossible() {
-        for (int i = 0; i < possible.length; i++) {
-            if (possible[i]) {
-                for (int c = 0; c < game.gameBoard().connectionsCount(i); c++) {
-                    if (game.gameBoard().connectionVehicle(i, c) != Vehicle.TAXI) {
-                        return false;
-                    }
-                }
-            }
-        }
-        return true;
+        return this.onlyTaxi;
     }
     
+    /**
+     * Onko lautta mahdollinen kulkuneuvo?
+     * 
+     * Jos Mr X:n olisi mahdollista kulkea lautalla, kannattaa Mr X:n ehkä
+     * käyttää mustaa lippua vaikka ei itse liikkuisikaan lautalla ihan
+     * vain etsiviä hämätäkseen..
+     * 
+     * @return Tosi, jos Mr X:n olisi mahdollista kulkea lautalla
+     */
     public boolean ferryPossible() {
-        for (int i = 0; i < possible.length; i++) {
+        return this.ferry;
+    }
+    
+    public void update() {
+        onlyTaxi = true;
+        ferry = false;
+        this.squareCount = 0;
+
+        for (int i = 1; i < possible.length; i++) {
             if (possible[i]) {
+                System.out.println("POSS " + i);
+                this.squareCount++;
                 for (int c = 0; c < game.gameBoard().connectionsCount(i); c++) {
                     if (game.gameBoard().connectionVehicle(i, c) == Vehicle.FERRY) {
-                        return true;
+                        ferry = true;   
+                        System.out.println("FERRY " + i);
+                    }
+                    if (game.gameBoard().connectionVehicle(i, c) != Vehicle.TAXI) {
+                        onlyTaxi = false;
                     }
                 }
             }
         }
-        return false;
-
+        System.out.println("sq " + this.squareCount);
     }
     
     private final Game game;
     private final boolean[] possible;
+    
+    private int squareCount = 0;
+    private boolean onlyTaxi = false;
+    private boolean ferry = false;
 }

@@ -26,51 +26,39 @@ public class ScoredAlternative {
      */
     public ScoredAlternative(Vehicle firstTicket, int firstTarget, 
               Vehicle secondTicket, int secondTarget, int score) {
-          this.firstTicket = firstTicket;
-          this.firstTarget = firstTarget;
-          this.secondTicket = secondTicket;
-          this.secondTarget = secondTarget;
-          this.score = score;
-      }
+        this.firstTicket = firstTicket;
+        this.firstTarget = firstTarget;
+        this.secondTicket = secondTicket;
+        this.secondTarget = secondTarget;
+        this.score = score;
+    }
 
-      /**
-       * Tekee siirron
-       * 
-       * @param game Game-olio
-       * @param set PossibleLocationsSet-olio, joka kuvaa etsivien kannalta mahdollisia X:n sijainteja
-       */
-      public void doMove(Game game, PossibleLocationsSet set) {
-          game.doMove(0, this.firstTarget, this.firstTicket, this.secondTarget > 0);
-          if( game.log().isVisibleTurn(game.log().currentTurn())) {
-              set.init(firstTarget);
-          } else {
-              set = set.nextSet(this.firstTicket, true);
-          }
-          if (this.secondTarget > 0) {
-              game.doMove(0, this.secondTarget, this.secondTicket, false);
-              if( game.log().isVisibleTurn(game.log().currentTurn())) {
-                  set.init(secondTarget);
-              } else {
-                  set = set.nextSet(this.secondTicket, true);
-              }                
-          }
-          System.out.println("---> " + firstTicket + " " + firstTarget + " ---> " + secondTarget);
-      }
+    /**
+     * Tekee siirron
+     * 
+     * @param game Game-olio
+     */
+    public void doMove(Game game) {
+        game.doMove(0, this.firstTarget, this.firstTicket, this.secondTarget > 0);
+        if (this.secondTarget > 0) {
+            game.doMove(0, this.secondTarget, this.secondTicket, false);
+        }
+        System.out.println("---> " + firstTicket + " " + firstTarget + " ---> " + secondTarget);
+    }
 
 
-      /**
-       * Siirrolle annettu pisteytys
-       * @return Siirron pisteytys
-       */
-      public int score() {
-          return this.score;
-      }
+    /**
+     * Siirrolle annettu pisteytys
+     * @return Siirron pisteytys
+     */
+    public int score() {
+        return this.score;
+    }
 
-      private Vehicle firstTicket;
-      private int firstTarget;
-      private Vehicle secondTicket;
-      private int secondTarget;
+    private Vehicle firstTicket;
+    private int firstTarget;
+    private Vehicle secondTicket;
+    private int secondTarget;
 
-      private int score;
-
-  }    
+    private int score;
+}    
