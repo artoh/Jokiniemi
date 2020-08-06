@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package artoh.jokiniemi.ui;
 
 import artoh.jokiniemi.game.Game;
@@ -24,15 +20,15 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
- * Main window of the application
+ * Sovelluksen pääikkuna
  * 
  * @author arto
  */
 public class MainWindow {
    
     /**
-     * Constructor
-     * @param game The Game object 
+     * Muodostaja
+     * @param game Peliolio
      */
     public MainWindow(Game game) {
         this.game = game;
@@ -40,16 +36,16 @@ public class MainWindow {
     }
     
     /**
-     * Get the X position of detectives column
-     * @param detective Number of detective
-     * @return Column x-position
+     * X-koordinaatti etsivän sarakkeelle ikkunassa
+     * @param detective Etsivät numero
+     * @return Sarakkeen x-koordinaatti
      */
     private int getXForDetective(int detective) {
         return (60 + 140 * detective + (detective > 0 ? 15 : 0));
     }
     
     /**
-     * Initilize LogWidgets for logging the game
+     * Alustaa LogWidgetit pelin etenemisen seuraamiseen
      */
     private void initWidgets() {
         for (int d = 0; d < 6; d++) {
@@ -66,8 +62,8 @@ public class MainWindow {
     }
     
     /**
-     * Draw the turn numbers in the left side.
-     * Circulated numbers are turns when Mr X is visible
+     * Piirtää vuoronumerot vasempaan laitaan
+     * Ympyröidyt numerot ovat vuoroja, joilla X näyttäytyy
      */
     private void drawTurnNumbers() {        
         for (int turn = 0; turn < game.log().turnsTotal(); turn++) {
@@ -87,12 +83,12 @@ public class MainWindow {
     }
     
     /**
-     * Draw the titles of detectives.
+     * Piirtää etsivien värikuvakkeet
      * 
      */
     private void drawTitles() {
         Text xt = new Text(60, 30, "Mr. X");
-        xt.setFont(Font.font("Sans", FontWeight.BLACK, 32));
+        xt.setFont(Font.font("Sans", FontWeight.LIGHT, 32));
         mainGroup.getChildren().add(xt);
         
         for (int detective = 1; detective < 6; detective++) {
@@ -124,7 +120,7 @@ public class MainWindow {
     }
     
     /**
-     * Initialize new game button and status message area.
+     * Alustaa "Uusi peli"-napin sekä statusalueen
      */
     private void drawStatusArea() {
         Button newButton = new Button("Uusi peli");
@@ -148,7 +144,8 @@ public class MainWindow {
     }
     
     /**
-     * Init event handler to handle clicks of the widgets
+     * Alustaa tapahtumakäsittelijän, jolla seurataan etsivän siirtoon
+     * käytettyä hiiren napsautusta
      */
     public void initEventHandler() {
         MainWindow thisWindow = this;
@@ -170,7 +167,7 @@ public class MainWindow {
     }
     
     /**
-     * Update the status message
+     * Päivittää statusviestin
      */
     public void updateStatus() {
         if (game.gameStatus() == Game.GameStatus.NOT_STARTED) {
@@ -185,7 +182,7 @@ public class MainWindow {
     }
     
     /**
-     * Update log of Mister X
+     * Päivittää Mr X:n lokin
      */
     public void updateMisterX() {
         for (int t = 0; t < game.log().turnsTotal(); t++) {
@@ -197,7 +194,7 @@ public class MainWindow {
     }
     
     /**
-     * Update the log of detectives
+     * Päivittää etsivien lokit
      */
     public void updateDetectives() {        
         for (int d = 1; d < 6; d++) {
@@ -219,7 +216,7 @@ public class MainWindow {
     }
     
     /**
-     * Update the log of Mister X and detectives and status text.
+     * Päivittää lokit sekä statiustekstit.
      */
     public void update() {
         updateStatus();
@@ -228,8 +225,8 @@ public class MainWindow {
     }
     
     /**
-     *  Init the main window
-     * @param window Stage object
+     * Alustaa pääikkunana
+     * @param window Stage-olio
      */
     public void init(Stage window) {
         window.setTitle("Jokiniemi");

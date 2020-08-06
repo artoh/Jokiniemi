@@ -1,29 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package artoh.jokiniemi.ai;
 
 import artoh.jokiniemi.game.Game;
 
 /**
- * Interface for Game AI
+ * Tekoälyn rajapinta
  * 
  * @author ahyvatti
  */
 public interface AIInterface {
     
     /**
-     * Called when start a new gmae
+     * Kutsutaan, kun uusi peli aloitetaan.
+     * 
+     * AI:n tulee alustaa uusi peli. Ensimmäinen siirto tehdään kuitenkin
+     * vasta doAITurn()-kutsulla
      */
     public void startGame(Game game);
     
-    /**
-     * Called to do the turn of AI
+    /**          
      * 
-     * AI will call Game.doMove() 
-     * When using the double card, AI will call Game.goMove() twice
+     * Kutsutaan, kun on AI:n vuoro tehdä oma siirtonsa
+     * 
+     * Kun AI on päättänyt siirtonsa, kutsuu AI Game.doMove()-funktiota.
+     * Jos AI käyttää tuplauskorttia, kutsuu AI Game.doMove()-funktiota kahdesti.
      * 
      */
     public void doAITurn();

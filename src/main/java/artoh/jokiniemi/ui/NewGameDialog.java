@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package artoh.jokiniemi.ui;
 
 import artoh.jokiniemi.ai.AIInterface;
@@ -11,11 +6,8 @@ import artoh.jokiniemi.ai.VeryStupidAI;
 import artoh.jokiniemi.algorithm.BoardDistanceInterface;
 import artoh.jokiniemi.algorithm.FloydWarshallDistance;
 import artoh.jokiniemi.algorithm.LinealCongruentialGenerator;
-import artoh.jokiniemi.algorithm.RandomizeInterface;
 import artoh.jokiniemi.game.Game;
-import com.sun.java.swing.plaf.gtk.GTKConstants;
 import javafx.geometry.Orientation;
-import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
@@ -26,10 +18,10 @@ import javafx.scene.layout.VBox;
 
 /**
  *
- *  Dialog to start a new game
+ * Dialogi uuden pelin aloittamiseen
  * 
- *  User select count of detectives and level of the game.
- * 
+ * Käyttäjä valitsee etsivien määrän ja pelin tason.
+ *  
  * @author arto
  */
 public class NewGameDialog {
@@ -45,7 +37,7 @@ public class NewGameDialog {
     private RadioButton heuristicLevel;
     
     /**
-     * Init the dialog
+     * Rakentaja
      */
     NewGameDialog() {
         dialog = new Dialog<>();
@@ -66,7 +58,7 @@ public class NewGameDialog {
     }
     
     /**
-     * Init radio buttons to select detective count
+     * Alustaa valintanapit etsivien lukumäärälle
      */
     void initDetectiveCoutSelection() {
         detectiveGroup = new ToggleGroup();
@@ -80,7 +72,7 @@ public class NewGameDialog {
     }
     
     /**
-     * Init radio button to select level
+     * Alustaa valintanapit tasolle
      */
     void initLevelSelection() {
         levelGroup = new ToggleGroup();
@@ -93,29 +85,31 @@ public class NewGameDialog {
     }
     
     /**
-     * Start new game with selections in the dialog
+     * Aloittaa uuden pelin dialogin valintojen mukaisesti
      * 
-     * @param game Game object
+     * @param game Game -olio
      */
     void startGame(Game game) {
         int detectives = detectives4.isSelected() ? 4 : 5;
-        RandomizeInterface randomizer = new LinealCongruentialGenerator();
         AIInterface ai;
         
         if (veryEasyLevel.isSelected()) {
-             ai = new VeryStupidAI(randomizer);
+             ai = new VeryStupidAI(new LinealCongruentialGenerator());
         } else {
             BoardDistanceInterface distances = new FloydWarshallDistance();
             distances.init(game.gameBoard());
-            ai = new SimpleHeuristicAI(distances, randomizer);
+            ai = new SimpleHeuristicAI(distances);
         }
         
         game.startGame(detectives, ai);
     }
     
     /**
-     * Static function to show the dialog and start a new game.
-     * @param game 
+     * Staattinen funktio dialogin näyttämiseen ja pelin aloittamiseen.
+     * 
+     * Pääikkuna kutsuu tätä funktiota, kun käyttäjä painaa "Uusi peli" -nappia
+     * 
+     * @param game Game-olio
      */
     static public void newGame(Game game) {
         

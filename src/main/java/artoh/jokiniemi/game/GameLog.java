@@ -1,7 +1,10 @@
 package artoh.jokiniemi.game;
 
 /**
- * Keep a log of positons and vehicles of mr X and detectives
+ * Peliloki
+ * 
+ * Pitää kirjaa etsivien ja Mr X:n siirroista ja kulkuneuvoista,
+ * sekä tietoa siitä, millä siirroilla Mr X paljastuu
  * 
  * @author ahyvatti
  */
@@ -13,9 +16,13 @@ public class GameLog {
     }
     
     /**
-     * Is Mr X visible during this turn
-     * @param turn Turn number
-     * @return True if positon of Mr X is visibe
+     * Paljastuuko Mr X tällä siirrolla
+     * 
+     * Etsivät eivät yleensä näe, millä pelilaudan ruudulla Mr X sijaitsee.
+     * Ainoastaan muutamalla vuorolla Mr X joutuu näyttäytymään etsiville.
+     * 
+     * @param turn Vuoron numero. Vuoro 0 on pelaajien aloitussijainti
+     * @return Tosi, jos Mr X on näkyvillä
      */
     public boolean isVisibleTurn(int turn) {
         if (turn >= this.turnsTotal) {
@@ -25,8 +32,8 @@ public class GameLog {
     }
     
     /**
-     * Init the game log
-     * @param turns Total amount of turns in the game
+     * Alustaa pelilokin
+     * @param turns Pelivuorojen kokonaismäärä
      */
     public void init(int turns) {
         this.turnsTotal = turns;
@@ -34,18 +41,20 @@ public class GameLog {
     }
     
     /**
-     * Set a turn as visible turn for Mister X
-     * @param turn Index of turn
+     * Asettaa, että Mr X näyttäytyy tällä vuorolla
+     * @param turn Pelivuoron numero
      */
     public void setVisibleTurn(int turn) {
         this.visible[turn] = true;
     }
     
     /**
-     * Start a new game. Mark the initial positions of Mr X and detectives.
+     * Aloittaa pelin.
      * 
-     * @param detectives Count of detectives
-     * @param starter Start placer object
+     * Sijoittaa etsivät ja Mr X:n aloitussijainteihinsa ja alustaa lokin.
+     * 
+     * @param detectives Etsivien lukumäärä
+     * @param starter Aloitussijainnit arpova olion
      */
     public void newGame(int detectives, StartPlaceInterface starter) {
         
@@ -57,36 +66,45 @@ public class GameLog {
     }
     
     /**
-     * Number of the current turn
-     * @return Number of turn
+     * Nykyisen vuoron numero
+     * 
+     * Vuoron numeron määrittää Mr X:n tekemien siirtojen lukumäärä.
+     * Vuoro 0 tarkoittaa, että aloitussijainnit on arvottu, mutta
+     * tietokone ei ole vielä tehnyt ensimmäistä siirtoaan. 
+     * 
+     * @return Vuoron numero
      */
     public int currentTurn() {
         return this.logs[0].turn();
     }
     
     /**
-     * Amount of turns total in the game
-     * @return Amount of turn
+     * Pelin vuorojen kokonaismäärä
+     * 
+     * Kun kaikki vuorot on pelattu, voittaa Mr X ellei hän ole vielä jäänyt
+     * kiinni.
+     * 
+     * @return Vuorojen kokonaismäärä
      */
     public int turnsTotal() {
         return turnsTotal;
     }
     
     /**
-     * Turns left (during AI function)
-     * @return Turns left
+     * Jäljellä olevien vuorojen määrä (AI:n tehdessä siirtoaan)
+     * @return Jäjellä olevat vuorot
      */
     public int turnsLeft() {
         return turnsTotal - currentTurn() - 1;
     }
     
     /**
-     * Add a mark to the log
+     * Lisää lokimerkinnän
      * 
-     * @param player Number of player (0: mr X, 1..n: detectives)
-     * @param square Square number
-     * @param vehicle Vehicle used to go here
-     * @param doubled Mr X use the Double card
+     * @param player Pelaajan numero (0: Mr X, 1..n etsivät)
+     * @param square Peliruudun numero, johon tällä vuorolla siirrytään.
+     * @param vehicle Lipputyyppi, jolla liikutaan
+     * @param doubled Mr X käyttää tuplausta (tuplauksen ensimmäisellä siirrolla)
      */
     public void logTurn(int player, int square, Vehicle vehicle, boolean doubled) {
         this.logs[player].addTurn(square, vehicle);
@@ -99,10 +117,10 @@ public class GameLog {
     }
     
     /**
-     * Return a position of a player
-     * @param player Number a player (0: mrX, 1..n detectives)
-     * @param turn Number of turn
-     * @return Square of player position
+     * Pelaajan sijainti
+     * @param player Pelaajan numero (0: Mr X, 1..n etsivät)
+     * @param turn Pelivuorn numero (0: aloitussijainti)
+     * @return Pelilaudan ruutu, jossa pelaaja on (tämän vuoron jälkeen)
      */
     public int position(int player, int turn) {
         return this.logs[player].position(turn);
@@ -110,19 +128,19 @@ public class GameLog {
     
     
     /**
-     * Return players current position
-     * @param player Number of player (0: mrX, 1..n detectives)
-     * @return Square of player position
+     * Pelaajan nykyinen sijainti
+     * @param player Pelaajan numero (0: Mr X, 1..n etsivät)
+     * @return Pelilaudan ruutu, jossa pelaaja on viimeisimmän siirtonsa jälkeen
      */
     public int currentPosition(int player) {
         return this.logs[player].currentPosition();
     }
     
     /**
-     * Return a vehicle of plaer when moving to the square
-     * @param player Number of a player (0: mrX 1..n detectives)
-     * @param turn Number of turn
-     * @return Vehicle used to move
+     * Lipputyyppi, jolla siirto on tehty
+     * @param player Pelaajan numeoro (0: Mr X, 1..n etsivät)
+     * @param turn Vuoron numero
+     * @return Lipputyyppi
      */
     public Vehicle vehicle(int player, int turn) {
         return this.logs[player].vehicle(turn);

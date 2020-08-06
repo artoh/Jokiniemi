@@ -2,10 +2,11 @@
 package artoh.jokiniemi.algorithm;
 
 /**
- * Implements Linear congreruential generator algorithm
+ * Toteuttaa Linear congreruential generator -algoritmin satunnaislukujen
+ * tuottamiseen
  * 
- * Algorith uses Numerical Receipes paramters 
- * Source: https://en.wikipedia.org/wiki/Linear_congruential_generator
+ * Algoritmi käyttää Numeric Receipesin parametreja
+ * Lähde: https://en.wikipedia.org/wiki/Linear_congruential_generator
  * 
  * @author arto
  */

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package artoh.jokiniemi.ui;
 
 import artoh.jokiniemi.game.Vehicle;
@@ -16,7 +11,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 /**
- * Widget showing a singel log event
+ * Widget, joka näyttää yksittäisen lokitapahtuman
  * 
  * @author arto
  */
@@ -26,7 +21,7 @@ public class LogWidget extends Group {
     private Text positionText;
     
     /**
-     * Constructor
+     * Rakentaja
      */
     public LogWidget() {
         rect = new Rectangle(120, 60, Color.TRANSPARENT);
@@ -42,7 +37,8 @@ public class LogWidget extends Group {
     }
     
     /**
-     * Show widget as button to ask detective to make his move
+     * Näyttää widgetin "Siirrä" -nappina, jolla käyttäjä saa
+     * seuraavan vuoron valintaan käytettävän listan
      */
     public void askForMove() {
         rect.setVisible(true);
@@ -57,12 +53,12 @@ public class LogWidget extends Group {
     }
     
     /**
-     * Show a single event
+     * Näyttää yksittäisen siirron
      * 
-     * @param vehicle Vehicle used
-     * @param position Position in board (number of square)
-     * @param hidden Is this hidden position of Mister X
-     * @param button Show like button to select next move
+     * @param vehicle Siirrossa käytettävä matkalippu tai kulkuneuvo
+     * @param position Pelilaudan ruudun numero
+     * @param hidden Tosi, jos tämä on Mr X:n salainen siirto, jossa ei näytetä sijaintia
+     * @param button Näyttää tämän ruudun nappulana, jolla siirto valitaan
      */
     public void show(Vehicle vehicle, int position, boolean hidden, boolean button) {
         if (position == 0) {

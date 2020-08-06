@@ -6,16 +6,18 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
 /**
- * Widget to ask detectives next move
+ * Widget, jolla kysytään pelaajan seuraavaa siirtoa
  * @author arto
  */
 public class MoveWidget extends LogWidget {
     
     /**
-     * Init and show the widged and init event filter for mouse click
-     * @param vehicle Vehicle to choise
-     * @param square Targer square to choise
-     * @param moveWindow MoveWindow object
+     * Alustaa ja näyttää widgetin, jolla kysytään pelaajan seuraavaa
+     * siirtoa.
+     * 
+     * @param vehicle Kulkuneuvo, jota käytettäisiin
+     * @param square Pelilaudan ruudun numero, johon siirryttäisiin
+     * @param moveWindow MoveWindow-olio
      */
     public MoveWidget(Vehicle vehicle, int square, MoveWindow moveWindow) {        
         

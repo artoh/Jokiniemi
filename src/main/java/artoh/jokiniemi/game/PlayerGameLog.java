@@ -1,22 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package artoh.jokiniemi.game;
 
 /**
- * Game log for a single player
+ * Yksittäisen pelaajan lokitiedot
  * 
  * @author arto
  */
 public class PlayerGameLog {
     
     /**
-     * Construct a game log for a player
+     * Pelaajalokin alustaja
      * 
-     * @param turns Turns in game 
-     * @param initialPosition Initial position, number of start square
+     * @param turns Pelin kokonaisvuorot
+     * @param initialPosition Pelaajan aloitussijainti, peliruudun numero
      */
     public PlayerGameLog(int turns, int initialPosition) {
         this.turnsPlayed = 0;
@@ -29,11 +24,11 @@ public class PlayerGameLog {
     }
     
     /**
-     * Add a turn into the log
+     * Lisää siirron lokiin
      * 
-     * @param square Number of square of the new position
-     * @param vehicle Vechicle used to go to this position
-     * @return Turns played
+     * @param square Pelaajan uusi sijainti, peliruudun numero
+     * @param vehicle Lipputyyppi, jolla pelaaja liikkui
+     * @return Pelaajan tekemien siirtojen määrä
      */
     public int addTurn(int square, Vehicle vehicle) {
         
@@ -44,18 +39,18 @@ public class PlayerGameLog {
     }
     
     /**
-     * Postion of player in turn n
-     * @param turn Turn index
-     * @return Number of square
+     * Palaajan sijainti tietyllä vuorolla
+     * @param turn Vuoron numero
+     * @return Peliruudun numero
      */
     public int position(int turn) {
         return this.squares[turn];
     }
     
     /**
-     * Vehicle of player in turn n
-     * @param turn Turn index
-     * @return Vehicle used by player on turn n
+     * Lippu, jolla pelaaja on tehnyt siirron
+     * @param turn Vuoron numero
+     * @return Lipputyyppi, jolla siirto on tehty
      */
     public Vehicle vehicle(int turn) {
         int ordinal = this.vehicles[turn];
@@ -76,16 +71,16 @@ public class PlayerGameLog {
     }
             
     /**
-     * Current positiof of playes
-     * @return Number of square
+     * Pelaajan nykyinen sijainti
+     * @return Peliruudun numero
      */
     public int currentPosition() {
         return squares[turnsPlayed];
     }
     
     /**
-     * Turns playes
-     * @return Number of turns played
+     * Vuoroja pelattu
+     * @return Pelaajan tekemien siirton lukumäärä
      */
     public int turn() {
         return turnsPlayed;

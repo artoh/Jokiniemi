@@ -1,28 +1,28 @@
 package artoh.jokiniemi.game;
 
 /**
- * Interface for start places randomizer
+ * Rajapinta Mr X:n ja pelaajien aloituspaikkojen arpomiseen
  * 
- * When beginning a new game, ask first the place for Mr X using
- * startNewGameAndGetStartPlaceForMisterX() and then ask
- * start places for the detectives.
+ * Pelin alkaessa pitää ENSIN kysyä Mr X:n aloitussijainti
+ * startNewGameAndGetStartPlaceForMisterX() -funktiolla ja SITTEN
+ * pelaajien aloitussijainnit kutsumalla getStartPlaveForDetective()-funktiota
+ * jokaiselle etsivälle.
  * 
  * @author arto
  */
 public interface StartPlaceInterface {
     
     /**
-     * Start a new game and get start place for mister X
+     * Aloittaa uuden pelin ja arpoo aloitussijainnin Mr X:llw
      * 
-     * @return Square number 
+     * @return Mr X:n aloitussijainti, pelilaudan ruudun numero
      */    
     public int startNewGameAndGetStartPlaceForMisterX();
 
     /**
+     * Arpoo etsivän aloitussijainnin
      * 
-     * Get start place for detective
-     * 
-     * @return Square number
+     * @return Etsivän aloitussijainti
      */
     public int getStartPlaceForDetective();    
     

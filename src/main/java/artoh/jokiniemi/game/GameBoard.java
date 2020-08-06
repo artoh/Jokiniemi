@@ -1,7 +1,7 @@
 package artoh.jokiniemi.game;
 
 /**
- * Game board implementation
+ * Pelilaudan toteutus
  * 
  * @author arto
  */

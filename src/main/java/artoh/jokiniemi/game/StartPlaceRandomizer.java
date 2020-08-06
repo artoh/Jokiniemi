@@ -4,7 +4,10 @@ import artoh.jokiniemi.struct.IntegerArray;
 import artoh.jokiniemi.algorithm.RandomizeInterface;
 
 /**
- * Get the start places for Mister X and the players
+ * Aloitusruutujen arpominen Mr X:lle ja etsiville
+ * 
+ * Ennen kuin aloitussijainnit voidaan arpoa, pitää ne lisätä
+ * addStartPlace()-funktiolla
  * 
  * @author ahyvatti
  */
@@ -13,9 +16,9 @@ public class StartPlaceRandomizer implements StartPlaceInterface {
     protected RandomizeInterface randomizer;
    
     /**
-     * Initialize randomizer 
+     * Luokan rakentaja
      * 
-     * @param randomizer Random number algorithm 
+     * @param randomizer Arvonnassa käytettävä satunnaislukugeneraattori
      */
     public StartPlaceRandomizer(RandomizeInterface randomizer) {
         this.randomizer = randomizer;
@@ -25,10 +28,10 @@ public class StartPlaceRandomizer implements StartPlaceInterface {
     
     /**
      * 
-     * Add a possible start place
+     * Lisää mahdollisen aloitussijainnin
      * 
-     * @param misterX True if it start place for Mister X, false if for Detective
-     * @param square  Square number
+     * @param misterX Tosi, jos Mr X:n aloitussijainti; epätosi, jos etsivän
+     * @param square  Pelilaudan ruudun numero
      */
     public void addStartPlace(boolean misterX, int square) {
         if (misterX) {

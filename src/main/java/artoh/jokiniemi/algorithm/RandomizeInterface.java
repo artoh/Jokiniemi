@@ -1,10 +1,11 @@
 package artoh.jokiniemi.algorithm;
 
 /**
- * Generator of (pseudo) random integers.
+ * Satunnaislukugeneraattori
  * 
- * The generator should be initalized in the constructor, using
- * for example the time.
+ * Satunnaislukugeneraattori alustetaan luokan koostajassa
+ * (käyttäen siemenlukuna esimerkiksi kellonaikaa). Tämän
+ * jälkeen satunnaislukuja pyydetään next() -funktiolla.
  * 
  * @author ahyvatti
  */
@@ -12,10 +13,10 @@ public interface RandomizeInterface {
     
     
     /**
-     * Returns a (pseudo) random integer between 1..max
+     * Palauttaa satunnaisluvun (kokonaisluku) väliltä 1..max (molemmat mukaan luettuina)      
      * 
-     * @param max Maximum of the integer
-     * @return Randomized integer
+     * @param max Suurin sallittu satunnaisluku
+     * @return Satunnaisluku
      */
     public int next(int max);
     

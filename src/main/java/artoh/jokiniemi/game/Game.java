@@ -3,12 +3,17 @@ package artoh.jokiniemi.game;
 import artoh.jokiniemi.ai.AIInterface;
 
 /**
- *
+ * Pelin sääntöihin liittyvän logiikan toteutus
+ * 
  * @author ahyvatti
  */
 public class Game {
 
-    
+    /**
+     * Peliluokan alustaja
+     * 
+     * @param startPlacer Etsivien aloituspaikat määrittelevä luokka
+     */
     public Game(StartPlaceInterface startPlacer) {
         this.gameLog = new GameLog();
         this.gameboard = new GameBoard();
@@ -17,29 +22,29 @@ public class Game {
     
     public enum GameStatus {
         /**
-         * Game has not been started
+         * Peli ei ole vielä alkanut
          */
         NOT_STARTED,
         /**
-         * Game is running
+         *  Peli on käynnissä
          */
         RUNNING,
         /**
-         * Game has ended when all the turns have been played and Mr X
-         * is not catched. Mr X wins the game.
+         * Peli on päättynyt siihen, että kaikki vuorot on pelattu,
+         * eikä Mr X ole jäänyt kiinni. Mr X (tietokone) voitti pelin.
          */
         MRX_WINS,
         /**
-         * Detectives have catched Mr X. Detectives win the game.
+         * Etsivät saivat Mr X:n kiinni. Etsivät voittivat pelitn.
          */
         DETECTIVES_WIN
     }
     
     /**
-     * Start a new game
+     * Aloittaa uuden pelin
      * 
-     * @param detectives Count of detectives
-     * @param ai The AI object
+     * @param detectives Etsivien lukumäärä
+     * @param ai Tekoälyolio
      */
     public void startGame(int detectives, AIInterface ai) {
         
@@ -57,20 +62,21 @@ public class Game {
     }
     
     /**
+     * Tekee siirron.
      * 
-     * Do a move
+     * Käyttöliittymä kutsuu tätä funktiota, kun etsivä tekee siirron.
+     * Kun kaikki etsivät ovat tehneet omat siirtonsa, vuoro päättyy ja
+     * Game kutsuu tekoälyn AI.doAITurn()-funktiota, joka puolestaan
+     * kutsuu tätä funktiota ilmoittaen tekoälyn valitseman siirron.
+     *  
+     * Kun tekoäly käyttää tuplausta, kutsuu se tätä funktiota kaksi kertaa
+     * peräkkäin: ensin doubled-parametrilla true ja sitten false.
      * 
-     * User inferface will call this function with moves of the detectives.
-     * When all the detectives have did their moves, the turn ends and
-     * Game will call AI and ask the AI to do Mr X's move.
-     * 
-     * When the game ends, this function returns the status of the game
-     * 
-     * @param player Player (0: mrX, 1..n detectives)
-     * @param square Square to move
-     * @param vehicle Vehicle doing the move
-     * @param doubled True when mrX make a first half of the double turn
-     * @return Status of the game after this move (and move of AI)
+     * @param player Pelaaja (0: MrX, 1...n etsivät)
+     * @param square Peliruudun numero, johon siirrytään
+     * @param vehicle Lipputyyppi, jota käytetään siirtoon
+     * @param doubled Tosi, kun Mr X käyttää tuplausta ja tämä on tuplausvuoroista ensimmäinen-
+     * @return Pelin tila tämän siirron (ja sitä mahdollisesti seuraavan tekoälyn siirron) jälkeen
      */
     public GameStatus doMove(int player, int square, Vehicle vehicle, boolean doubled) {
 
@@ -97,71 +103,92 @@ public class Game {
     }
     
     /**
-     * Amount of Double Cards Mr X have
-     * @return Amount of cards
+     * Mr X:llä olevien tuplauskorttien lukumäärä
+     * 
+     * Mr X pystyy tuplauskortilla tekemään kaksi siirtoa peräkkäin ilman,
+     * että etsivillä on vuoroa niiden välissä.
+     * 
+     * @return Korttien lukumäärä
      */
     public int doubleCardsLeft() {
         return this.doubleCardsLeft;
     }
     
     /**
-     * Amount of Black Tickets Mr X have
-     * @return amount of tickets
+     * Mr X:llä olevien mustien lippujen määrä
+     * 
+     * Kun Mr X liikkuu mustalla lipulla, eivät etsivät tiedä, mitä kulkuneuvoa
+     * Mr X on käyttänyt, ja etsivien on siten vaikeampaa päätellä Mr X:n
+     * sijaintia. Mustilla lipuilla pystyy liikkumaan myös lauttaa
+     * käyttäen.
+     * 
+     * @return Lippujen lukumäärä
      */
     public int blackCardsLeft() {
         return this.blackCardsLeft;
     }
     
     /**
-     * The Game Log object
-     * @return Game log
+     * Peliloki
+     * 
+     * Pelilokissa on tieto kaikkien pelaajien siirroista sekä
+     * peli pituudesta ja niistä vuoroista, jolloin Mr X näyttäytyy
+     * 
+     * @return Game log -olio
      */
     public GameLog log() {
         return this.gameLog;
     }        
     
     /**
-     * The Game Board object
-     * @return Game board object
+     * Pelilauta
+     * 
+     * Pelilauta tuntee peliruutujen väliset yhteydet
+     * 
+     * @return Game board -olio
      */
     public GameBoardInterface gameBoard() {
         return this.gameboard;
     }
     
     /**
-     * The StartPlaceRandomizer object
-     * @return Start placer object
+     * Aloituspaikat
+     * 
+     * Olio, joka tuntee pelin mahdolliset aloituspaikat sekä
+     * arpoo pelin alussa Mr X:n ja etsivien aloituspaikat
+     * 
+     * @return Aloituspaikat määrittelevä olio
      */
     public StartPlaceInterface startPlacer() {
         return this.startplacer;
     }
     
     /**
-     * Return count of detectives
-     * @return Count of detectives
+     * Etsivien lukumäärä
+     * @return Etsivien lukumäärä
      */
     public int detectives() {
         return this.detectivesCount;
     }
     
     /**
-     * Return game status
-     * @return Game status
+     * Pelin tila (ei aloitettu, käynnissä, Mr X voitti, etsivät voittivat)
+     * @return Pelin tila
      */
     public GameStatus gameStatus() {
         return this.status;
     }
     
     /**
-     * Update status of the game
+     * Päivittää pelin tilan
      * 
-     * Update the count of moved detectives in this turn
+     * - Laskee, kuinka moni etsivä on jo liikkunut tällä vuorolla
+     * - Tarkastaa, onko joku etsivistä samassa ruudussa kuin Mr X: jos
+     *   näin on, etsivät voittavat pelin.
+     * - Tarkastaa, onko kaikki vuorot pelattu siten, että Mr X on yhä
+     *   vapaana: jos näin on, Mr X voitti pelin.
      * 
-     * Check if
-     * - some detective is in same square as Mr X: Detectives win
-     * - all the turns are gone and Mr is still free: Mr X win
-     * 
-     * @return Game status
+     * @return Pelin tila
      */
     private GameStatus checkStatus() {
         

@@ -4,9 +4,9 @@ import artoh.jokiniemi.game.GameBoardInterface;
 import artoh.jokiniemi.game.Vehicle;
 
 /**
- * Calculate distances between squares using Floyd-Warshall algorith
+ * Laskee ruutujen välisen etäisyyden käyttäen Floyd-Warshallin algoritmia
  * 
- * All the distances will be calculated in the constructor.
+ * Kaikki etäisyydet lasketaan valmiiksi jo alustamisen yhteydessä init()-funktiossa
  * 
  * @author arto
  */
@@ -17,8 +17,9 @@ public class FloydWarshallDistance implements BoardDistanceInterface {
         
         final int squares = gameboard.squareCount() + 1;
         
-        // Init distance table to 1 if squares are connected and
-        // Integer.MAX if there are no direct connection
+        // Alustaa etäisyysmatriisiin 1 jos ruutujen välillä on yhteys
+        // ja muuten pelilaudan ruutujen määrän (=maksimietäisyys, koska
+        // kaikki ruudut yhteydessä toisiinsa)
         
         distances = new int[squares + 1][squares + 1];
         
@@ -30,7 +31,7 @@ public class FloydWarshallDistance implements BoardDistanceInterface {
             
             for (int c = 0; c < gameboard.connectionsCount(i); c++) {
                 if (gameboard.connectionVehicle(i, c) != Vehicle.FERRY) {
-                    // Detectives is not allowed to use the ferry
+                    // Etsivät eivät voi käyttää lauttaa
                     distances[i][gameboard.connectionTo(i, c)] = 1;
                 }
             }            

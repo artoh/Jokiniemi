@@ -1,7 +1,7 @@
 package artoh.jokiniemi.game;
 
 /**
- * Vechiles used in the game
+ * Pelissä käytetyt ajoneuvot ja lipputyypit
  * 
  * @author ahyvatti
  */
@@ -13,8 +13,8 @@ public enum Vehicle {
     FERRY,
     BLACK_CARD,
     /*
-    When Mister X used "DOUBLED"-card, the detectives still in the same
-    place and get "DOUBLED" status in the log
+    Kun Mr X käyttä tuplauskorttien, merkitään pelaajien lokiin DOUBLED sen
+    siirron kohdalle, joka etsiviltä jää tuplauksen takia tekemättä.
     */
     DOUBLED  
 }

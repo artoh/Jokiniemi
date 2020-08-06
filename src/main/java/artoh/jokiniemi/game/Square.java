@@ -2,17 +2,17 @@
 package artoh.jokiniemi.game;
 
 /**
- * A Square of the Game Board
+ * Pelilaudan ruudu
  * 
- * A Square knows the connections: what squares is connected and
- * by what vehicle
+ * Peliruutu tietäää yhteytensä, eli mihin ruutuihin tästä ruudusta pääsee
+ * ja mitä kulkuneuvoa mikäkin yhteys käyttää
  * 
  * @author arto
  */
 public class Square {
     
     /**
-     * The constructor. Inital data tables with initial size.
+     * Luokan muodostaja
      */
     public Square() {
         this.connections = 0;
@@ -23,10 +23,10 @@ public class Square {
     
     /**
      * 
-     * Add a connection
+     * Lisää yhteyden
      * 
-     * @param vehicle Vehicle of connection
-     * @param toSquare Target square of connection
+     * @param vehicle Yhteyden kulkuneuvo
+     * @param toSquare Yhteyden kohde, pelilaudan ruudun numero
      */
     public void addConnection(Vehicle vehicle, int toSquare) {
         // If the data tables are full, doubles the sizes of the data tables and
@@ -48,28 +48,29 @@ public class Square {
     }
     
     /**
-     * Count of connections
+     * Yhteyksien lukumäärä
      * 
-     * @return Count
+     * @return Lukumäärä
      */
     public int connectionsCount() {
         return this.connections;
     }
     
     /**
-     * Target square of a connection
-     * @param index Index of connection (index starts at 0)
-     * @return Number of target square
+     * Yhteyden kohderuutu 
+     * 
+     * @param index Yhteyden indeksi (alkaen nollasta)
+     * @return Kohde, pelilaudan ruudun numero
      */
     public int connectionTo(int index) {
         return this.squares[index];
     }
     
     /**
-     * Vehicle used with this connection
+     * Yhteyden kulkuneuvo
      * 
-     * @param index Index of connection (index starts at 0)
-     * @return Vehicle used by this connection. START_SQUARE if vehicle is uncorrect.
+     * @param index Yhteyden indeksi (alkaen nollasta)
+     * @return Yhteyden kulkuneuvo, START_SQUARE jos yhteys ei ole kelvollinen.
      */
     public Vehicle connectionVehicle(int index) {
         int vehicle = this.vehicles[index];

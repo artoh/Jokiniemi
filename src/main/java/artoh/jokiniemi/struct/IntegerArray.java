@@ -1,21 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package artoh.jokiniemi.struct;
 
 /**
- * Array of integers
+ * Dynaamisen kokoinen kokonaislukutaulukko
+ * 
+ * Tässä on toteutettuina vain ohjelmassa tarvittavat metodit.
+ * Näin ollen taulukkoon voi ainoastaan lisätä alkioita, ei poistaa
+ * eikä muokata.
  * 
  * @author arto
  */
 public class IntegerArray {
     
     /**
-     * Constructor
+     * Muodostaja
      * 
-     * @param initialCapacity Initial capacity
+     * @param initialCapacity Alkukapasiteetti (pitää olla vähintään yksi)
      */
     public IntegerArray(int initialCapacity) {
         this.capacity = initialCapacity;
@@ -23,9 +22,9 @@ public class IntegerArray {
     }
         
     /**
-     * Add a integer at the end
+     * Lisää kokonaisluvun taulukon loppuun
      * 
-     * @param value Integer to append
+     * @param value Kokonaisluvun indeksi
      */
     public void push(int value) {
         if (capacity == counter) {
@@ -41,17 +40,17 @@ public class IntegerArray {
     }
     
     /**
-     * Size of array
-     * @return size
+     * Taulukon koko
+     * @return Taulukkoon tallennettujen alkioiden lukumäärä
      */
     public int count() {
         return this.counter;
     }
     
     /**
-     * Element at position
-     * @param index Index, beginning at 0
-     * @return integer at position index
+     * Taulukon alkio
+     * @param index Indeksi (alkaen nollasta)
+     * @return Taulukkoon kyseiselllä indeksillä tallennettu kokonaisluku
      */
     public int at(int index) {
         return this.data[index];

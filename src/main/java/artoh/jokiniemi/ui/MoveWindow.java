@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package artoh.jokiniemi.ui;
 
 import artoh.jokiniemi.game.Game;
@@ -12,21 +7,22 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * Window to ask detectives next move
+ * Ikkuna, jolla kysytään etsivän seuraavaa siirtoa
  * 
- * MainWindow uses static doTurn-function when user click the button
- * to select detectives target and vehicle.
+ * MainWindow käyttää saattista doTurn()-funktiota, kun käyttäjä
+ * napsauttaa etsivät saraketta. Silloin käyttäjälle näytetään ikkuna,
+ * josta käyttäjä voi valita käytettävän yhteyden (kulkuneuvo ja kohde)
  * 
  * @author arto
  */
 public class MoveWindow {
     
     /**
-     * Constructor 
+     * Muodostaja
      * 
-     * @param mainWindow MainWindow object
-     * @param game Game object
-     * @param detective Number of detective (1..n)
+     * @param mainWindow MainWindow-olio
+     * @param game Game-olio
+     * @param detective Etsivän numero (1..n)
      */
     public MoveWindow(MainWindow mainWindow, Game game, int detective) {
         this.stage = new Stage();
@@ -43,9 +39,9 @@ public class MoveWindow {
     }
     
     /**
-     * Is there a detective on the square
-     * @param square Square number
-     * @return True is reserved
+     * Onko ruudussa jo etsivää
+     * @param square Peliruudun numero
+     * @return Tosi, jos ruutu on jo varattu
      */
     private boolean isReserved(int square) {
         for (int i = 1; i <= game.detectives(); i++) {
@@ -57,12 +53,12 @@ public class MoveWindow {
     }
     
     /**
-     * Init MoveWidgets to select next target.
+     * Alustaa widgetin seuraavan siirron valitsemista varten
      * 
-     * Widgets includes all possible moves and are organized 
-     * into columns depending the vehicle.
+     * Widgeteissa on kaikki mahdolliset siirrot. Ne on järjestetty
+     * sarakkeisiin kulkuneuvojen mukaisesti.
      * 
-     * @return Group including all the widgets
+     * @return Group jossa kaikki widgetit ovat
      */
     private Group initWidgets() {
         Group group = new Group();
@@ -98,10 +94,10 @@ public class MoveWindow {
     }
     
     /**
-     * Move detective. Called by widget when used clicks widget.
+     * Siirtää etsivää. Kutsutaan, kun käyttäjä klikkaa widgetiä.
      * 
-     * @param vehicle Selected vehicle.
-     * @param square  Selected target square (square number)
+     * @param vehicle Valittu kulkuneuvo
+     * @param square  Valittu kohderuutu (pelilaudan ruutu)
      */
     public void doMove(Vehicle vehicle, int square) {
         if (game.log().position(this.detective, turn) == 0 &&
@@ -113,7 +109,7 @@ public class MoveWindow {
     }
     
     /**
-     * Show the window and wait for click
+     * Näyttää ikkunan ja odottaa siirtoa
      */
     public void exec() {
         this.stage.showAndWait();
@@ -126,15 +122,19 @@ public class MoveWindow {
     private final int turn;
     
     /**
-     * Ask for next move and make the move. Called by MainWindow when
-     * user wants to select next target.
+     * Kysyy etsivän seuraavaa siirtoa, sekä tekee siirron.
      * 
-     * The window with possible moves will be shown, and when the
-     * user click a selection, the move will be done.
+     * MainWindow kutsuu tätä staattista funktiota, kun
+     * käyttäjä haluaa valita seuraavan siirtonsa.
      * 
-     * @param mainWindow
-     * @param game
-     * @param detective 
+     * Käyttäjälle näytetään ikkuna, jossa on painikkeet jokaiselle
+     * mahdolliselle siirrolle. Kun käyttäjä painaa jotain painiketta,
+     * tehdään siirto.
+     * 
+     * 
+     * @param mainWindow MainWindow -olio
+     * @param game Game -olio
+     * @param detective Etsivän numero (1..n)
      */
     static public void doTurn(MainWindow mainWindow, Game game, int detective) {
         MoveWindow move = new MoveWindow(mainWindow, game, detective);

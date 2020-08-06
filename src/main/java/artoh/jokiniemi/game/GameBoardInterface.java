@@ -1,62 +1,64 @@
 package artoh.jokiniemi.game;
 
 /**
- * Data stucture to the Game Board
+ * Pelilauta
+ * 
+ * Pelilaudalla on tieto peliruutujen välisistä yhteyksistä
  * 
  * @author ahyvatti
  */
 public interface GameBoardInterface {
     
     /**
-     * Init the game board
-     * @param squares Count of the squares
+     * Alustaa pelilaudan     
+     * @param squares Pelilaudan ruutujen lukumäärä
      */
     public void init(int squares);
     
     
     /**
-     * Add a connection
+     * Lisää yhteyden pelilaudan kahden ruudun välille
      * 
-     * All the connections are double-direction connections
+     * Kaikki yhteydet ovat kaksisuuntaisia. 
      * 
-     * @param vehicle Vehicle of the connection
-     * @param from One endpoint of the connection
-     * @param to Second endpoint of the connection
+     * @param vehicle Yhteydessä käytettävä kulkuneuvo
+     * @param from Yhteyden alkupää (peliruudun numero, numeroitu yhdestä alkaen)
+     * @param to Yhteyden loppupää
      */
     public void addConnection(Vehicle vehicle, int from, int to);
     
     /**
-     * The count of the squares in the game board
+     * Pelilaudan ruutujen lukumäärä
      * 
-     * Note! The squares is numbered 1..count !
+     * Pelilaudan ruudut on numeroitu alkaen ykkösestä
      * 
-     * @return Number of squares in the game board
+     * @return Pelilaudan ruutujen lukumäärä
      */
     public int squareCount();
     
     /**
-     * How many connections are connected to this square?
+     * Peliruudusta lähtevien yhteyksien lukumäärä
      * 
-     * @param square Number of a squre
-     * @return Count of connections
+     * @param square Peliruudun numero
+     * @return Yhteyksien lukumäärä
      */
     public int connectionsCount(int square);
     
     /**
-     * What is the target of this connextion?
+     * Yhteyden määränpää (peliruutu, jonne yhteys johtaa)
      * 
-     * @param square Number of square
-     * @param index Index of connection
-     * @return Number of the target of this connection
-     */
+     * @param square Peliruudun numero
+     * @param index Yhteyden indeksi (alkaen nollasta)
+     * @return Peliruudun numero, jonne yhteys johtaa
+     */    
     public int connectionTo(int square, int index);
     
     /**
-     * What vechile uses this connection?
+     * Yhteyden käyttämä kulkuneuvo
      * 
-     * @param square Number of square
-     * @param index Index of connection
-     * @return Vechile using this connection
+     * @param square Peliruudun numero
+     * @param index Yhteyden indeksi (alkaen nollasta)
+     * @return Kulkuneuvo, joka käyttää yhteyttä
      */
     public Vehicle connectionVehicle(int square, int index);
     

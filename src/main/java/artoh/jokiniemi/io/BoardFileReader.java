@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package artoh.jokiniemi.io;
 
 import artoh.jokiniemi.game.Game;
@@ -18,18 +13,19 @@ import java.io.IOException;
 import java.net.URL;
 
 /**
- * Read the integrated gameboard file (board.txt) and init the
- * game board and start places.
+ * Lukee ohjelmaan resussiksi sisällytetyn pelilaudan
+ * (board.txt) ja alustaa pelilaudan sekä aloituspaikat * 
  * 
  * @author ahyvatti
  */
 public class BoardFileReader {
 
     /**
-     * Read gameboard file
+     * Lukee pelilaudan tiedot
      * 
-     * @param game The Game object
-     * @return True if success
+     * @param game Game-olio
+     * @param starter Aloitussijainnit arpova olio
+     * @return 
      */
     public boolean readBoard(Game game, StartPlaceRandomizer starter) {
         
@@ -37,7 +33,7 @@ public class BoardFileReader {
             FileReader reader = new FileReader(getResourceFile("board.txt"));
             BufferedReader br = new BufferedReader(reader);            
             
-            // Line "JOKINIEMI" as file format specifier
+            // Rivi "JOKINIEMI" tiedoston alussa tiedostotyypin tunnisteena
             if (!br.readLine().equals("JOKINIEMI")) {
                 return false;
             }
@@ -65,9 +61,9 @@ public class BoardFileReader {
     }
     
     /**
-     * Get the resource file
-     * @param fileName File name
-     * @return File object
+     * Palauttaa resurssitiedoston
+     * @param fileName Tietoston nimi
+     * @return File -olio
      */
     private File getResourceFile(String fileName) {
         ClassLoader loader = getClass().getClassLoader();
@@ -76,10 +72,10 @@ public class BoardFileReader {
     }
     
     /**
-     * Initial turn table
+     * Alustaa vuorotaulun
      * 
-     * @param log GameLog object
-     * @param line Line like S--X---X---X (X means mr X visible)
+     * @param log GameLog -olio
+     * @param line Rivi tyyliin S--X---X---X (X vuorolla, jossa Mr X näkyvä)
      */
     public void initTurnTable(GameLog log, String line) {
         log.init(line.length());
@@ -91,10 +87,13 @@ public class BoardFileReader {
     }
     
     /**
-     * Initial start place list of mr X or detective
+     * Alustaa aloitussijaintien listan
      * 
-     * @param starter Start Place Randomizer object
-     * @param list Line like D12,34,123
+     * Rivi on muotoa X12,45,124 X:n aloitussijainneille 12, 45, 124
+     * tai D14,33,177 etsivien aloitussijainneille
+     * 
+     * @param starter Aloituspaikkojen arpoja
+     * @param list Rivi tietoa
      */
     public void initStartList(StartPlaceRandomizer starter, String list) {
                 
@@ -113,24 +112,26 @@ public class BoardFileReader {
     
     
     /**
-     * Parse a connection line and store it into Game Board
+     * Tulkitsee peliruutujen väliset yhteydet määrittelevän rivin
+     * ja tallentaa yhteydet.
      * 
-     * Connections are described in lines like
+     * Yhteydet on määritelty rivillä, joka on muotoa
      * 
-     * 12T32T44B13U123
+     * 12T32T44B13U123F199
      * 
-     * 12 = FROM squre
-     * T = Taxi
-     * 32 = TO square with taxi
+     * 12 - Määrittelee ruudun 12 yhteyksiä
+     * T32 T44 = Taksillä pääsee ruutuihin 32 ja 144
+     * B13 - Bussilla ruutuun 13
+     * U123 - Metrolla ruutuun 123
+     * F199 - Lautalla (Mr X pääsee) ruutuun 199
      * 
-     * B = Bus
-     * M = Underground
-     * F = Ferry
+     * Yhteydet ovat kaksisuuntasia ja merkitty tiedostossa suuntaan
+     * pienemmästä ruudusta isompaan päin: ts. esimerkissä määriteltäessä
+     * ruutua 32 ei siinä ole merkitty taksiyhteyttä ruutuun 12, koska
+     * se lisätään jo ruutua 12 luettaessa.
      * 
-     * Connections are two-sided: "From" number is less than "to" number
-     * 
-     * @param board Game Board object
-     * @param line Line of text like 1T12B34U87F122
+     * @param board Pelilaudan olio
+     * @param line Rivi tekstiä esim 12T32T44B13U123F199
      */    
     public void addConnectionLine(GameBoardInterface board, String line) {
         int from = 0;

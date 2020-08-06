@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package artoh.jokiniemi.ui;
 
 import artoh.jokiniemi.algorithm.LinealCongruentialGenerator;
@@ -16,7 +11,8 @@ import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 /**
- * Application class to initialize the game and launch the Main Window
+ * 
+ * Sovelluksen luokka pelin ja käyttöliittymän alustamiseen
  * 
  * @author arto
  */
@@ -34,8 +30,8 @@ public class JokiniemiApplication extends Application {
     }   
 
     /**
-     * Load gameboard and rules
-     * @return Initialized Game object
+     * Alustaa pelin säännöt ja pelilaudan
+     * @return Alustettu peliolio
      */
     private Game initGame() {
         RandomizeInterface randomizer = new LinealCongruentialGenerator();
@@ -55,6 +51,11 @@ public class JokiniemiApplication extends Application {
         }        
     }
     
+    /**
+     * Ohjelman käynnistävä pääfunktio
+     * 
+     * @param args Käynnistysriviparametrit (ei käytössä)
+     */
     public static void main(String[] args) {
         launch(JokiniemiApplication.class);
     }

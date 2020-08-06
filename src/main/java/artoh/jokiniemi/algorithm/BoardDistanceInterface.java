@@ -3,32 +3,35 @@ package artoh.jokiniemi.algorithm;
 import artoh.jokiniemi.game.GameBoardInterface;
 
 /**
- * Algorithm counting distance between squares
+ * Algoritmi, jolla selvitetään kahden ruudun välinen etäisyys
  * 
  * @author ahyvatti
  */
 public interface BoardDistanceInterface {
 
     /**
+     * 
+     * Alustaa algoritmin peliruudun tiedoilla.
+     * 
+     * Algoritmista riippuen tämä funktioi saattaa laskea
+     * etäisyysmatriisin tai alustaa välimuistin tms.
+     * 
      * Initialize the algorithm to be used with game board
      * 
-     * Depending on the algorithm, this function may calculate
-     * the distance matrix or initalize the distance cache
-     * 
-     * @param gameboard 
+     * @param gameboard Pelilauta
      */
     public void init(GameBoardInterface gameboard);
     
     
     /**
-     * Get the distance between two squares
+     * Laskee kahden ruudun välisen etäisyyden
      * 
-     * Using ferry is not counted because of the detectives is not allowed
-     * to traver on ferry.
-     * 
-     * @param from First square
-     * @param to Second square
-     * @return Distance in turns
+     * Ei huomioi lautalla matkustamista, koska etsivät eivät voi käyttää
+     * lauttaa.
+     *  
+     * @param from Ensimmäinen peliruutu
+     * @param to Toinen peliruutu
+     * @return Etäisyys peliruutuina
      */
     public int distance(int from, int to);
     
