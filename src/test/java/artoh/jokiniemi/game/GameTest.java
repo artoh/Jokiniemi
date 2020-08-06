@@ -28,7 +28,7 @@ public class GameTest {
         
         game = new Game(starter);
         game.log().init(5);
-        game.startGame(2, ai);
+        game.startGame(3, ai);
     }
     
     @After
@@ -37,7 +37,7 @@ public class GameTest {
 
     @Test
     public void detectivesCount() {
-        assertEquals(2, game.detectives());        
+        assertEquals(3, game.detectives());        
     }
 
     
@@ -46,9 +46,10 @@ public class GameTest {
        int blacks = game.blackCardsLeft();       
        
        game.doMove(1, 11, Vehicle.BUS, false);
-       game.doMove(2, 21, Vehicle.UNDERGROUD, true);
+       game.doMove(2, 21, Vehicle.UNDERGROUD, false);
+       game.doMove(3, 31, Vehicle.TAXI, false);
        
-       assertEquals( blacks-1, game.blackCardsLeft());
+       assertEquals( blacks - 1, game.blackCardsLeft());
        assertEquals( 52, game.log().currentPosition(0));
        assertEquals( Game.GameStatus.RUNNING, game.gameStatus());
        
@@ -63,10 +64,45 @@ public class GameTest {
        for (int i=0; i < 3; i++) {
            assertEquals(Game.GameStatus.RUNNING,  game.doMove(1, i+10, Vehicle.TAXI, false));           
            game.doMove(2, i+20, Vehicle.TAXI, false);
+           game.doMove(3, i+30, Vehicle.TAXI, false);
        }
        assertEquals(doubles-1, game.doubleCardsLeft());
        assertEquals(Game.GameStatus.MRX_WINS, game.gameStatus());
        
+   }
+   
+   @Test
+   public void ticketsDecrease() {
+       assertEquals(Game.TAXI_TICKETS_TOTAL, game.ticketsLeft(Vehicle.TAXI));
+       game.doMove(3, 11, Vehicle.TAXI, false);
+       assertEquals(Game.TAXI_TICKETS_TOTAL - 1, game.ticketsLeft(Vehicle.TAXI));       
+   }
+   
+   @Test
+   public void bobbysMoveDontDecreaseTickets() {
+       assertEquals(Game.UNDERGROUD_TICKETS_TOTAL, game.ticketsLeft(Vehicle.UNDERGROUD));
+       game.doMove(1, 11, Vehicle.UNDERGROUD, false);
+       assertEquals(Game.UNDERGROUD_TICKETS_TOTAL, game.ticketsLeft(Vehicle.UNDERGROUD));              
+   }
+   
+   @Test
+   public void goingBackIsFree() {
+       System.out.println(game.log().currentPosition(3));
+       assertEquals(Game.BUS_TICKETS_TOTAL, game.ticketsLeft(Vehicle.BUS));
+       game.doMove(3, 11, Vehicle.BUS, false);
+       game.doMove(1, 41, Vehicle.UNDERGROUD, false);
+       game.doMove(2, 61, Vehicle.TAXI, false);
+       assertEquals(Game.BUS_TICKETS_TOTAL - 1, game.ticketsLeft(Vehicle.BUS));
+       game.doMove(3, 2, Vehicle.BUS, false);
+       assertEquals(Game.BUS_TICKETS_TOTAL - 1, game.ticketsLeft(Vehicle.BUS));       
+   }
+   
+   @Test
+   public void undergroudTicketsDecrease() {
+       assertEquals(Game.UNDERGROUD_TICKETS_TOTAL, game.ticketsLeft(Vehicle.UNDERGROUD));       
+       game.doMove(3, 11, Vehicle.UNDERGROUD, false);
+       assertEquals(Game.TAXI_TICKETS_TOTAL, game.ticketsLeft(Vehicle.TAXI));
+       assertEquals(Game.UNDERGROUD_TICKETS_TOTAL - 1, game.ticketsLeft(Vehicle.UNDERGROUD));              
    }
     
     public class MockStarter implements StartPlaceInterface {

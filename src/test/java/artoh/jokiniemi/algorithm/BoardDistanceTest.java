@@ -85,6 +85,14 @@ public abstract class BoardDistanceTest {
         assertEquals(3, di.distance(8, 2));
     }
 
+    @Test
+    public final void negativeConnection() {
+        BoardDistanceInterface di = initSimple();
+        assertEquals(Integer.MAX_VALUE, di.distance(1, -1));
+        assertEquals(Integer.MAX_VALUE, di.distance(-1, 1));
+        assertEquals(Integer.MAX_VALUE, di.distance(-1, -1));
+    }
+    
     /**
      * Init with real gameboard
      * @return 
