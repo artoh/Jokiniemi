@@ -2,7 +2,7 @@
 
 <ClassDiagram name="Jokiniemi">
   <ClassDiagramComponents>
-    <Class name="ScoredAlternative" package="artoh.jokiniemi.struct" visibility="public" xPosition="20.0" yPosition="20.0">
+    <Class name="ScoredAlternative" package="artoh.jokiniemi.struct" visibility="public" xPosition="89.0" yPosition="873.0">
       <Fields>
         <Field name="firstTicket" type="Vehicle" visibility="private"/>
         <Field name="firstTarget" type="int" visibility="private"/>
@@ -26,7 +26,7 @@
         <Method name="score" returnType="int" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="JumArray" package="artoh.jokiniemi.struct" visibility="public" xPosition="320.0" yPosition="20.0">
+    <Class name="JumArray" package="artoh.jokiniemi.struct" visibility="public" xPosition="737.0" yPosition="590.0">
       <Fields>
         <Field name="analyser" type="JumAnalyser" visibility="private"/>
         <Field name="jumSquares" type="JumSquare[]" visibility="private"/>
@@ -42,7 +42,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="PossibleLocationsSet" package="artoh.jokiniemi.struct" visibility="public" xPosition="620.0" yPosition="20.0">
+    <Class name="PossibleLocationsSet" package="artoh.jokiniemi.struct" visibility="public" xPosition="1178.0" yPosition="649.0">
       <Fields>
         <Field name="game" type="Game" visibility="private" isFinal="true"/>
         <Field name="possible" type="boolean[]" visibility="private" isFinal="true"/>
@@ -71,7 +71,7 @@
         <Method name="update" returnType="void" visibility="public"/>
       </Methods>
     </Class>
-    <Class name="IntegerArray" package="artoh.jokiniemi.struct" visibility="public" xPosition="920.0" yPosition="20.0">
+    <Class name="IntegerArray" package="artoh.jokiniemi.struct" visibility="public" xPosition="1362.0" yPosition="222.0">
       <Fields>
         <Field name="data" type="int[]" visibility="private"/>
         <Field name="counter" type="int" visibility="private"/>
@@ -92,7 +92,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="LinealCongruentialGenerator" package="artoh.jokiniemi.algorithm" visibility="public" xPosition="1220.0" yPosition="20.0">
+    <Class name="LinealCongruentialGenerator" package="artoh.jokiniemi.algorithm" visibility="public" xPosition="70.0" yPosition="624.0">
       <Fields>
         <Field name="state" type="long" visibility="private"/>
         <Field name="modulus" type="long" visibility="private" isFinal="true"/>
@@ -108,7 +108,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="FloydWarshallDistance" package="artoh.jokiniemi.algorithm" visibility="public" xPosition="1520.0" yPosition="20.0">
+    <Class name="FloydWarshallDistance" package="artoh.jokiniemi.algorithm" visibility="public" xPosition="1875.0" yPosition="554.0">
       <Fields>
         <Field name="distances" type="int" visibility="private"/>
       </Fields>
@@ -123,7 +123,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="JumAnalyser" package="artoh.jokiniemi.algorithm" visibility="public" xPosition="1820.0" yPosition="20.0">
+    <Class name="JumAnalyser" package="artoh.jokiniemi.algorithm" visibility="public" xPosition="882.0" yPosition="204.0">
       <Fields>
         <Field name="gameBoard" type="GameBoardInterface" visibility="private"/>
         <Field name="list" type="int[]" visibility="private"/>
@@ -151,33 +151,7 @@
         </Method>
       </Methods>
     </Class>
-    <Interface name="BoardDistanceInterface" package="artoh.jokiniemi.algorithm" visibility="public" xPosition="2120.0" yPosition="20.0">
-      <Methods>
-        <Method name="init" returnType="void" visibility="public">
-          <Argument type="GameBoardInterface" name="gameboard"/>
-        </Method>
-        <Method name="distance" returnType="int" visibility="public">
-          <Argument type="int" name="from"/>
-          <Argument type="int" name="to"/>
-        </Method>
-      </Methods>
-    </Interface>
-    <Interface name="RandomizeInterface" package="artoh.jokiniemi.algorithm" visibility="public" xPosition="20.0" yPosition="420.0">
-      <Methods>
-        <Method name="next" returnType="int" visibility="public">
-          <Argument type="int" name="max"/>
-        </Method>
-      </Methods>
-    </Interface>
-    <Interface name="AIInterface" package="artoh.jokiniemi.ai" visibility="public" xPosition="320.0" yPosition="420.0">
-      <Methods>
-        <Method name="startGame" returnType="void" visibility="public">
-          <Argument type="Game" name="game"/>
-        </Method>
-        <Method name="doAITurn" returnType="void" visibility="public"/>
-      </Methods>
-    </Interface>
-    <Class name="SimpleHeuristicAI" package="artoh.jokiniemi.ai" visibility="public" xPosition="620.0" yPosition="420.0">
+    <Class name="SimpleHeuristicAI" package="artoh.jokiniemi.ai" visibility="public" xPosition="848.0" yPosition="1148.0">
       <Fields>
         <Field name="boardDistances" type="BoardDistanceInterface" visibility="private"/>
         <Field name="game" type="Game" visibility="private"/>
@@ -240,7 +214,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="VeryStupidAI" package="artoh.jokiniemi.ai" visibility="public" xPosition="920.0" yPosition="420.0">
+    <Class name="VeryStupidAI" package="artoh.jokiniemi.ai" visibility="public" xPosition="216.0" yPosition="88.0">
       <Fields>
         <Field name="game" type="Game" visibility="private"/>
         <Field name="randomizer" type="RandomizeInterface" visibility="private" isFinal="true"/>
@@ -260,455 +234,44 @@
         </Method>
       </Methods>
     </Class>
-    <Interface name="GameBoardInterface" package="artoh.jokiniemi.game" visibility="public" xPosition="1220.0" yPosition="420.0">
+    <Interface name="BoardDistanceInterface" package="artoh.jokiniemi.algorithm" visibility="public" xPosition="1875.0" yPosition="831.0">
       <Methods>
         <Method name="init" returnType="void" visibility="public">
-          <Argument type="int" name="squares"/>
+          <Argument type="GameBoardInterface" name="gameboard"/>
         </Method>
-        <Method name="addConnection" returnType="void" visibility="public">
-          <Argument type="Vehicle" name="vehicle"/>
+        <Method name="distance" returnType="int" visibility="public">
           <Argument type="int" name="from"/>
           <Argument type="int" name="to"/>
         </Method>
-        <Method name="squareCount" returnType="int" visibility="public"/>
-        <Method name="connectionsCount" returnType="int" visibility="public">
-          <Argument type="int" name="square"/>
-        </Method>
-        <Method name="connectionTo" returnType="int" visibility="public">
-          <Argument type="int" name="square"/>
-          <Argument type="int" name="index"/>
-        </Method>
-        <Method name="connectionVehicle" returnType="Vehicle" visibility="public">
-          <Argument type="int" name="square"/>
-          <Argument type="int" name="index"/>
+      </Methods>
+    </Interface>
+    <Interface name="RandomizeInterface" package="artoh.jokiniemi.algorithm" visibility="public" xPosition="20.0" yPosition="420.0">
+      <Methods>
+        <Method name="next" returnType="int" visibility="public">
+          <Argument type="int" name="max"/>
         </Method>
       </Methods>
     </Interface>
-    <Enum name="Vehicle" package="artoh.jokiniemi.game" visibility="public" xPosition="1520.0" yPosition="420.0">
-      <Literals>
-        <Literal name="START_SQUARE"/>
-        <Literal name="TAXI"/>
-        <Literal name="BUS"/>
-        <Literal name="UNDERGROUD"/>
-        <Literal name="FERRY"/>
-        <Literal name="BLACK_CARD"/>
-        <Literal name="DOUBLED"/>
-      </Literals>
-    </Enum>
-    <Class name="GameLog" package="artoh.jokiniemi.game" visibility="public" xPosition="1820.0" yPosition="420.0">
-      <Fields>
-        <Field name="turnsTotal" type="int" visibility="private"/>
-        <Field name="visible" type="boolean[]" visibility="private"/>
-        <Field name="logs" type="PlayerGameLog[]" visibility="private"/>
-      </Fields>
-      <Constructors>
-        <Constructor visibility="public"/>
-      </Constructors>
-      <Methods>
-        <Method name="isVisibleTurn" returnType="boolean" visibility="public">
-          <Argument type="int" name="turn"/>
-        </Method>
-        <Method name="init" returnType="void" visibility="public">
-          <Argument type="int" name="turns"/>
-        </Method>
-        <Method name="setVisibleTurn" returnType="void" visibility="public">
-          <Argument type="int" name="turn"/>
-        </Method>
-        <Method name="newGame" returnType="void" visibility="public">
-          <Argument type="int" name="detectives"/>
-          <Argument type="StartPlaceInterface" name="starter"/>
-        </Method>
-        <Method name="currentTurn" returnType="int" visibility="public"/>
-        <Method name="turnsTotal" returnType="int" visibility="public"/>
-        <Method name="turnsLeft" returnType="int" visibility="public"/>
-        <Method name="logTurn" returnType="void" visibility="public">
-          <Argument type="int" name="player"/>
-          <Argument type="int" name="square"/>
-          <Argument type="Vehicle" name="vehicle"/>
-          <Argument type="boolean" name="doubled"/>
-        </Method>
-        <Method name="position" returnType="int" visibility="public">
-          <Argument type="int" name="player"/>
-          <Argument type="int" name="turn"/>
-        </Method>
-        <Method name="currentPosition" returnType="int" visibility="public">
-          <Argument type="int" name="player"/>
-        </Method>
-        <Method name="vehicle" returnType="Vehicle" visibility="public">
-          <Argument type="int" name="player"/>
-          <Argument type="int" name="turn"/>
-        </Method>
-      </Methods>
-    </Class>
-    <Class name="PlayerGameLog" package="artoh.jokiniemi.game" visibility="public" xPosition="2120.0" yPosition="420.0">
-      <Fields>
-        <Field name="turnsPlayed" type="int" visibility="private"/>
-        <Field name="squares" type="int" visibility="private"/>
-        <Field name="vehicles" type="int" visibility="private"/>
-      </Fields>
-      <Constructors>
-        <Constructor visibility="public">
-          <Argument type="int" name="turns"/>
-          <Argument type="int" name="initialPosition"/>
-        </Constructor>
-      </Constructors>
-      <Methods>
-        <Method name="addTurn" returnType="int" visibility="public">
-          <Argument type="int" name="square"/>
-          <Argument type="Vehicle" name="vehicle"/>
-        </Method>
-        <Method name="position" returnType="int" visibility="public">
-          <Argument type="int" name="turn"/>
-        </Method>
-        <Method name="vehicle" returnType="Vehicle" visibility="public">
-          <Argument type="int" name="turn"/>
-        </Method>
-        <Method name="currentPosition" returnType="int" visibility="public"/>
-        <Method name="turn" returnType="int" visibility="public"/>
-      </Methods>
-    </Class>
-    <Interface name="StartPlaceInterface" package="artoh.jokiniemi.game" visibility="public" xPosition="20.0" yPosition="820.0">
-      <Methods>
-        <Method name="startNewGameAndGetStartPlaceForMisterX" returnType="int" visibility="public"/>
-        <Method name="getStartPlaceForDetective" returnType="int" visibility="public"/>
-      </Methods>
-    </Interface>
-    <Class name="StartPlaceRandomizer" package="artoh.jokiniemi.game" visibility="public" xPosition="320.0" yPosition="820.0">
-      <Fields>
-        <Field name="randomizer" type="RandomizeInterface" visibility="protected"/>
-        <Field name="DEFAULT_PLACES_CAPACITY" type="int" visibility="private" isStatic="true" isFinal="true"/>
-        <Field name="detectivePlaces" type="IntegerArray" visibility="private"/>
-        <Field name="mrXPlaces" type="IntegerArray" visibility="private"/>
-        <Field name="usedDetectivePlaces" type="boolean[]" visibility="private"/>
-        <Field name="detectivesPlaced" type="int" visibility="private"/>
-      </Fields>
-      <Constructors>
-        <Constructor visibility="public">
-          <Argument type="RandomizeInterface" name="randomizer"/>
-        </Constructor>
-      </Constructors>
-      <Methods>
-        <Method name="addStartPlace" returnType="void" visibility="public">
-          <Argument type="boolean" name="misterX"/>
-          <Argument type="int" name="square"/>
-        </Method>
-        <Method name="startNewGameAndGetStartPlaceForMisterX" returnType="int" visibility="public"/>
-        <Method name="getStartPlaceForDetective" returnType="int" visibility="public"/>
-      </Methods>
-    </Class>
-    <Class name="GameBoard" package="artoh.jokiniemi.game" visibility="public" xPosition="620.0" yPosition="820.0">
-      <Fields>
-        <Field name="squares" type="Square[]" visibility="private"/>
-      </Fields>
-      <Constructors/>
-      <Methods>
-        <Method name="init" returnType="void" visibility="public">
-          <Argument type="int" name="squares"/>
-        </Method>
-        <Method name="addConnection" returnType="void" visibility="public">
-          <Argument type="Vehicle" name="vehicle"/>
-          <Argument type="int" name="from"/>
-          <Argument type="int" name="to"/>
-        </Method>
-        <Method name="squareCount" returnType="int" visibility="public"/>
-        <Method name="connectionsCount" returnType="int" visibility="public">
-          <Argument type="int" name="square"/>
-        </Method>
-        <Method name="connectionTo" returnType="int" visibility="public">
-          <Argument type="int" name="square"/>
-          <Argument type="int" name="index"/>
-        </Method>
-        <Method name="connectionVehicle" returnType="Vehicle" visibility="public">
-          <Argument type="int" name="square"/>
-          <Argument type="int" name="index"/>
-        </Method>
-      </Methods>
-    </Class>
-    <Class name="Game" package="artoh.jokiniemi.game" visibility="public" xPosition="920.0" yPosition="820.0">
-      <Fields>
-        <Field name="gameLog" type="GameLog" visibility="private" isFinal="true"/>
-        <Field name="gameboard" type="GameBoardInterface" visibility="private" isFinal="true"/>
-        <Field name="startplacer" type="StartPlaceInterface" visibility="private" isFinal="true"/>
-        <Field name="ai" type="AIInterface" visibility="private"/>
-        <Field name="BLACK_CARDS_TOTAL" type="int" visibility="public" isStatic="true" isFinal="true"/>
-        <Field name="DOUBLE_CARDS_TOTAL" type="int" visibility="public" isStatic="true" isFinal="true"/>
-        <Field name="blackCardsLeft" type="int" visibility="private"/>
-        <Field name="doubleCardsLeft" type="int" visibility="private"/>
-        <Field name="detectivesCount" type="int" visibility="private"/>
-        <Field name="detectivesMoved" type="int" visibility="private"/>
-        <Field name="status" type="GameStatus" visibility="private"/>
-      </Fields>
-      <Constructors>
-        <Constructor visibility="public">
-          <Argument type="StartPlaceInterface" name="startPlacer"/>
-        </Constructor>
-      </Constructors>
+    <Interface name="AIInterface" package="artoh.jokiniemi.ai" visibility="public" xPosition="373.0" yPosition="403.0">
       <Methods>
         <Method name="startGame" returnType="void" visibility="public">
-          <Argument type="int" name="detectives"/>
-          <Argument type="AIInterface" name="ai"/>
-        </Method>
-        <Method name="doMove" returnType="GameStatus" visibility="public">
-          <Argument type="int" name="player"/>
-          <Argument type="int" name="square"/>
-          <Argument type="Vehicle" name="vehicle"/>
-          <Argument type="boolean" name="doubled"/>
-        </Method>
-        <Method name="doubleCardsLeft" returnType="int" visibility="public"/>
-        <Method name="blackCardsLeft" returnType="int" visibility="public"/>
-        <Method name="log" returnType="GameLog" visibility="public"/>
-        <Method name="gameBoard" returnType="GameBoardInterface" visibility="public"/>
-        <Method name="startPlacer" returnType="StartPlaceInterface" visibility="public"/>
-        <Method name="detectives" returnType="int" visibility="public"/>
-        <Method name="gameStatus" returnType="GameStatus" visibility="public"/>
-        <Method name="checkStatus" returnType="GameStatus" visibility="private"/>
-      </Methods>
-    </Class>
-    <Class name="Square" package="artoh.jokiniemi.game" visibility="public" xPosition="1220.0" yPosition="820.0">
-      <Fields>
-        <Field name="INITIAL_CAPACITY" type="int" visibility="private" isStatic="true" isFinal="true"/>
-        <Field name="capacity" type="int" visibility="private"/>
-        <Field name="connections" type="int" visibility="private"/>
-        <Field name="squares" type="int[]" visibility="private"/>
-        <Field name="vehicles" type="int[]" visibility="private"/>
-      </Fields>
-      <Constructors>
-        <Constructor visibility="public"/>
-      </Constructors>
-      <Methods>
-        <Method name="addConnection" returnType="void" visibility="public">
-          <Argument type="Vehicle" name="vehicle"/>
-          <Argument type="int" name="toSquare"/>
-        </Method>
-        <Method name="connectionsCount" returnType="int" visibility="public"/>
-        <Method name="connectionTo" returnType="int" visibility="public">
-          <Argument type="int" name="index"/>
-        </Method>
-        <Method name="connectionVehicle" returnType="Vehicle" visibility="public">
-          <Argument type="int" name="index"/>
-        </Method>
-      </Methods>
-    </Class>
-    <Class name="LogWidget" package="artoh.jokiniemi.ui" visibility="public" xPosition="1520.0" yPosition="820.0">
-      <Fields>
-        <Field name="rect" type="Rectangle" visibility="private"/>
-        <Field name="vehicleText" type="Text" visibility="private"/>
-        <Field name="positionText" type="Text" visibility="private"/>
-      </Fields>
-      <Constructors>
-        <Constructor visibility="public"/>
-      </Constructors>
-      <Methods>
-        <Method name="askForMove" returnType="void" visibility="public"/>
-        <Method name="show" returnType="void" visibility="public">
-          <Argument type="Vehicle" name="vehicle"/>
-          <Argument type="int" name="position"/>
-          <Argument type="boolean" name="hidden"/>
-          <Argument type="boolean" name="button"/>
-        </Method>
-      </Methods>
-    </Class>
-    <Class name="MainWindow" package="artoh.jokiniemi.ui" visibility="public" xPosition="1820.0" yPosition="820.0">
-      <Fields>
-        <Field name="game" type="Game" visibility="private"/>
-        <Field name="mainGroup" type="Group" visibility="package"/>
-        <Field name="widgets" type="LogWidget[][]" visibility="private"/>
-        <Field name="statusText" type="Text" visibility="package"/>
-      </Fields>
-      <Constructors>
-        <Constructor visibility="public">
-          <Argument type="Game" name="game"/>
-        </Constructor>
-      </Constructors>
-      <Methods>
-        <Method name="getXForDetective" returnType="int" visibility="private">
-          <Argument type="int" name="detective"/>
-        </Method>
-        <Method name="initWidgets" returnType="void" visibility="private"/>
-        <Method name="drawTurnNumbers" returnType="void" visibility="private"/>
-        <Method name="drawTitles" returnType="void" visibility="private"/>
-        <Method name="drawStatusArea" returnType="void" visibility="private"/>
-        <Method name="initEventHandler" returnType="void" visibility="public"/>
-        <Method name="updateStatus" returnType="void" visibility="public"/>
-        <Method name="updateMisterX" returnType="void" visibility="public"/>
-        <Method name="updateDetectives" returnType="void" visibility="public"/>
-        <Method name="update" returnType="void" visibility="public"/>
-        <Method name="init" returnType="void" visibility="public">
-          <Argument type="Stage" name="window"/>
-        </Method>
-      </Methods>
-    </Class>
-    <Class name="Main" package="artoh.jokiniemi.ui" visibility="public" xPosition="2120.0" yPosition="820.0">
-      <Fields/>
-      <Constructors/>
-      <Methods>
-        <Method name="main" returnType="void" visibility="public" isStatic="true">
-          <Argument type="String[]" name="args"/>
-        </Method>
-      </Methods>
-    </Class>
-    <Class name="NewGameDialog" package="artoh.jokiniemi.ui" visibility="public" xPosition="20.0" yPosition="1220.0">
-      <Fields>
-        <Field name="dialog" type="Dialog&lt;Boolean&gt;" visibility="package"/>
-        <Field name="detectiveGroup" type="ToggleGroup" visibility="private"/>
-        <Field name="detectives4" type="RadioButton" visibility="private"/>
-        <Field name="detectives5" type="RadioButton" visibility="private"/>
-        <Field name="levelGroup" type="ToggleGroup" visibility="private"/>
-        <Field name="veryEasyLevel" type="RadioButton" visibility="private"/>
-        <Field name="heuristicLevel" type="RadioButton" visibility="private"/>
-      </Fields>
-      <Constructors>
-        <Constructor visibility="package"/>
-      </Constructors>
-      <Methods>
-        <Method name="initDetectiveCoutSelection" returnType="void" visibility="package"/>
-        <Method name="initLevelSelection" returnType="void" visibility="package"/>
-        <Method name="startGame" returnType="void" visibility="package">
           <Argument type="Game" name="game"/>
         </Method>
-        <Method name="newGame" returnType="void" visibility="public" isStatic="true">
-          <Argument type="Game" name="game"/>
-        </Method>
+        <Method name="doAITurn" returnType="void" visibility="public"/>
       </Methods>
-    </Class>
-    <Class name="JokiniemiApplication" package="artoh.jokiniemi.ui" visibility="public" xPosition="320.0" yPosition="1220.0">
-      <Fields/>
-      <Constructors/>
-      <Methods>
-        <Method name="start" returnType="void" visibility="public">
-          <Argument type="Stage" name="stage"/>
-        </Method>
-        <Method name="initGame" returnType="Game" visibility="private"/>
-        <Method name="main" returnType="void" visibility="public" isStatic="true">
-          <Argument type="String[]" name="args"/>
-        </Method>
-      </Methods>
-    </Class>
-    <Class name="MoveWindow" package="artoh.jokiniemi.ui" visibility="public" xPosition="620.0" yPosition="1220.0">
-      <Fields>
-        <Field name="stage" type="Stage" visibility="private" isFinal="true"/>
-        <Field name="game" type="Game" visibility="private" isFinal="true"/>
-        <Field name="detective" type="int" visibility="private" isFinal="true"/>
-        <Field name="mainWindow" type="MainWindow" visibility="private" isFinal="true"/>
-        <Field name="turn" type="int" visibility="private" isFinal="true"/>
-      </Fields>
-      <Constructors>
-        <Constructor visibility="public">
-          <Argument type="MainWindow" name="mainWindow"/>
-          <Argument type="Game" name="game"/>
-          <Argument type="int" name="detective"/>
-        </Constructor>
-      </Constructors>
-      <Methods>
-        <Method name="isReserved" returnType="boolean" visibility="private">
-          <Argument type="int" name="square"/>
-        </Method>
-        <Method name="initWidgets" returnType="Group" visibility="private"/>
-        <Method name="doMove" returnType="void" visibility="public">
-          <Argument type="Vehicle" name="vehicle"/>
-          <Argument type="int" name="square"/>
-        </Method>
-        <Method name="exec" returnType="void" visibility="public"/>
-        <Method name="doTurn" returnType="void" visibility="public" isStatic="true">
-          <Argument type="MainWindow" name="mainWindow"/>
-          <Argument type="Game" name="game"/>
-          <Argument type="int" name="detective"/>
-        </Method>
-      </Methods>
-    </Class>
-    <Class name="MoveWidget" package="artoh.jokiniemi.ui" visibility="public" xPosition="920.0" yPosition="1220.0">
-      <Fields/>
-      <Constructors>
-        <Constructor visibility="public">
-          <Argument type="Vehicle" name="vehicle"/>
-          <Argument type="int" name="square"/>
-          <Argument type="MoveWindow" name="moveWindow"/>
-        </Constructor>
-      </Constructors>
-      <Methods/>
-    </Class>
-    <Class name="BoardFileReader" package="artoh.jokiniemi.io" visibility="public" xPosition="1220.0" yPosition="1220.0">
-      <Fields/>
-      <Constructors/>
-      <Methods>
-        <Method name="readBoard" returnType="boolean" visibility="public">
-          <Argument type="Game" name="game"/>
-          <Argument type="StartPlaceRandomizer" name="starter"/>
-        </Method>
-        <Method name="getResourceFile" returnType="File" visibility="private">
-          <Argument type="String" name="fileName"/>
-        </Method>
-        <Method name="initTurnTable" returnType="void" visibility="public">
-          <Argument type="GameLog" name="log"/>
-          <Argument type="String" name="line"/>
-        </Method>
-        <Method name="initStartList" returnType="void" visibility="public">
-          <Argument type="StartPlaceRandomizer" name="starter"/>
-          <Argument type="String" name="list"/>
-        </Method>
-        <Method name="addConnectionLine" returnType="void" visibility="public">
-          <Argument type="GameBoardInterface" name="board"/>
-          <Argument type="String" name="line"/>
-        </Method>
-      </Methods>
-    </Class>
+    </Interface>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="randomizer" source="artoh.jokiniemi.game.StartPlaceRandomizer" target="artoh.jokiniemi.algorithm.RandomizeInterface" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.game.Game" target="artoh.jokiniemi.game.StartPlaceInterface" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="artoh.jokiniemi.algorithm.FloydWarshallDistance" target="artoh.jokiniemi.algorithm.BoardDistanceInterface"/>
-    <UseRelation source="artoh.jokiniemi.ai.AIInterface" target="artoh.jokiniemi.game.Game" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.game.Square" target="artoh.jokiniemi.game.Vehicle" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.game.Game" target="artoh.jokiniemi.ai.AIInterface" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="startplacer" source="artoh.jokiniemi.game.Game" target="artoh.jokiniemi.game.StartPlaceInterface" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.algorithm.FloydWarshallDistance" target="artoh.jokiniemi.game.Game" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="gameLog" source="artoh.jokiniemi.game.Game" target="artoh.jokiniemi.game.GameLog" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <IsRelation name="is" source="artoh.jokiniemi.ui.MoveWidget" target="artoh.jokiniemi.ui.LogWidget"/>
-    <UseRelation source="artoh.jokiniemi.io.BoardFileReader" target="artoh.jokiniemi.game.StartPlaceRandomizer" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="jumArray" source="artoh.jokiniemi.ai.SimpleHeuristicAI" target="artoh.jokiniemi.struct.JumArray" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.ui.JokiniemiApplication" target="artoh.jokiniemi.game.Game" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.ai.SimpleHeuristicAI" target="artoh.jokiniemi.game.Game" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="gameboard" source="artoh.jokiniemi.game.Game" target="artoh.jokiniemi.game.GameBoardInterface" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.ui.LogWidget" target="artoh.jokiniemi.game.Vehicle" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="bestAlternative" source="artoh.jokiniemi.ai.SimpleHeuristicAI" target="artoh.jokiniemi.struct.ScoredAlternative" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.algorithm.BoardDistanceInterface" target="artoh.jokiniemi.game.Game" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="randomizer" source="artoh.jokiniemi.ai.VeryStupidAI" target="artoh.jokiniemi.algorithm.RandomizeInterface" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="ai" source="artoh.jokiniemi.game.Game" target="artoh.jokiniemi.ai.AIInterface" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="boardDistances" source="artoh.jokiniemi.ai.SimpleHeuristicAI" target="artoh.jokiniemi.algorithm.BoardDistanceInterface" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.game.GameLog" target="artoh.jokiniemi.game.Vehicle" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.ui.NewGameDialog" target="artoh.jokiniemi.game.Game" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.game.PlayerGameLog" target="artoh.jokiniemi.game.Vehicle" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="artoh.jokiniemi.game.StartPlaceRandomizer" target="artoh.jokiniemi.game.StartPlaceInterface"/>
-    <UseRelation source="artoh.jokiniemi.game.GameBoard" target="artoh.jokiniemi.game.Vehicle" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="artoh.jokiniemi.ai.SimpleHeuristicAI" target="artoh.jokiniemi.ai.AIInterface"/>
-    <UseRelation source="artoh.jokiniemi.ai.SimpleHeuristicAI" target="artoh.jokiniemi.game.Vehicle" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="game" source="artoh.jokiniemi.ai.SimpleHeuristicAI" target="artoh.jokiniemi.game.Game" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="possibles" source="artoh.jokiniemi.ai.SimpleHeuristicAI" target="artoh.jokiniemi.struct.PossibleLocationsSet" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="PossibleLocationsSet"/>
-    <HasRelation name="gameBoard" source="artoh.jokiniemi.algorithm.JumAnalyser" target="artoh.jokiniemi.game.GameBoardInterface" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.ui.MoveWindow" target="artoh.jokiniemi.game.Vehicle" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="artoh.jokiniemi.algorithm.LinealCongruentialGenerator" target="artoh.jokiniemi.algorithm.RandomizeInterface"/>
     <UseRelation source="artoh.jokiniemi.algorithm.JumAnalyser" target="artoh.jokiniemi.struct.IntegerArray" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.game.Game" target="artoh.jokiniemi.game.Game" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.struct.PossibleLocationsSet" target="artoh.jokiniemi.game.Vehicle" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.game.GameLog" target="artoh.jokiniemi.game.StartPlaceInterface" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="firstTicket" source="artoh.jokiniemi.struct.ScoredAlternative" target="artoh.jokiniemi.game.Vehicle" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.struct.JumArray" target="artoh.jokiniemi.game.Square" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.ai.VeryStupidAI" target="artoh.jokiniemi.game.Game" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="game" source="artoh.jokiniemi.ui.MainWindow" target="artoh.jokiniemi.game.Game" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="game" source="artoh.jokiniemi.struct.PossibleLocationsSet" target="artoh.jokiniemi.game.Game" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.game.GameBoardInterface" target="artoh.jokiniemi.game.Vehicle" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.ui.MoveWindow" target="artoh.jokiniemi.ui.Main" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.ai.SimpleHeuristicAI" target="artoh.jokiniemi.game.Square" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="game" source="artoh.jokiniemi.ai.VeryStupidAI" target="artoh.jokiniemi.game.Game" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.struct.ScoredAlternative" target="artoh.jokiniemi.game.Game" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="artoh.jokiniemi.io.BoardFileReader" target="artoh.jokiniemi.game.Game" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="detectivePlaces" source="artoh.jokiniemi.game.StartPlaceRandomizer" target="artoh.jokiniemi.struct.IntegerArray" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="mainWindow" source="artoh.jokiniemi.ui.MoveWindow" target="artoh.jokiniemi.ui.MainWindow" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="secondTicket" source="artoh.jokiniemi.struct.ScoredAlternative" target="artoh.jokiniemi.game.Vehicle" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="artoh.jokiniemi.game.GameBoard" target="artoh.jokiniemi.game.GameBoardInterface"/>
-    <HasRelation name="mrXPlaces" source="artoh.jokiniemi.game.StartPlaceRandomizer" target="artoh.jokiniemi.struct.IntegerArray" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="analyser" source="artoh.jokiniemi.struct.JumArray" target="artoh.jokiniemi.algorithm.JumAnalyser" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="artoh.jokiniemi.ai.VeryStupidAI" target="artoh.jokiniemi.ai.AIInterface"/>
-    <HasRelation name="game" source="artoh.jokiniemi.ui.MoveWindow" target="artoh.jokiniemi.game.Game" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="artoh.jokiniemi.ai.SimpleHeuristicAI" target="artoh.jokiniemi.ai.AIInterface"/>
+    <HasRelation name="possibles" source="artoh.jokiniemi.ai.SimpleHeuristicAI" target="artoh.jokiniemi.struct.PossibleLocationsSet" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="PossibleLocationsSet"/>
+    <HasRelation name="jumArray" source="artoh.jokiniemi.ai.SimpleHeuristicAI" target="artoh.jokiniemi.struct.JumArray" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="artoh.jokiniemi.algorithm.FloydWarshallDistance" target="artoh.jokiniemi.algorithm.BoardDistanceInterface"/>
+    <HasRelation name="bestAlternative" source="artoh.jokiniemi.ai.SimpleHeuristicAI" target="artoh.jokiniemi.struct.ScoredAlternative" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="boardDistances" source="artoh.jokiniemi.ai.SimpleHeuristicAI" target="artoh.jokiniemi.algorithm.BoardDistanceInterface" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="randomizer" source="artoh.jokiniemi.ai.VeryStupidAI" target="artoh.jokiniemi.algorithm.RandomizeInterface" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="artoh.jokiniemi.algorithm.LinealCongruentialGenerator" target="artoh.jokiniemi.algorithm.RandomizeInterface"/>
+    <HasRelation name="analyser" source="artoh.jokiniemi.struct.JumArray" target="artoh.jokiniemi.algorithm.JumAnalyser" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>
