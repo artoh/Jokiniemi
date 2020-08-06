@@ -18,7 +18,10 @@ public class GameLog {
      * @return True if positon of Mr X is visibe
      */
     public boolean isVisibleTurn(int turn) {
-        return this.visible[turn];
+        if (turn >= this.turnsTotal) {
+            return false;
+        }
+        return this.visible[turn];  // FIX ME !!!!!!!!!
     }
     
     /**
@@ -67,6 +70,14 @@ public class GameLog {
      */
     public int turnsTotal() {
         return turnsTotal;
+    }
+    
+    /**
+     * Turns left (during AI function)
+     * @return Turns left
+     */
+    public int turnsLeft() {
+        return turnsTotal - currentTurn() - 1;
     }
     
     /**

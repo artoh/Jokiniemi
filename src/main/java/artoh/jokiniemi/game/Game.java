@@ -190,8 +190,8 @@ public class Game {
     private final StartPlaceInterface startplacer;
     private AIInterface ai;
 
-    private final static int BLACK_CARDS_TOTAL = 5;
-    private final static int DOUBLE_CARDS_TOTAL = 2;
+    public final static int BLACK_CARDS_TOTAL = 5;
+    public final static int DOUBLE_CARDS_TOTAL = 2;
     
     private int blackCardsLeft;
     private int doubleCardsLeft;

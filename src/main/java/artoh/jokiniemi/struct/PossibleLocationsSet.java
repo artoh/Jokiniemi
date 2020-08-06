@@ -27,6 +27,28 @@ public class PossibleLocationsSet {
     public PossibleLocationsSet(Game game) {
         this.game = game;               
         this.possible = new boolean[game.gameBoard().squareCount() + 1];
+        
+    }
+
+    /**
+     * Fill the possibilities table with trues.
+     * When the game begins, all the squares are possible...
+     */
+    public void fill() {
+        for (int i=1; i < this.possible.length; i++) {
+            this.possible[i] = true;
+        }
+    }
+    
+    /**
+     * Remove possible location
+     * 
+     * Used to remove location the player just left
+     * 
+     * @param square Square number
+     */
+    public void removeLocation(int square) {
+        this.possible[square] = false;
     }
     
     /**
@@ -35,7 +57,10 @@ public class PossibleLocationsSet {
      * @param square Square of visible Mister X
      */
     public void init(int square) {
-        possible[square] = true;
+        for (int i=0; i < possible.length; i++) {
+            this.possible[i] = false;
+        }        
+        this.possible[square] = true;
     }
     
     /**
@@ -50,7 +75,7 @@ public class PossibleLocationsSet {
                 possible[location] = false;
             }
         }
-    }
+    }        
     
     /**
      * Count of possible squares of Mister X
@@ -93,6 +118,38 @@ public class PossibleLocationsSet {
         }
         
         return newSet;
+    }
+    
+    /**
+     * Is taxi only possible vehicle from possible squares?
+     * 
+     * @return True if taxi is the only possible vehicle
+     */
+    public boolean onlyTaxiPossible() {
+        for (int i = 0; i < possible.length; i++) {
+            if (possible[i]) {
+                for (int c = 0; c < game.gameBoard().connectionsCount(i); c++) {
+                    if (game.gameBoard().connectionVehicle(i, c) != Vehicle.TAXI) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+    
+    public boolean ferryPossible() {
+        for (int i = 0; i < possible.length; i++) {
+            if (possible[i]) {
+                for (int c = 0; c < game.gameBoard().connectionsCount(i); c++) {
+                    if (game.gameBoard().connectionVehicle(i, c) == Vehicle.FERRY) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+
     }
     
     private final Game game;

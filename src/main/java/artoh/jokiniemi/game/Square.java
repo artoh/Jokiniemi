@@ -86,7 +86,7 @@ public class Square {
             return Vehicle.START_SQUARE;   
         }
                     
-    }
+    }    
     
     private final static int INITIAL_CAPACITY = 8;
     

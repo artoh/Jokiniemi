@@ -6,7 +6,10 @@
 package artoh.jokiniemi.ui;
 
 import artoh.jokiniemi.ai.AIInterface;
+import artoh.jokiniemi.ai.SimpleHeuristicAI;
 import artoh.jokiniemi.ai.VeryStupidAI;
+import artoh.jokiniemi.algorithm.BoardDistanceInterface;
+import artoh.jokiniemi.algorithm.FloydWarshallDistance;
 import artoh.jokiniemi.algorithm.LinealCongruentialGenerator;
 import artoh.jokiniemi.algorithm.RandomizeInterface;
 import artoh.jokiniemi.game.Game;
@@ -39,6 +42,7 @@ public class NewGameDialog {
     
     private ToggleGroup levelGroup;
     private RadioButton veryEasyLevel;
+    private RadioButton heuristicLevel;
     
     /**
      * Init the dialog
@@ -46,13 +50,13 @@ public class NewGameDialog {
     NewGameDialog() {
         dialog = new Dialog<>();
         dialog.setTitle("Uusi peli");
-        dialog.setHeaderText("Valitse etsivien määrä ja pelin vaikeustaso");
+        dialog.setHeaderText("Valitse etsivien määrä ja käytettävä tekoäly");
         
         initDetectiveCoutSelection();
         initLevelSelection();
         
         Separator separator = new Separator(Orientation.HORIZONTAL);
-        VBox vbox = new VBox(detectives4, detectives5, separator, veryEasyLevel);
+        VBox vbox = new VBox(detectives4, detectives5, separator, veryEasyLevel, heuristicLevel);
         
         dialog.getDialogPane().setContent(vbox);
         
@@ -68,10 +72,11 @@ public class NewGameDialog {
         detectiveGroup = new ToggleGroup();
         detectives4 = new RadioButton("4 etsivää");
         detectives4.setToggleGroup(detectiveGroup);
+        detectives4.setSelected(true);
         
         detectives5 = new RadioButton("5 etsivää");
         detectives5.setToggleGroup(detectiveGroup);
-        detectives5.setSelected(true);
+
     }
     
     /**
@@ -79,9 +84,12 @@ public class NewGameDialog {
      */
     void initLevelSelection() {
         levelGroup = new ToggleGroup();
-        veryEasyLevel = new RadioButton("Hyvin helppo");
-        veryEasyLevel.setToggleGroup(levelGroup);
-        veryEasyLevel.setSelected(true);
+        veryEasyLevel = new RadioButton("Typerä tekoäly");
+        veryEasyLevel.setToggleGroup(levelGroup);        
+        
+        heuristicLevel = new RadioButton("Heuristinen tekoäly");
+        heuristicLevel.setToggleGroup(levelGroup);
+        heuristicLevel.setSelected(true);
     }
     
     /**
@@ -92,7 +100,15 @@ public class NewGameDialog {
     void startGame(Game game) {
         int detectives = detectives4.isSelected() ? 4 : 5;
         RandomizeInterface randomizer = new LinealCongruentialGenerator();
-        AIInterface ai = new VeryStupidAI(randomizer);
+        AIInterface ai;
+        
+        if (veryEasyLevel.isSelected()) {
+             ai = new VeryStupidAI(randomizer);
+        } else {
+            BoardDistanceInterface distances = new FloydWarshallDistance();
+            distances.init(game.gameBoard());
+            ai = new SimpleHeuristicAI(distances, randomizer);
+        }
         
         game.startGame(detectives, ai);
     }
