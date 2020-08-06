@@ -94,6 +94,15 @@ public class LogWidget extends Group {
                 positionText.setFill(Color.WHITE);
                 vehicleText.setText("");
                 positionText.setText("2x");
+            } else if (position < 0) {
+                rect.setFill(Color.TRANSPARENT);
+                vehicleText.setText("");
+                if (button) {
+                   positionText.setText("Poista liikuntakyvytön nappula pelistä");
+                   rect.setWidth(300);
+                } else {
+                    positionText.setText("X");
+                }
             } else {
                 rect.setFill(Color.WHITE);
                 vehicleText.setText("");

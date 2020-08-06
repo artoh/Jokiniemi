@@ -48,8 +48,12 @@ public class Game {
      */
     public void startGame(int detectives, AIInterface ai) {
         
-        this.blackCardsLeft = this.BLACK_CARDS_TOTAL;
-        this.doubleCardsLeft = this.DOUBLE_CARDS_TOTAL;
+        this.blackCardsLeft = Game.BLACK_CARDS_TOTAL;
+        this.doubleCardsLeft = Game.DOUBLE_CARDS_TOTAL;
+        
+        this.taxiTicketsLeft = Game.TAXI_TICKETS_TOTAL;
+        this.busTicketsLeft = Game.BUS_TICKETS_TOTAL;
+        this.undergroudTicketsLeft = Game.UNDERGROUD_TICKETS_TOTAL;
         
         this.detectivesCount = detectives;
         this.ai = ai;
@@ -89,6 +93,16 @@ public class Game {
             if (doubled) {
                 this.doubleCardsLeft--;
             }
+        } else if (player > BOBBIES) {
+            if (log().currentTurn() > 1 && log().position(player, log().currentTurn() - 2) == square) {
+                ; // Free move!
+            } else if (vehicle == Vehicle.TAXI) {
+                this.taxiTicketsLeft--;
+            } else if (vehicle == Vehicle.BUS) {
+                this.busTicketsLeft--;
+            } else if (vehicle == Vehicle.UNDERGROUD) {
+                this.undergroudTicketsLeft--;
+            }
         }
         
         checkStatus();
@@ -127,6 +141,24 @@ public class Game {
     public int blackCardsLeft() {
         return this.blackCardsLeft;
     }
+    
+    /**
+     * Etsivillä jäljellä olevien lippujen määrä
+     * 
+     * @param ticket Lipputyyppi (Vehicle.TAXI, Vehicle.BUS tai Vehicle.UNDERGROUD)
+     * @return Jäljellä olevien lippujen määrä
+     */
+    public int ticketsLeft(Vehicle ticket) {
+        if (ticket == Vehicle.TAXI) {
+            return this.taxiTicketsLeft;
+        } else if (ticket == Vehicle.BUS) {
+            return this.busTicketsLeft;
+        } else if (ticket == Vehicle.UNDERGROUD) {
+            return this.undergroudTicketsLeft;
+        }
+        return 0;
+    }
+    
     
     /**
      * Peliloki
@@ -217,14 +249,24 @@ public class Game {
     private final StartPlaceInterface startplacer;
     private AIInterface ai;
 
+    public final static int BOBBIES = 2;
+    
     public final static int BLACK_CARDS_TOTAL = 5;
     public final static int DOUBLE_CARDS_TOTAL = 2;
+    
+    public final static int TAXI_TICKETS_TOTAL = 22;
+    public final static int BUS_TICKETS_TOTAL = 16;
+    public final static int UNDERGROUD_TICKETS_TOTAL = 8;
     
     private int blackCardsLeft;
     private int doubleCardsLeft;
     
     private int detectivesCount;
     private int detectivesMoved;
+    
+    private int taxiTicketsLeft;
+    private int busTicketsLeft;
+    private int undergroudTicketsLeft;
     
     private GameStatus status = GameStatus.NOT_STARTED;
     

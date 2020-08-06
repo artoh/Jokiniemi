@@ -27,10 +27,6 @@ import javafx.scene.layout.VBox;
 public class NewGameDialog {
     
     Dialog<Boolean> dialog;
-
-    private ToggleGroup detectiveGroup;
-    private RadioButton detectives4;
-    private RadioButton detectives5;
     
     private ToggleGroup levelGroup;
     private RadioButton veryEasyLevel;
@@ -42,13 +38,11 @@ public class NewGameDialog {
     NewGameDialog() {
         dialog = new Dialog<>();
         dialog.setTitle("Uusi peli");
-        dialog.setHeaderText("Valitse etsivien määrä ja käytettävä tekoäly");
+        dialog.setHeaderText("Valitse käytettävä tekoäly");
         
-        initDetectiveCoutSelection();
         initLevelSelection();
         
-        Separator separator = new Separator(Orientation.HORIZONTAL);
-        VBox vbox = new VBox(detectives4, detectives5, separator, veryEasyLevel, heuristicLevel);
+        VBox vbox = new VBox(veryEasyLevel, heuristicLevel);
         
         dialog.getDialogPane().setContent(vbox);
         
@@ -57,20 +51,7 @@ public class NewGameDialog {
         
     }
     
-    /**
-     * Alustaa valintanapit etsivien lukumäärälle
-     */
-    void initDetectiveCoutSelection() {
-        detectiveGroup = new ToggleGroup();
-        detectives4 = new RadioButton("4 etsivää");
-        detectives4.setToggleGroup(detectiveGroup);
-        detectives4.setSelected(true);
-        
-        detectives5 = new RadioButton("5 etsivää");
-        detectives5.setToggleGroup(detectiveGroup);
 
-    }
-    
     /**
      * Alustaa valintanapit tasolle
      */
@@ -90,7 +71,6 @@ public class NewGameDialog {
      * @param game Game -olio
      */
     void startGame(Game game) {
-        int detectives = detectives4.isSelected() ? 4 : 5;
         AIInterface ai;
         
         if (veryEasyLevel.isSelected()) {
@@ -101,7 +81,7 @@ public class NewGameDialog {
             ai = new SimpleHeuristicAI(distances);
         }
         
-        game.startGame(detectives, ai);
+        game.startGame(4, ai);
     }
     
     /**

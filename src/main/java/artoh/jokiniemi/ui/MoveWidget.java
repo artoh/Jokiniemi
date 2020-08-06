@@ -4,6 +4,7 @@ package artoh.jokiniemi.ui;
 import artoh.jokiniemi.game.Vehicle;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 
 /**
  * Widget, jolla kysytään pelaajan seuraavaa siirtoa
@@ -31,6 +32,5 @@ public class MoveWidget extends LogWidget {
         };
         
         this.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
-    }
-    
+    }        
 }

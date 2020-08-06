@@ -131,7 +131,8 @@ public class SimpleHeuristicAI implements AIInterface {
         inRoute[currentPosition] = true;
         
         JumArray.JumSquare jumSquare = jumArray.getJumSquare(currentPosition);
-        boolean inTrouble = analyseJum(2, jumSquare, 1) == 0;
+        boolean inTrouble = (analyseJum(2, jumSquare, 1) == 0 && possibles.count() < 4) ||
+                analyseJum(1, jumSquare, 1) == 0 || analyseJum(2, jumSquare, 2) == 0;
         
         for (int i = 0; i < connections; i++) {
             int squareTo = game.gameBoard().connectionTo(currentPosition, i);
@@ -315,9 +316,9 @@ public class SimpleHeuristicAI implements AIInterface {
             points = (squares > 10 ? 10 : squares) * 2 + nearestDetectiveDistance(square) * 2;
         
         
-            for (int c = 0; c < game.gameBoard().connectionsCount(square); c++) {
+            for (int c = 0; c < game.gameBoard().connectionsCount(square); c++) {                
                 if (game.gameBoard().connectionVehicle(square, c) == Vehicle.FERRY) {
-                    points += 10;
+                    points += 8;
                 } else if (game.gameBoard().connectionVehicle(square, c) == Vehicle.UNDERGROUD) {
                     points += 5;
                 } else if (game.gameBoard().connectionVehicle(square, c) == Vehicle.BUS) {
@@ -402,7 +403,7 @@ public class SimpleHeuristicAI implements AIInterface {
         int nearest = nearestDetectiveDistance(square);
         int nearPoints = 0;
         if (nearest > 2) {
-            nearPoints = nearest * 5 + 120;
+            nearPoints = (nearest > 4 ? 4 : nearest) * 10 + 120;
             if (game.log().isVisibleTurn(turn + 1)) {
                 nearPoints += nearest * 30;
             }
@@ -416,7 +417,7 @@ public class SimpleHeuristicAI implements AIInterface {
         if ((nearest < 2 && game.log().isVisibleTurn(turn + 1)) || nearest == 0) {
             total = 0;
         } else if (nearest == 1) {
-            total = total / 8;
+            total = total / 6;
         } else if (jumPoints < 100) {
             total = total / 3;
         }               

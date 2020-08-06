@@ -56,6 +56,9 @@ public class FloydWarshallDistance implements BoardDistanceInterface {
 
     @Override
     public int distance(int from, int to) {
+        if (from <= 0 || to <= 0) {
+            return Integer.MAX_VALUE;
+        }
         return distances[from][to];
     }
     

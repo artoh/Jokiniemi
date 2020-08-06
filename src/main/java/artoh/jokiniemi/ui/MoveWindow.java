@@ -75,7 +75,10 @@ public class MoveWindow {
             
             if (vehicle == Vehicle.FERRY || isReserved(squareTo)) {
                 continue;
-            }            
+            }           
+            if (this.detective > Game.BOBBIES && this.game.ticketsLeft(vehicle) < 1) {
+                continue;   // Ei matkalippuja jäljellä !
+            }
             
             MoveWidget widget = new MoveWidget(vehicle, squareTo, this);
             group.getChildren().add(widget);
@@ -89,6 +92,11 @@ public class MoveWindow {
                 widget.setTranslateX(140 * 2);
             }
         }
+        if (taxiIndex == 0 && busIndex == 0 && ugroundIndex == 0) {
+            // Pelaaja ei liikkumismahdollisuuksia
+            MoveWidget leaveWidget = new MoveWidget(Vehicle.START_SQUARE, -1, this);
+            group.getChildren().add(leaveWidget);
+        }
         
         return  group;
     }
@@ -100,13 +108,19 @@ public class MoveWindow {
      * @param square  Valittu kohderuutu (pelilaudan ruutu)
      */
     public void doMove(Vehicle vehicle, int square) {
-        if (game.log().position(this.detective, turn) == 0 &&
+        if (square < 0) {
+            // Pelaaja ei voinut liikkua ja nappula poistetaan pelistä
+            for (int t = game.log().currentTurn(); t <= game.log().turnsTotal(); t++) {
+                game.doMove(this.detective, -1, Vehicle.START_SQUARE, false);
+            }
+        } else if (game.log().position(this.detective, turn) == 0 &&
             game.log().currentTurn() == turn) {
             game.doMove(this.detective, square, vehicle, false);
         }
         stage.close();
         mainWindow.update();
-    }
+    }    
+    
     
     /**
      * Näyttää ikkunan ja odottaa siirtoa

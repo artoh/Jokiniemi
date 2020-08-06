@@ -11,6 +11,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.ArcType;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
@@ -41,7 +44,7 @@ public class MainWindow {
      * @return Sarakkeen x-koordinaatti
      */
     private int getXForDetective(int detective) {
-        return (60 + 140 * detective + (detective > 0 ? 15 : 0));
+        return (60 + 140 * detective + (detective > 0 ? 15 : 0) + (detective > 2 ? 15 : 0));
     }
     
     /**
@@ -82,6 +85,51 @@ public class MainWindow {
         }                
     }
     
+    private static Arc createArc(int x, int y, int startAngle, Color color) {
+        Arc arc = new Arc();
+        arc.setCenterX(x);
+        arc.setCenterY(y);
+        arc.setRadiusX(32);
+        arc.setRadiusY(32);
+        arc.setStartAngle(startAngle);
+        arc.setLength(360 / 3);
+        arc.setFill(color);
+        arc.setType(ArcType.ROUND);
+        return arc;
+    }
+    
+    public static void addBobbyCircle(Group group, int x, int y) {
+        group.getChildren().add(createArc(x, y, 0, Color.YELLOW));
+        group.getChildren().add(createArc(x, y, 360 / 3, Color.CYAN));
+        group.getChildren().add(createArc(x, y, 360 / 3 * 2, Color.RED));
+    }
+    
+    public static Color getPlayerColor(int detective) {
+        switch(detective) {
+            case 1:
+                return Color.GREEN;
+            case 2:
+                return Color.BLACK;
+            case 3:
+                return Color.YELLOW;
+            default:
+                return Color.RED;
+        }
+    }
+    
+    public static void addPlayerCircle(Group group, int detective, int x, int y) {
+        if (detective <= 2) {
+            addBobbyCircle(group, x, y);
+        }
+        Circle circle = new Circle();
+        circle.setCenterX(x);
+        circle.setCenterY(y);
+        circle.setRadius(24);
+        circle.setFill(getPlayerColor(detective));
+        group.getChildren().add(circle);
+    }
+    
+    
     /**
      * Piirtää etsivien värikuvakkeet
      * 
@@ -91,30 +139,8 @@ public class MainWindow {
         xt.setFont(Font.font("Sans", FontWeight.LIGHT, 32));
         mainGroup.getChildren().add(xt);
         
-        for (int detective = 1; detective < 6; detective++) {
-            Ellipse ellipse = new Ellipse(60 + 15 + 50 + 140 * detective, 24, 32, 26);            
-            switch (detective) {
-                case 1: 
-                    ellipse.setFill(Color.GREEN); 
-                    break;
-                case 2: 
-                    ellipse.setFill(Color.YELLOW);
-                    break;
-                case 3: 
-                    ellipse.setFill(Color.BLACK); 
-                    break;
-                case 4: 
-                    ellipse.setFill(Color.BLUE); 
-                    break;
-                case 5: 
-                    ellipse.setFill(Color.RED); 
-                    break;
-            }
-            mainGroup.getChildren().add(ellipse);
-            Text text = new Text(60 + 15 + 40 + 140 * detective, 30, "" + detective);
-            text.setFont(Font.font("Sans", FontWeight.BLACK, 32));
-            text.setFill(Color.WHITE);
-            mainGroup.getChildren().add(text);
+        for (int detective = 1; detective <= 4; detective++) {
+            addPlayerCircle(mainGroup, detective, getXForDetective(detective) + 60, 24);
             
         }        
     }
@@ -124,7 +150,7 @@ public class MainWindow {
      */
     private void drawStatusArea() {
         Button newButton = new Button("Uusi peli");
-        newButton.setTranslateY(-40);
+        newButton.setTranslateY(-45);
         mainGroup.getChildren().add(newButton);
         newButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -134,13 +160,29 @@ public class MainWindow {
             }            
         });
         
-        statusText = new Text(150, -20, "");
+        statusText = new Text(150, -25, "");
         mainGroup.getChildren().add(statusText);
         
-        Line line = new Line(-20, -5, 900, -5);
+        Line line = new Line(-20, -10, 1000, -10);
         mainGroup.getChildren().add(line);        
         
         updateStatus();
+    }
+    
+    private void initTicketsArea() {
+        taxiTickets = new TicketWidget(mainGroup, Vehicle.TAXI, 800, 0);
+        busTickets = new TicketWidget(mainGroup, Vehicle.BUS, 800, 70);
+        metroTickets = new TicketWidget(mainGroup, Vehicle.UNDERGROUD, 800, 140);
+        
+        metroTickets.setAmount(8);
+        busTickets.setAmount(16);
+        taxiTickets.setAmount(22);
+    }
+    
+    private void updateTickets() {
+        taxiTickets.setAmount(game.ticketsLeft(Vehicle.TAXI));
+        busTickets.setAmount(game.ticketsLeft(Vehicle.BUS));
+        metroTickets.setAmount(game.ticketsLeft(Vehicle.UNDERGROUD));
     }
     
     /**
@@ -222,6 +264,7 @@ public class MainWindow {
         updateStatus();
         updateMisterX();
         updateDetectives();
+        updateTickets();
     }
     
     /**
@@ -237,6 +280,7 @@ public class MainWindow {
         drawTurnNumbers();
         drawTitles();
         drawStatusArea();
+        initTicketsArea();
         initEventHandler();        
         
         ScrollPane scrollPane = new ScrollPane();
@@ -252,4 +296,8 @@ public class MainWindow {
     Group mainGroup;
     private LogWidget[][] widgets;
     Text statusText;    
+    
+    TicketWidget taxiTickets;
+    TicketWidget busTickets;
+    TicketWidget metroTickets;
 }
