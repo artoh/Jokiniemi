@@ -1,6 +1,6 @@
 # Viikkoraportti 3
 
-Aikaa tällä viikolla käytetty n. 32 tuntia 
+Aikaa tällä viikolla käytetty n. 36 tuntia
 
 ## Mitä olen tehnyt
 
@@ -14,7 +14,9 @@ Tekoäly häviää pelin useimmiten jo ennen puoliväliä. Yhden kerran tekoäly
 
 ![Tietokone voitti!](mrxvoitti.png)
 
-Pelin tasapainoituksen kannalta rajoitetut matkaliput ovat niin olennaisessa roolissa, että niiden jättäminen toteuttamatta (ohjelman yksinkertaistamisen takia) osoittautui huonoksi valinnaksi. Peliin olisikin syytä toteuttaa pelaajan korttien rajaaminen esim. muuttamalla pelimuodoksi pelin sääntöjen mukainen kaksinpeli (jossa pelaajalla on kaksi nappulaa yhteisellä korttivarastolla ja kaksi "bobbyä" jotka eivät tarvitse lippuja).
+Pelin tasapainoituksen kannalta rajoitetut matkaliput ovat niin olennaisessa roolissa, että niiden jättäminen toteuttamatta (ohjelman yksinkertaistamisen takia) osoittautui huonoksi valinnaksi. Päädyinkin muuttamaan peliä niin, että peli noudataa Scotland Yardin sääntövihkon kaksinpelivariaatiota: ihmispelaajalla on käytössä kaksi bobbya rajoittamattomilla lipuilla ja kaksi etsivää, jotka jakavat rajallisen määrän lippuja.
+
+![Rajalliset peliliput](kaksinpeli.png)
 
 # Miten ohjelma on edistynyt
 
@@ -36,4 +38,8 @@ Opin toteuttamaan JUnitin yksikkötesti abstraktin kantaluokan avulla rajapintoj
 Mielenkiintoinen projekti vie paljon aikaa (etenkin jollain tavalla järkevän pisteytysfunktion laatiminen osoittautui vaikeaksi).
 
 # Mitä seuraavaksi
-Peliin otetaan mukaan etsivien matkalippujen rajallinen määrä (vaatii muutoksia moneen paikkaan läpi ohjelman). Tämä tarkoittanee sitä, että tilanteessa, jossa etsivien lippujen määrä muodostaa rajoitteen, otetaan käyttöön syvyyshakuun perustuva erikoistettu etäisyydenlaskenta-algoritmi, joka etsii vain niitä reittejä, joihin etsivien matkaliput riittävät.
+
+- SimpleHeuristicAI:n refraktointi siistimmäksi ja yksikkötestit
+- Samalla tehostetaan laskentaa esimerkiksi käyttämällä "välimuistia" silloin, kun samaa laskentaa toistetaan (ainakin kun tutkitaan etäisyyttä lähimpään etsivään)
+- Rajallisten matkalippujen määrän huomioiminen tekoälyssä (esim. etäisyydenlaskenta silloin, kun etsivät eivät voi rajallisten matkalippujen takia käyttää lyhintä reittiä)
+- Käyttöohjeen aloittaminen
