@@ -316,7 +316,15 @@ public class SimpleHeuristicAI implements AIInterface {
             points = (squares > 10 ? 10 : squares) * 2 + nearestDetectiveDistance(square) * 2;
         
         
-            for (int c = 0; c < game.gameBoard().connectionsCount(square); c++) {                
+            for (int c = 0; c < game.gameBoard().connectionsCount(square); c++) {    
+                for (int j = 0; j < c; j++) {
+                    if (game.gameBoard().connectionTo(square, c) == game.gameBoard().connectionTo(square, j)) {
+                        // Ei ota tässä pisteyksessä huomioon sitä, jos kahden ruudun välillä
+                        // on kaksi eri kulkuneuvoa (esim. sekä taksi- että bussiyhteys).
+                        continue;
+                    }
+                }
+                
                 if (game.gameBoard().connectionVehicle(square, c) == Vehicle.FERRY) {
                     points += 8;
                 } else if (game.gameBoard().connectionVehicle(square, c) == Vehicle.UNDERGROUD) {
@@ -347,7 +355,7 @@ public class SimpleHeuristicAI implements AIInterface {
             }             
 
         } else {
-            if (analyseJum(4, jumSquare, 2) > 150) {
+            if (analyseJum(3, jumSquare, 2) > 150) {
                 points = 25;
             }
         }
