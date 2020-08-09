@@ -10,6 +10,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 
 /**
@@ -30,8 +32,8 @@ public class BoardFileReader {
     public boolean readBoard(Game game, StartPlaceRandomizer starter) {
         
         try {
-            FileReader reader = new FileReader(getResourceFile("board.txt"));
-            BufferedReader br = new BufferedReader(reader);            
+            InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("board.txt");            
+            BufferedReader br = new BufferedReader(new InputStreamReader(stream));            
             
             // Rivi "JOKINIEMI" tiedoston alussa tiedostotyypin tunnisteena
             if (!br.readLine().equals("JOKINIEMI")) {
@@ -54,22 +56,13 @@ public class BoardFileReader {
             
             return true;
         } catch (FileNotFoundException ex) {
+            System.out.println(ex);
             return false;
         } catch (IOException ex) {
             return false;
         }
     }
     
-    /**
-     * Palauttaa resurssitiedoston
-     * @param fileName Tietoston nimi
-     * @return File -olio
-     */
-    private File getResourceFile(String fileName) {
-        ClassLoader loader = getClass().getClassLoader();
-        URL resource = loader.getResource(fileName);
-        return new File(resource.getFile());
-    }
     
     /**
      * Alustaa vuorotaulun

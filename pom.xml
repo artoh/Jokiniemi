@@ -51,8 +51,31 @@
           <configuration>
             <configLocation>checkstyle.xml</configLocation>
           </configuration>
-        </plugin>        
-    </plugins>
+        </plugin> 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                        <archive>
+                                <manifest>
+                                        <mainClass>artoh.jokiniemi.ui.Main</mainClass>
+                                </manifest>
+                        </archive>
+                </configuration>
+        </plugin>   
+        <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                  <archive>
+                        <manifest>
+                                <!-- Jar file entry point -->
+                                <mainClass>artoh.jokiniemi.ui.Main</mainClass>
+                        </manifest>
+                  </archive>
+                </configuration>
+        </plugin>     
+    </plugins>                           
 </build>
 
 </project>
