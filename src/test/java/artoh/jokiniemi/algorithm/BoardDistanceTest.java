@@ -134,14 +134,14 @@ public abstract class BoardDistanceTest {
     }
     
     @Test
-    public final void count10000Distances() {
+    public final void count2000Distances() {
         BoardDistanceInterface di = initReal();
         int sum = 0;
-        for (int i=0; i < 100000; i++) {
+        for (int i=0; i < 20000; i++) {
             int from = ((i + 79) * 1785) % 199 + 1;
             int to = ((i + 577) * 9745) % 199 + 1;
             sum += di.distance(from, to);
         }
-        assertEquals(400981, sum);
+        assertEquals(80173, sum);
     }
 }

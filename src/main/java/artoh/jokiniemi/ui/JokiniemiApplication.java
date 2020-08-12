@@ -1,5 +1,6 @@
 package artoh.jokiniemi.ui;
 
+import artoh.jokiniemi.algorithm.BoardDistanceInterface;
 import artoh.jokiniemi.algorithm.LinealCongruentialGenerator;
 import artoh.jokiniemi.algorithm.RandomizeInterface;
 import artoh.jokiniemi.game.Game;
@@ -33,7 +34,7 @@ public class JokiniemiApplication extends Application {
      * Alustaa pelin säännöt ja pelilaudan
      * @return Alustettu peliolio
      */
-    private Game initGame() {
+    public static Game initGame() {
         RandomizeInterface randomizer = new LinealCongruentialGenerator();
         StartPlaceRandomizer starter = new StartPlaceRandomizer(randomizer);
         BoardFileReader loader = new BoardFileReader();
@@ -51,6 +52,8 @@ public class JokiniemiApplication extends Application {
         }        
     }
     
+    
+    
     /**
      * Ohjelman käynnistävä pääfunktio
      * 
@@ -58,6 +61,7 @@ public class JokiniemiApplication extends Application {
      */
     public static void main(String[] args) {
         launch(JokiniemiApplication.class);
+
     }
     
 }
