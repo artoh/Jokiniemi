@@ -126,7 +126,6 @@ public class GameLog {
         return this.logs[player].position(turn);
     }
     
-    
     /**
      * Pelaajan nykyinen sijainti
      * @param player Pelaajan numero (0: Mr X, 1..n etsivät)
@@ -145,7 +144,7 @@ public class GameLog {
     public Vehicle vehicle(int player, int turn) {
         return this.logs[player].vehicle(turn);
     }
-    
+        
     private int turnsTotal = 0;    
     private boolean[] visible;
     private PlayerGameLog[] logs;
