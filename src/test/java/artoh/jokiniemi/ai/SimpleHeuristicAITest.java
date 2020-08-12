@@ -19,9 +19,9 @@ import static org.junit.Assert.*;
  *
  * @author arto
  */
-public class SimpleHeuristicAIFirstTest {
+public class SimpleHeuristicAITest {
     
-    public SimpleHeuristicAIFirstTest() {
+    public SimpleHeuristicAITest() {
     }
     
     @Before
@@ -83,7 +83,7 @@ public class SimpleHeuristicAIFirstTest {
 
     @Test
     public void jumPointsAt5() {
-        assertEquals(350, ai.jumPoints(2));
+        assertEquals(300, ai.jumPoints(2));
     }
     
     @Test
@@ -188,7 +188,7 @@ public class SimpleHeuristicAIFirstTest {
         public int doubleCardsLeft() {
             return 1;
         }
-        
+                        
     }
     
     public class MockStarter implements StartPlaceInterface {

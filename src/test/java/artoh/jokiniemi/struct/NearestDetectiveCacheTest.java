@@ -6,6 +6,7 @@
 package artoh.jokiniemi.struct;
 
 import artoh.jokiniemi.algorithm.BoardDistanceInterface;
+import artoh.jokiniemi.algorithm.TicketAwareDistance;
 import artoh.jokiniemi.game.Game;
 import artoh.jokiniemi.game.GameBoard;
 import artoh.jokiniemi.game.GameBoardInterface;
@@ -29,7 +30,18 @@ public class NearestDetectiveCacheTest {
     @Before
     public void setUp() {
         game = new MockGame();
-        BoardDistanceInterface distancer = new MockDistancer();
+        
+        game.gameBoard().init(10);
+        for (int i=1; i < 9; i +=3 ) {
+            game.gameBoard().addConnection(Vehicle.TAXI, i, i+1);
+            game.gameBoard().addConnection(Vehicle.BUS, i+1, i+2);
+            game.gameBoard().addConnection(Vehicle.UNDERGROUD, i+2, i+3);
+        }
+        game.gameBoard().addConnection(Vehicle.TAXI, 9, 10);
+        
+        BoardDistanceInterface distancer = new TicketAwareDistance();
+        distancer.init(game.gameBoard());
+        
         this.cache = new NearestDetectiveCache(game, distancer);
     }
     
@@ -42,6 +54,8 @@ public class NearestDetectiveCacheTest {
         assertEquals(0, cache.countDistance(1));
         assertEquals(1, cache.countDistance(3));
         assertEquals(2, cache.countDistance(6));
+        assertEquals(0, cache.countDistance(8));
+        assertEquals(5, cache.countDistance(9));
     }
     
     @Test
@@ -58,30 +72,18 @@ public class NearestDetectiveCacheTest {
         assertEquals(0, cache.distance(1));
         assertEquals(1, cache.distance(3));
         assertEquals(2, cache.countDistance(6));
+        assertEquals(5, cache.countDistance(9));
         game.move();
         cache.invalidate();
         assertEquals(1, cache.distance(1));
         assertEquals(1, cache.distance(3));        
         assertEquals(1, cache.countDistance(6));
+        assertEquals(4, cache.countDistance(9));
     }
     
     private NearestDetectiveCache cache;
     private MockGame game;
-    
-    private class MockDistancer implements BoardDistanceInterface {
-
-        @Override
-        public void init(GameBoardInterface gameboard) {
-            ;
-        }
-
-        @Override
-        public int distance(int from, int to) {
-            return Math.abs(to - from);            
-        }
         
-    }
-    
     private class MockLog extends GameLog {
         @Override
         public int currentPosition(int detective) {
@@ -102,14 +104,7 @@ public class NearestDetectiveCacheTest {
         
         private int moves = 0;                
     }
-    
-    private class MockBoard extends GameBoard {
-       @Override
-       public int squareCount() {
-           return 10;
-       }
-    }
-    
+        
     private class MockGame extends Game {
         
         public MockGame() {
@@ -126,12 +121,7 @@ public class NearestDetectiveCacheTest {
         public int detectives() {
             return 3;
         }
-        
-        @Override
-        public GameBoardInterface gameBoard() {
-            return new MockBoard();
-        }
-        
+                
         public void move() {
             this.mockLog.move();
         }

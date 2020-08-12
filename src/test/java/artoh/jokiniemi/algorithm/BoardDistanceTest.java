@@ -38,7 +38,7 @@ public abstract class BoardDistanceTest {
         }        
     }
     
-    private BoardDistanceInterface initSimple() {
+    protected BoardDistanceInterface initSimple() {
         BoardDistanceInterface distance = createInstance();
         
         GameBoardInterface gameboard = new GameBoard();
@@ -97,7 +97,7 @@ public abstract class BoardDistanceTest {
      * Init with real gameboard
      * @return 
      */
-    private BoardDistanceInterface initReal() {
+    protected BoardDistanceInterface initReal() {
         BoardFileReader reader = new BoardFileReader();
         StartPlaceRandomizer starter = new StartPlaceRandomizer(null);
         Game game = new Game(starter);
@@ -131,5 +131,17 @@ public abstract class BoardDistanceTest {
         assertEquals(5, di.distance(194, 157));
         assertEquals(3, di.distance(157, 108));
         assertEquals(10, di.distance(7, 164));
+    }
+    
+    @Test
+    public final void count10000Distances() {
+        BoardDistanceInterface di = initReal();
+        int sum = 0;
+        for (int i=0; i < 100000; i++) {
+            int from = ((i + 79) * 1785) % 199 + 1;
+            int to = ((i + 577) * 9745) % 199 + 1;
+            sum += di.distance(from, to);
+        }
+        assertEquals(400981, sum);
     }
 }

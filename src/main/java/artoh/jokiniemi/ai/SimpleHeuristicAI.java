@@ -85,7 +85,7 @@ public class SimpleHeuristicAI implements AIInterface {
         } else if (isInTrouble(position)) {
             return score * 2 / 3;
         } else {
-            return score /4; 
+            return score / 4; 
         }
     }
    
@@ -204,7 +204,7 @@ public class SimpleHeuristicAI implements AIInterface {
                 }
             }
             
-            if (game.doubleCardsLeft() > 0 ) {
+            if (game.doubleCardsLeft() > 0) {
                 evaluateDoubleConnections(vehicle, squareTo, currentPosition, currentTurn, onlyTaxi);
             }            
         }        
@@ -312,7 +312,7 @@ public class SimpleHeuristicAI implements AIInterface {
             int square = jumSquare.square(level, si);
             for (int di = 0; di < game.detectives(); di++) {
                 int detectivePosition = game.log().currentPosition(di + 1);
-                if (boardDistances.distance(detectivePosition, square) <= distance) {            
+                if (this.nearestDetectives.detectiveDistance(di, square) <= distance) {            
                     onHuntDetectives[di]++;
                     hunted = true;
                 }

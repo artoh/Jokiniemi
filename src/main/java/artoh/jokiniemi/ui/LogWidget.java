@@ -67,7 +67,7 @@ public class LogWidget extends Group {
         } else if (ticket == Vehicle.DOUBLED) {
             return Color.BLUEVIOLET;
         } else {
-            return Color.TRANSPARENT;
+            return Color.WHITE;
         }
     }
     
@@ -119,16 +119,15 @@ public class LogWidget extends Group {
                 rect.setFill(Color.BLUEVIOLET);
                 positionText.setFill(Color.WHITE);
                 positionText.setText("2x");
-            } else if (position < 0) {
+            } else if (position < 0) {                
                 if (button) {
                     positionText.setText("Poista liikuntakyvytön nappula pelistä");
                     rect.setWidth(300);
+                    rect.setFill(Color.WHITE);
                 } else {
-                    positionText.setText("X");
+                    positionText.setText("X");                    
                 }
-            } else {
-                rect.setFill(Color.WHITE);
-            }
+            } 
         }
     }
 }
