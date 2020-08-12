@@ -39,6 +39,11 @@ public class GameTest {
     public void detectivesCount() {
         assertEquals(3, game.detectives());        
     }
+    
+    @Test
+    public void bobbiesCount() {
+        assertEquals(2, game.bobbies());
+    }
 
     
    @Test
@@ -72,6 +77,11 @@ public class GameTest {
    }
    
    @Test
+   public void invalidTicketCountZero() {
+       assertEquals(0, game.ticketsLeft(Vehicle.START_SQUARE));
+   }
+   
+   @Test
    public void ticketsDecrease() {
        assertEquals(Game.TAXI_TICKETS_TOTAL, game.ticketsLeft(Vehicle.TAXI));
        game.doMove(3, 11, Vehicle.TAXI, false);
@@ -102,7 +112,7 @@ public class GameTest {
        assertEquals(Game.UNDERGROUD_TICKETS_TOTAL, game.ticketsLeft(Vehicle.UNDERGROUD));       
        game.doMove(3, 11, Vehicle.UNDERGROUD, false);
        assertEquals(Game.TAXI_TICKETS_TOTAL, game.ticketsLeft(Vehicle.TAXI));
-       assertEquals(Game.UNDERGROUD_TICKETS_TOTAL - 1, game.ticketsLeft(Vehicle.UNDERGROUD));              
+       assertEquals(Game.UNDERGROUD_TICKETS_TOTAL - 1, game.ticketsLeft(Vehicle.UNDERGROUD));                
    }
     
     public class MockStarter implements StartPlaceInterface {

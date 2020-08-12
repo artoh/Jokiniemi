@@ -32,6 +32,10 @@ public class PlayerGameLog {
      */
     public int addTurn(int square, Vehicle vehicle) {
         
+        if (this.turnsPlayed + 1 >= this.squares.length) {
+            return this.turnsPlayed;
+        }
+        
         this.turnsPlayed++;
         this.squares[this.turnsPlayed] = square;
         this.vehicles[this.turnsPlayed] = vehicle.ordinal();

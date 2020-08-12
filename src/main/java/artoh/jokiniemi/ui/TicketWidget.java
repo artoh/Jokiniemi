@@ -29,7 +29,7 @@ public class TicketWidget {
         
         this.rect = new Rectangle(100, 50, colorForTicket(ticket));
         this.rect.setTranslateX(100);
-        this.ticketText = new Text(102, 32, ticketName(ticket));
+        this.ticketText = new Text(102, 32, LogWidget.ticketName(ticket));
         this.ticketText.setFont(Font.font(null, FontWeight.NORMAL, 24));
         
         this.amountText = new Text(0, 36, "");
@@ -55,20 +55,7 @@ public class TicketWidget {
         } else {
             return Color.WHITE;
         }            
-    }
-    
-    public static String ticketName(Vehicle ticket) {
-        if (ticket == Vehicle.TAXI) {
-            return "TAKSI";
-        } else if (ticket == Vehicle.BUS) {
-            return "BUSSI";
-        } else if (ticket == Vehicle.UNDERGROUD) {
-            return "METRO";
-        } else {
-            return "";
-        }                    
-    }
-    
+    }    
     
     public void setAmount(int amount) {
         this.amountText.setText("" + amount + " X");

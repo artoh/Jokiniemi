@@ -2,11 +2,9 @@ package artoh.jokiniemi.ui;
 
 import artoh.jokiniemi.game.Vehicle;
 import javafx.scene.Group;
-import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
@@ -53,6 +51,41 @@ public class LogWidget extends Group {
     }
     
     /**
+     * Palauttaa lipputyyppiin liittyvän värin
+     * @param ticket
+     * @return 
+     */
+    public static Color ticketColor(Vehicle ticket) {
+        if (ticket == Vehicle.TAXI) {
+            return Color.YELLOW;
+        } else if (ticket == Vehicle.BUS) {
+            return Color.CYAN;
+        } else if (ticket == Vehicle.UNDERGROUD) {
+            return Color.RED;
+        } else if (ticket == Vehicle.BLACK_CARD) {
+            return Color.BLACK;
+        } else if (ticket == Vehicle.DOUBLED) {
+            return Color.BLUEVIOLET;
+        } else {
+            return Color.TRANSPARENT;
+        }
+    }
+    
+    public static String ticketName(Vehicle ticket) {
+        if (ticket == Vehicle.TAXI) {
+            return "TAKSI";
+        } else if (ticket == Vehicle.BUS) {
+            return "BUSSI";
+        } else if (ticket == Vehicle.UNDERGROUD) {
+            return "METRO";
+        } else if (ticket == Vehicle.BLACK_CARD) {
+            return "???";
+        } else {
+            return "";
+        }        
+    }
+    
+    /**
      * Näyttää yksittäisen siirron
      * 
      * @param vehicle Siirrossa käytettävä matkalippu tai kulkuneuvo
@@ -75,37 +108,26 @@ public class LogWidget extends Group {
             positionText.setFill(Color.BLACK);
             vehicleText.setFill(Color.BLACK);
             
-            if (vehicle == Vehicle.TAXI) {
-                rect.setFill(Color.YELLOW);
-                vehicleText.setText("TAKSI");
-            } else if (vehicle == Vehicle.BUS) {
-                rect.setFill(Color.CYAN);
-                vehicleText.setText("BUSSI");
-            } else if (vehicle == Vehicle.UNDERGROUD) {
-                rect.setFill(Color.RED);
-                vehicleText.setText("METRO");
-            } else if (vehicle == Vehicle.BLACK_CARD) {
+            rect.setFill(ticketColor(vehicle));
+            vehicleText.setText(ticketName(vehicle));
+            
+            if (vehicle == Vehicle.BLACK_CARD) {
                 rect.setFill(Color.BLACK);
-                vehicleText.setText(" ???");
                 vehicleText.setFill(Color.WHITE);
                 positionText.setFill(Color.WHITE);
             } else if (vehicle == Vehicle.DOUBLED) {
                 rect.setFill(Color.BLUEVIOLET);
                 positionText.setFill(Color.WHITE);
-                vehicleText.setText("");
                 positionText.setText("2x");
             } else if (position < 0) {
-                rect.setFill(Color.TRANSPARENT);
-                vehicleText.setText("");
                 if (button) {
-                   positionText.setText("Poista liikuntakyvytön nappula pelistä");
-                   rect.setWidth(300);
+                    positionText.setText("Poista liikuntakyvytön nappula pelistä");
+                    rect.setWidth(300);
                 } else {
                     positionText.setText("X");
                 }
             } else {
                 rect.setFill(Color.WHITE);
-                vehicleText.setText("");
             }
         }
     }

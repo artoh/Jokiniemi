@@ -65,7 +65,19 @@ public class PlayerGameLogTest {
         }
         for(int i=1; i<1000; i++) {
             assertEquals(i+10, log.position(i));
-        }
+        }                
+    }
+    
+    @Test
+    public void logginAfterGameEnds() {
+        PlayerGameLog log = new PlayerGameLog(2,10);
+        assertEquals(10, log.currentPosition());
+        assertEquals(1, log.addTurn(101, Vehicle.TAXI));
+        assertEquals(101, log.currentPosition());
+        assertEquals(2, log.addTurn(102, Vehicle.BUS));
+        assertEquals(102, log.currentPosition());
+        assertEquals(2, log.addTurn(103, Vehicle.UNDERGROUD));                
+        assertEquals(102, log.currentPosition());
     }
     
 }

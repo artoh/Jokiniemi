@@ -244,12 +244,31 @@ public class Game {
         return this.status;
     }    
     
+    /**
+     * Bobbyjen (poliisikonstaapelien) määrä pelissä
+     * 
+     * Osa pelaajan nappuloista on bobbyja eli virkapukuisia poliiseja,
+     * jotka saavat liikkua takseilla, busseilla ja metroilla ilman, että
+     * heidän tarvitsee käyttää siihen matkalippuja. Nämä bobbyt ovat
+     * numeroiltaan ennen tavallisia etsiviä, ts. jos nappuloita on tavanomaiset
+     * neljä ja niistä kaksi on bobbyjä, ovat 1 ja 2 bobbyjä sekä 3 ja 4
+     * tavallisia etsiviä.
+     * 
+     * Bobbyjen määrä on kovakoodattu vakioon BOBBIES, mutta tämän funktion
+     * tarkoituksena on tehdä helpommaksi bobbyjen määrän muuttaminen myöhemmin.
+     * 
+     * @return Bobbien määrä
+     */
+    public int bobbies() {
+        return Game.BOBBIES;
+    }
+    
     private final GameLog gameLog;
     private final GameBoardInterface gameboard;
     private final StartPlaceInterface startplacer;
     private AIInterface ai;
 
-    public final static int BOBBIES = 2;
+    private final static int BOBBIES = 2;
     
     public final static int BLACK_CARDS_TOTAL = 5;
     public final static int DOUBLE_CARDS_TOTAL = 2;

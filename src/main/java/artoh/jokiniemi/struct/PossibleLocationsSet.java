@@ -91,7 +91,6 @@ public class PossibleLocationsSet {
      * @return Ruutujen lukumäärä
      */
     public int count() {
-        System.out.println("SQ " + squareCount);
         return squareCount;
     }
     
@@ -160,12 +159,10 @@ public class PossibleLocationsSet {
 
         for (int i = 1; i < possible.length; i++) {
             if (possible[i]) {
-                System.out.println("POSS " + i);
                 this.squareCount++;
                 for (int c = 0; c < game.gameBoard().connectionsCount(i); c++) {
                     if (game.gameBoard().connectionVehicle(i, c) == Vehicle.FERRY) {
                         ferry = true;   
-                        System.out.println("FERRY " + i);
                     }
                     if (game.gameBoard().connectionVehicle(i, c) != Vehicle.TAXI) {
                         onlyTaxi = false;
@@ -173,7 +170,6 @@ public class PossibleLocationsSet {
                 }
             }
         }
-        System.out.println("sq " + this.squareCount);
     }
     
     private final Game game;

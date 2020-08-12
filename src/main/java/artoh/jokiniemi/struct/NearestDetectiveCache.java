@@ -29,7 +29,7 @@ public class NearestDetectiveCache {
     public NearestDetectiveCache(Game game, BoardDistanceInterface distancer) {
         this.distancer = distancer;
         this.game = game;
-        this.distances = new int[game.gameBoard().squareCount()];
+        this.distances = new int[game.gameBoard().squareCount() + 1];
         invalidate();
     }
     
@@ -54,7 +54,7 @@ public class NearestDetectiveCache {
     int countDistance(int square) {
         int nearest = Integer.MAX_VALUE;
         
-        for (int detective = 1; detective <= this.distances.length; detective++) {
+        for (int detective = 1; detective <= this.game.detectives(); detective++) {
             int distance = this.distancer.distance(square, game.log().currentPosition(detective));
             if (distance < nearest) {
                 nearest = distance;

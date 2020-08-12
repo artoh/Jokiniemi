@@ -76,7 +76,7 @@ public class MoveWindow {
             if (vehicle == Vehicle.FERRY || isReserved(squareTo)) {
                 continue;
             }           
-            if (this.detective > Game.BOBBIES && this.game.ticketsLeft(vehicle) < 1) {
+            if (this.detective > game.bobbies() && this.game.ticketsLeft(vehicle) < 1) {
                 continue;   // Ei matkalippuja jäljellä !
             }
             

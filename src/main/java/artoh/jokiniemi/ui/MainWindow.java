@@ -105,7 +105,7 @@ public class MainWindow {
     }
     
     public static Color getPlayerColor(int detective) {
-        switch(detective) {
+        switch (detective) {
             case 1:
                 return Color.GREEN;
             case 2:

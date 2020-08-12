@@ -4,6 +4,7 @@ import artoh.jokiniemi.algorithm.BoardDistanceInterface;
 import artoh.jokiniemi.game.Game;
 import artoh.jokiniemi.game.Vehicle;
 import artoh.jokiniemi.struct.JumArray;
+import artoh.jokiniemi.struct.NearestDetectiveCache;
 import artoh.jokiniemi.struct.PossibleLocationsSet;
 import artoh.jokiniemi.struct.ScoredAlternative;
 
@@ -35,6 +36,7 @@ public class SimpleHeuristicAI implements AIInterface {
         this.possibles.fill();
         this.inRoute = new boolean[game.gameBoard().squareCount() + 1];
         this.jumArray = new JumArray(game.gameBoard());
+        this.nearestDetectives = new NearestDetectiveCache(this.game, this.boardDistances);
         this.firstVisiblePlayed = false;
     }
 
@@ -51,7 +53,7 @@ public class SimpleHeuristicAI implements AIInterface {
      * @param vehicle Käytetty kulkuneuvo
      * @return Skaalatutu pisteet
      */
-    public int blackCardScale(int score, Vehicle vehicle) {
+    int blackCardScale(int score, Vehicle vehicle) {
         if (game.log().isVisibleTurn(game.log().currentTurn() + 1)) {
             return score / 10;
         } else if (game.blackCardsLeft() + 1 >= game.log().turnsLeft()) {
@@ -77,13 +79,13 @@ public class SimpleHeuristicAI implements AIInterface {
      * @param score Skaalaamattomat pisteet
      * @return Skaalatut pisteet
      */
-    public int doubleCardScale(int score) {
+    int doubleCardScale(int score, int position) {
         if (game.doubleCardsLeft() + 1 >= game.log().turnsLeft() * 2) {
             return score * 2;
-        } else if (game.log().currentTurn() < 4) {
-            return score / 5;
+        } else if (isInTrouble(position)) {
+            return score * 2 / 3;
         } else {
-            return score / 3;
+            return score /4; 
         }
     }
    
@@ -99,21 +101,41 @@ public class SimpleHeuristicAI implements AIInterface {
     * @param secondTarget Jos tupalataan, lopullinen ruutu; 0 jos ei tuplata
     * @param score Siirron pisteytys
     */
-    public void addAlternative(Vehicle firstTicket, int firstTarget,
+    void addAlternative(Vehicle firstTicket, int firstTarget,
         Vehicle secondTicket, int secondTarget, int score) {
         if (this.bestAlternative == null ||
             score > this.bestAlternative.score()) {
             this.bestAlternative = 
                 new ScoredAlternative(firstTicket, firstTarget, secondTicket, secondTarget, score);
         }
+        System.out.println("" + score + " \t" + firstTicket + " \t" + firstTarget + " \t" + secondTicket + " \t" + secondTarget);
     }
       
-    
     @Override
     public void doAITurn() {
-    
+
         int currentPosition = game.log().currentPosition(0);
         int currentTurn = game.log().currentTurn();
+        
+        inRoute[currentPosition] = true;
+        
+        beginTurn(currentPosition, currentTurn);
+        evaluateConnections(currentPosition, currentTurn);
+                
+        inRoute[currentPosition] = false;        
+        this.bestAlternative.doMove(game);
+    }
+
+    /**
+     * AI:n vuoron alkutoimet
+     * 
+     * Päivittää mahdollisten sijaintien taulun sekä
+     * alustaa lähimmän etsivän välimuistin ja parhaan vaihtoehdon
+     * 
+     * @param currentPosition
+     * @param currentTurn 
+     */
+    void beginTurn(int currentPosition, int currentTurn) {
         
         if (game.log().isVisibleTurn(currentTurn)) {
             possibles.init(currentPosition);
@@ -123,20 +145,47 @@ public class SimpleHeuristicAI implements AIInterface {
             possibles.removeDetectiveLocations();
         }        
         
+        nearestDetectives.invalidate();
+        this.bestAlternative = null;        
+    }
+    
+    /**
+     * Onko pelaaja vaarassa jäädä kiinni
+     * 
+     * Arvioi, onko pelaaja välittömässä vaarassa, ts. kannattaako pelaajan
+     * käyttää tuplasiirtoa päästäkseen parempaan sijaintiin
+     * 
+     * @param position Mr X:n sijainti
+     * @return Tosi, jos pelaaja on vaarassa jäädä kiinni
+     */
+    public boolean isInTrouble(int position) {
+        JumArray.JumSquare jumSquare = jumArray.getJumSquare(position);
+        return (nearestDetectiveDistance(position) <= 1 ||
+                (analyseJum(2, jumSquare, 1) == 0 && possibles.count() < 4) ||
+                (analyseJum(1, jumSquare, 1) == 0 || analyseJum(2, jumSquare, 2) == 0));        
+    }
+    
+    /**
+     * Arvioi pelaajan käytettävissä olevat siirtomahdollisuudet
+     * 
+     * Kaikki yhteysvaihtoehdot arvioidaan myös siten, että niihin käytetään mustaa korttia,
+     * jolloin etsivät eivät voi yhtä hyvin arvioida sitä, minne mr X on siirtynyt.
+     * 
+     * Paras mahdollisista siirroista säilytetään aina bestAlternative-jäsenmuuttujassa
+     * 
+     * @param currentPosition Nykyinen sijainti
+     * @param currentTurn Vuoron numero
+     */
+    void evaluateConnections(int currentPosition, int currentTurn) {
+        
         int connections = game.gameBoard().connectionsCount(currentPosition);
         boolean onlyTaxi = possibles.onlyTaxiPossible();
-        this.bestAlternative = null;
-                
-        System.out.println("Turn " + currentTurn + " " + game.log().turnsLeft() + " left " + (onlyTaxi ? "TAXI" : " ") + currentPosition);
-        inRoute[currentPosition] = true;
-        
-        JumArray.JumSquare jumSquare = jumArray.getJumSquare(currentPosition);
-        boolean inTrouble = (analyseJum(2, jumSquare, 1) == 0 && possibles.count() < 4) ||
-                analyseJum(1, jumSquare, 1) == 0 || analyseJum(2, jumSquare, 2) == 0;
-        
+
+        System.out.println("Turn " + game.log().currentTurn() + " " + game.log().turnsLeft() + " left " + (onlyTaxi ? "TAXI" : " ") + currentPosition);        
+
         for (int i = 0; i < connections; i++) {
             int squareTo = game.gameBoard().connectionTo(currentPosition, i);
-            Vehicle vehicle = game.gameBoard().connectionVehicle(currentPosition, i);                        
+            Vehicle vehicle = game.gameBoard().connectionVehicle(currentPosition, i);                                    
             
             if (nearestDetectiveDistance(squareTo) == 0) {
                 if (vehicle != Vehicle.FERRY) {
@@ -155,49 +204,61 @@ public class SimpleHeuristicAI implements AIInterface {
                 }
             }
             
-            
-            if (game.doubleCardsLeft() > 0 && 
-                game.log().turnsLeft() > 1 &&
-                inTrouble) {
-                // Doubled alternativies
-                for (int j = 0; j < game.gameBoard().connectionsCount(squareTo); j++) {
-                    int secondTarget = game.gameBoard().connectionTo(squareTo, j);
-                    Vehicle secondVehicle = game.gameBoard().connectionVehicle(squareTo, j);
-                    
-                    if (secondTarget == currentPosition) {
-                        continue;
-                    }
-                    
-                    if (vehicle == Vehicle.FERRY && secondVehicle == Vehicle.FERRY || 
-                        ((vehicle == Vehicle.FERRY || secondVehicle == Vehicle.FERRY) && game.blackCardsLeft() == 0)) {
-                        continue;
-                    }
-                    
-                    PossibleLocationsSet secondSet = possibles.nextSet(vehicle, true);
-                    int doubledMoveScore = doubleCardScale(evaluateMove(secondVehicle, secondTarget, currentTurn + 1, secondSet));
-                    
-                    if (vehicle == Vehicle.FERRY && game.doubleCardsLeft() > 0) {
-                        addAlternative(Vehicle.BLACK_CARD, squareTo, secondVehicle, secondTarget, doubledMoveScore);                        
-                    } else if (secondVehicle == Vehicle.FERRY && game.doubleCardsLeft() > 0) {
-                        addAlternative(vehicle, squareTo, Vehicle.BLACK_CARD, secondTarget, evaluateMove(Vehicle.BLACK_CARD, secondTarget, currentTurn + 1, secondSet));                        
-                        
-                    } else if (game.doubleCardsLeft() > 0) {
-                        addAlternative(vehicle, squareTo, secondVehicle, secondTarget, doubledMoveScore);   
-                        if (!game.log().isVisibleTurn(currentTurn + 1) && !game.log().isVisibleTurn(currentTurn + 2)) {
-                            addAlternative(vehicle, squareTo, Vehicle.BLACK_CARD, secondTarget, blackCardScale(evaluateMove(Vehicle.BLACK_CARD, secondTarget, currentTurn + 1, secondSet), secondVehicle));                        
-                        }
-                        if (!game.log().isVisibleTurn(currentTurn + 1) && !onlyTaxi) {
-                            addAlternative(Vehicle.BLACK_CARD, squareTo, secondVehicle, secondTarget, blackCardScale(doubledMoveScore, vehicle));
-                        }
-                    } else {
-                        addAlternative(vehicle, squareTo, secondVehicle, secondTarget, doubledMoveScore);
-                    }
-                }
+            if (game.doubleCardsLeft() > 0 ) {
+                evaluateDoubleConnections(vehicle, squareTo, currentPosition, currentTurn, onlyTaxi);
+            }            
+        }        
+    }        
+
+    /**
+     * Arvio pelaajan vuoron tuplauksella käytettävissä olevat siirtomahdollisuudet
+     * 
+     * Jos AI arvioi, että pelaaja on pulassa ja tarvitsee mahdollisesti tuplasiirron
+     * (tai jos peli on niin lopussa, ettei tuplauskorteille olisi parempaakaan käyttöä)
+     * arvioidaan myös kaikki ne siirrot, jotka pelaaja voisi tehdä käyttäen vuoron tuplausta
+     * 
+     * @param firstTicket Ensimmäisen siirron lippu
+     * @param firstTarget Ensimmäisen siirron kohde (ruudun numero)
+     * @param currentPosition Mr X:n nykyinen sijainti
+     * @param currentTurn Vuoron numero
+     * @param onlyTaxi Tosi, jos etsivät tietävät, että Mr X voi käyttää ainoastaan taksia
+     */
+    void evaluateDoubleConnections(Vehicle firstTicket, int firstTarget, int currentPosition, int currentTurn, boolean onlyTaxi) {
+        for (int j = 0; j < game.gameBoard().connectionsCount(firstTarget); j++) {
+            int secondTarget = game.gameBoard().connectionTo(firstTarget, j);
+            Vehicle secondVehicle = game.gameBoard().connectionVehicle(firstTarget, j);
+
+            if (secondTarget == currentPosition) {
+                continue;
             }
-        }               
-        inRoute[currentPosition] = false;        
-        this.bestAlternative.doMove(game);
+
+            if (firstTicket == Vehicle.FERRY && secondVehicle == Vehicle.FERRY || 
+                ((firstTicket == Vehicle.FERRY || secondVehicle == Vehicle.FERRY) && game.blackCardsLeft() == 0)) {
+                continue;
+            }
+
+            PossibleLocationsSet secondSet = possibles.nextSet(firstTicket, true);
+            int doubledMoveScore = doubleCardScale(evaluateMove(secondVehicle, secondTarget, currentTurn + 1, secondSet), firstTarget);
+
+            if (firstTicket == Vehicle.FERRY && game.doubleCardsLeft() > 0) {
+                addAlternative(Vehicle.BLACK_CARD, firstTarget, secondVehicle, secondTarget, doubledMoveScore);                        
+            } else if (secondVehicle == Vehicle.FERRY && game.doubleCardsLeft() > 0) {
+                addAlternative(firstTicket, firstTarget, Vehicle.BLACK_CARD, secondTarget, evaluateMove(Vehicle.BLACK_CARD, secondTarget, currentTurn + 1, secondSet));                        
+
+            } else if (game.doubleCardsLeft() > 0) {
+                addAlternative(firstTicket, firstTarget, secondVehicle, secondTarget, doubledMoveScore);   
+                if (!game.log().isVisibleTurn(currentTurn + 1) && !game.log().isVisibleTurn(currentTurn + 2)) {
+                    addAlternative(firstTicket, firstTarget, Vehicle.BLACK_CARD, secondTarget, blackCardScale(evaluateMove(Vehicle.BLACK_CARD, secondTarget, currentTurn + 1, secondSet), secondVehicle));                        
+                }
+                if (!game.log().isVisibleTurn(currentTurn + 1) && !onlyTaxi) {
+                    addAlternative(Vehicle.BLACK_CARD, firstTarget, secondVehicle, secondTarget, blackCardScale(doubledMoveScore, firstTicket));
+                }
+            } else {
+                addAlternative(firstTicket, firstTarget, secondVehicle, secondTarget, doubledMoveScore);
+            }
+        }        
     }
+    
     
     /**
      * Onko tämä siirtosarja turvallinen
@@ -210,7 +271,7 @@ public class SimpleHeuristicAI implements AIInterface {
      * @param deep Haun syvyys
      * @return Tosi, jos siirto täysin turvallinen
      */
-    public boolean isSafe(int square, int turn, int deep) {
+    boolean isSafe(int square, int turn, int deep) {
         if (deep >= nearestDetectiveDistance(square)) {
             return false;
         } else if (turn == game.log().turnsTotal()) {
@@ -239,7 +300,7 @@ public class SimpleHeuristicAI implements AIInterface {
      * @param level Saarron taso (kuinka kaukaa saarretaan)
      * @return Saartopisteet 0 - 200
      */
-    public int analyseJum(int distance, JumArray.JumSquare jumSquare, int level) {
+    int analyseJum(int distance, JumArray.JumSquare jumSquare, int level) {
         
         int onHuntDetectives[] = new int[game.detectives()];
         int huntSquaresCount = 0;
@@ -284,7 +345,7 @@ public class SimpleHeuristicAI implements AIInterface {
      * @param square Ruutun numero
      * @return Saartopisteet
      */
-    public int jumPoints(int square) {        
+    int jumPoints(int square) {        
         JumArray.JumSquare jumSquare = jumArray.getJumSquare(square);
         int jummedOneScores = analyseJum(1, jumSquare, 1);
         int jummedNearScores = analyseJum(2, jumSquare, 1);
@@ -296,6 +357,62 @@ public class SimpleHeuristicAI implements AIInterface {
             return jummedNearScores  + jummedTwoScores;
         }              
     }
+
+    /**
+     * Pisteyttää ruudun käytettävien kulkuneuvojen kannalta
+     * @param square Ruudun numero
+     * @return Pisteytys
+     */
+    int connectionVehiclePoints(int square) {
+        int points = 0;
+        for (int c = 0; c < game.gameBoard().connectionsCount(square); c++) {    
+            boolean doubled = false;
+            for (int j = 0; j < c; j++) {                
+                if (game.gameBoard().connectionTo(square, c) == game.gameBoard().connectionTo(square, j)) {
+                    // Ei ota tässä pisteyksessä huomioon sitä, jos kahden ruudun välillä
+                    // on kaksi eri kulkuneuvoa (esim. sekä taksi- että bussiyhteys).
+                    doubled = true;
+                    continue;
+                }
+            }
+            if (doubled) {
+                continue;
+            }
+
+            if (game.gameBoard().connectionVehicle(square, c) == Vehicle.FERRY) {
+                points += 8;
+            } else if (game.gameBoard().connectionVehicle(square, c) == Vehicle.UNDERGROUD) {
+                points += 5;
+            } else if (game.gameBoard().connectionVehicle(square, c) == Vehicle.BUS) {
+                points += 2;
+            } else if (game.gameBoard().connectionVehicle(square, c) == Vehicle.TAXI) {
+                points += 1;
+            }
+        }
+        return points;
+    }
+    
+    /**
+     * Pisteyttää tästä eteenpäin kulkevia kulkuyhteyksiä kutsumalla rekursiivisesti 
+     * connectionPoints()-funktiota
+     * 
+     * @param square Ruutu, jonka yhteyksiä ollaan pisteyttämässä
+     * @param deep Haun syvyys
+     * @param turn Vuoro (jolla tähän ruutuun siirryttäisiin)
+     * @return Pisteytys
+     */
+    int deepConnectionPoints(int square, int deep, int turn) {
+        int best = 0;
+        for (int i = 0; i < game.gameBoard().connectionsCount(square); i++) {
+            int nextSquare = game.gameBoard().connectionTo(square, i);
+            if (inRoute[nextSquare] == false) {
+                int nextPoints = connectionPoints(nextSquare, deep, turn);
+                best = nextPoints > best ? nextPoints : best;
+            }
+        }            
+        return best;        
+    }
+    
     
     /**
      * Pisteyttää ruudun kulkuyhteyksien kannalta
@@ -305,37 +422,17 @@ public class SimpleHeuristicAI implements AIInterface {
      * @param turn Vuoron numero
      * @return Yhteyspisteet
      */
-    public int connectionPoints(int square, int deep, int turn) {
+    int connectionPoints(int square, int deep, int turn) {
         inRoute[square] = true;
         
-        JumArray.JumSquare jumSquare = jumArray.getJumSquare(square);
-        int squares = jumSquare.count(2);
+        JumArray.JumSquare jumSquare = jumArray.getJumSquare(square);        
         int points = 0;
         
         if (deep < 4) {
-            points = (squares > 10 ? 10 : squares) * 2 + nearestDetectiveDistance(square) * 2;
+            int squares = jumSquare.count(2);
+            points = (squares > 10 ? 10 : squares) * 2 + nearestDetectiveDistance(square) * 2 
+                    + connectionVehiclePoints(square);        
         
-        
-            for (int c = 0; c < game.gameBoard().connectionsCount(square); c++) {    
-                for (int j = 0; j < c; j++) {
-                    if (game.gameBoard().connectionTo(square, c) == game.gameBoard().connectionTo(square, j)) {
-                        // Ei ota tässä pisteyksessä huomioon sitä, jos kahden ruudun välillä
-                        // on kaksi eri kulkuneuvoa (esim. sekä taksi- että bussiyhteys).
-                        continue;
-                    }
-                }
-                
-                if (game.gameBoard().connectionVehicle(square, c) == Vehicle.FERRY) {
-                    points += 8;
-                } else if (game.gameBoard().connectionVehicle(square, c) == Vehicle.UNDERGROUD) {
-                    points += 5;
-                } else if (game.gameBoard().connectionVehicle(square, c) == Vehicle.BUS) {
-                    points += 2;
-                } else if (game.gameBoard().connectionVehicle(square, c) == Vehicle.TAXI) {
-                    points += 1;
-                }
-            }
-
             if (game.log().turnsTotal() - turn > 3 && game.log().isVisibleTurn(turn + 1)) {
                 points = points * 4;
                 if (!firstVisiblePlayed) {
@@ -343,16 +440,7 @@ public class SimpleHeuristicAI implements AIInterface {
                 }
             } else if (deep == 1) {
                 points = points * 2;
-            }
-
-
-            int nearest = nearestDetectiveDistance(square);
-            if (nearest == 0) {
-                inRoute[square] = false;
-                return 0;
-            } else if (nearest == 1) {
-                points = points / 2;
-            }             
+            }           
 
         } else {
             if (analyseJum(3, jumSquare, 2) > 150) {
@@ -360,21 +448,21 @@ public class SimpleHeuristicAI implements AIInterface {
             }
         }
         
+        int nearest = nearestDetectiveDistance(square);
+        if (nearest == 0) {
+            inRoute[square] = false;
+            return 0;
+        } else if (nearest == 1) {
+            points = points / 2;
+        }          
+        
         if (deep < 6 && turn + 1 < game.log().turnsTotal()) {
-            int best = 0;
-            for (int i = 0; i < game.gameBoard().connectionsCount(square); i++) {
-                int nextSquare = game.gameBoard().connectionTo(square, i);
-                if (inRoute[nextSquare] == false) {
-                    int nextPoints = connectionPoints(nextSquare, deep + 1, turn + 1);
-                    best = nextPoints > best ? nextPoints : best;
-                }
-            }            
-            points += best;
+            points += deepConnectionPoints(square, deep + 1, turn + 1);
         }        
         
         inRoute[square] = false;
         return points;
-    }
+    }        
     
     /**
      * Pisteyttää siirron
@@ -388,7 +476,7 @@ public class SimpleHeuristicAI implements AIInterface {
     public int evaluateMove(Vehicle vehicle, int square, int turn, PossibleLocationsSet set) {
         
         if (game.log().turnsLeft() < 5 && isSafe(square, turn, 1)) {
-            return 1000;    // Safe end win !
+            return 1000;    // Peli päättyy varmasti voittoon!
         }
         
         int jumPoints = jumPoints(square);
@@ -396,18 +484,22 @@ public class SimpleHeuristicAI implements AIInterface {
         PossibleLocationsSet newSet = set.nextSet(vehicle, true);
         int newPossibilities = game.log().isVisibleTurn(turn + 1) ? 0 : newSet.count();
         
+        // Laskee pisteitä siitä, kuinka huonosti etsivät pystyvät päättelemään
+        // Mr X:n sijainnin
         int hiddenScores = (newPossibilities > set.count() ? 5 : 0) +
                 (newPossibilities == 1 ? 0 : (newPossibilities > 10 ? 10 : newPossibilities) * 5);
+        
         int connectionPoints = connectionPoints(square, 1, turn);
         
+        // Välttää liikkumista edestakaisin samojen ruutujen välillä, koska yleensä
+        // se johtaa nalkkiin joutumiseen
         if (turn > 2 && square == game.log().position(0, turn - 1)) {
             connectionPoints = connectionPoints / 8;
-        }
-        if (turn > 3 && square == game.log().position(0, turn - 2)) {
+        } else if (turn > 3 && square == game.log().position(0, turn - 2)) {
             connectionPoints = connectionPoints / 6;
         }
 
-        
+        // Antaa pisteitä siitä, kuinka siirto pitää yllä etäisyyttä etsiviin
         int nearest = nearestDetectiveDistance(square);
         int nearPoints = 0;
         if (nearest > 2) {
@@ -415,13 +507,11 @@ public class SimpleHeuristicAI implements AIInterface {
             if (game.log().isVisibleTurn(turn + 1)) {
                 nearPoints += nearest * 30;
             }
-        }
-            
-        if (nearest > 1 && vehicle == Vehicle.UNDERGROUD) {
-            nearPoints += 80;
-        } 
+        }            
                
         int total = jumPoints + hiddenScores + nearPoints + connectionPoints;
+        // Vähentää pisteitä siirroilla, jotka ovat erityisen
+        // riskialttiita kiinnijäämisen kannalta
         if ((nearest < 2 && game.log().isVisibleTurn(turn + 1)) || nearest == 0) {
             total = 0;
         } else if (nearest == 1) {
@@ -442,20 +532,14 @@ public class SimpleHeuristicAI implements AIInterface {
      * @return Etisvän etäisyys vuoroa
      */
     public int nearestDetectiveDistance(int square) {      
-        int nearest = Integer.MAX_VALUE;
-        
-        for (int i = 1; i <= game.detectives(); i++) {
-            int distance = boardDistances.distance(square, game.log().currentPosition(i));
-            if (distance < nearest) {
-                nearest = distance;
-            }
-        }
-        return nearest;        
+        return nearestDetectives.distance(square);
     }    
     
     private BoardDistanceInterface boardDistances;
     private Game game;
     private PossibleLocationsSet possibles;
+    private NearestDetectiveCache nearestDetectives;
+    
     private boolean[] inRoute;
     private boolean firstVisiblePlayed = false;
     private ScoredAlternative bestAlternative;    
