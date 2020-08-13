@@ -80,17 +80,16 @@ public class NearestDetectiveCache {
      * 
      * @param detective Etsivän numero
      * @param square Pelilaudan ruudun numero
+     * @param limit Enimmäisetäisyys 
      * @return Etäisyys vuoroina
      */
-    public int detectiveDistance(int detective, int square) {
+    public int detectiveDistance(int detective, int square, int limit) {
         int distance = this.distancer.distance(square, game.log().currentPosition(detective));
         if (distance > tickets && detective > this.game.bobbies()) {
             distance = this.ticketDistancer.distanceWithTickets(square, game.log().currentPosition(detective), 
-                    game.ticketsLeft(Vehicle.TAXI), game.ticketsLeft(Vehicle.BUS), game.ticketsLeft(Vehicle.UNDERGROUD), distance, 10);
-            return (distance > 10 ? 10 : distance);
-        } else {
-            return distance;
-        }
+                    game.ticketsLeft(Vehicle.TAXI), game.ticketsLeft(Vehicle.BUS), game.ticketsLeft(Vehicle.UNDERGROUD), distance, limit);            
+        } 
+        return (distance > limit ? limit : distance);
     }
     
     /**
@@ -103,7 +102,7 @@ public class NearestDetectiveCache {
         int nearest = Integer.MAX_VALUE;
         
         for (int detective = 1; detective <= this.game.detectives(); detective++) {
-            int distance = detectiveDistance(detective, square);
+            int distance = detectiveDistance(detective, square, 10);
             if (distance < nearest) {
                 nearest = distance;
             }

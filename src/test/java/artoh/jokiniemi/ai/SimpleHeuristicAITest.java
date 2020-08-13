@@ -83,7 +83,7 @@ public class SimpleHeuristicAITest {
 
     @Test
     public void jumPointsAt5() {
-        assertEquals(300, ai.jumPoints(2));
+        assertEquals(350, ai.jumPoints(2));
     }
     
     @Test

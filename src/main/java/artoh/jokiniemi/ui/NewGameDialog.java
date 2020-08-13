@@ -5,7 +5,7 @@ import artoh.jokiniemi.ai.SimpleHeuristicAI;
 import artoh.jokiniemi.ai.VeryStupidAI;
 import artoh.jokiniemi.algorithm.BoardDistanceInterface;
 import artoh.jokiniemi.algorithm.FloydWarshallDistance;
-import artoh.jokiniemi.algorithm.LinealCongruentialGenerator;
+import artoh.jokiniemi.algorithm.LinearCongruentialGenerator;
 import artoh.jokiniemi.game.Game;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -74,7 +74,7 @@ public class NewGameDialog {
         AIInterface ai;
         
         if (veryEasyLevel.isSelected()) {
-            ai = new VeryStupidAI(new LinealCongruentialGenerator());
+            ai = new VeryStupidAI(new LinearCongruentialGenerator());
         } else {
             BoardDistanceInterface distances = new FloydWarshallDistance();
             distances.init(game.gameBoard());

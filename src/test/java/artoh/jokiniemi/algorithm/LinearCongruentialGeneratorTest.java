@@ -16,7 +16,7 @@ public class LinearCongruentialGeneratorTest {
 
     @Test
     public void randomBetweenOneAndMax() {
-        RandomizeInterface randomizer = new LinealCongruentialGenerator();
+        RandomizeInterface randomizer = new LinearCongruentialGenerator();
         for(int i=10; i<100;i++) {
             int random = randomizer.next(i);
             assertTrue( random >= 1);
@@ -26,7 +26,7 @@ public class LinearCongruentialGeneratorTest {
     
     @Test
     public void allRandomsNotSame() {
-        RandomizeInterface randomizer = new LinealCongruentialGenerator();
+        RandomizeInterface randomizer = new LinearCongruentialGenerator();
         int random1 = randomizer.next(Integer.MAX_VALUE);
         int random2 = randomizer.next(Integer.MAX_VALUE);
         int random3 = randomizer.next(Integer.MAX_VALUE);

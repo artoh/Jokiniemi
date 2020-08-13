@@ -8,7 +8,7 @@ package artoh.jokiniemi.game;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import artoh.jokiniemi.algorithm.LinealCongruentialGenerator;
+import artoh.jokiniemi.algorithm.LinearCongruentialGenerator;
 
 /**
  *
@@ -29,7 +29,7 @@ public class GameLogTest {
     
     @Test
     public void turnsLeft() {
-        StartPlaceRandomizer starter = new StartPlaceRandomizer(new LinealCongruentialGenerator());
+        StartPlaceRandomizer starter = new StartPlaceRandomizer(new LinearCongruentialGenerator());
         starter.addStartPlace(true, 10);
         starter.addStartPlace(false, 20);
         
@@ -60,7 +60,7 @@ public class GameLogTest {
     
     @Test
     public void testGameLogging() {
-        StartPlaceRandomizer starter = new StartPlaceRandomizer(new LinealCongruentialGenerator());
+        StartPlaceRandomizer starter = new StartPlaceRandomizer(new LinearCongruentialGenerator());
         starter.addStartPlace(true, 10);
         starter.addStartPlace(false, 20);
         

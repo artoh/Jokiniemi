@@ -1,9 +1,14 @@
 package artoh.jokiniemi.ui;
 
+import artoh.jokiniemi.ai.AIInterface;
+import artoh.jokiniemi.ai.SimpleHeuristicAI;
+import artoh.jokiniemi.ai.VeryStupidAI;
 import artoh.jokiniemi.algorithm.BoardDistanceInterface;
 import artoh.jokiniemi.algorithm.FloydWarshallDistance;
+import artoh.jokiniemi.algorithm.LinearCongruentialGenerator;
 import artoh.jokiniemi.algorithm.TicketAwareDistance;
 import artoh.jokiniemi.game.Game;
+import artoh.jokiniemi.game.Vehicle;
 import static artoh.jokiniemi.ui.JokiniemiApplication.initGame;
 import java.util.Arrays;
 
@@ -29,7 +34,7 @@ public class Main {
      * pieni, jäävät suoritusajat harmillisen lyhyiksi.
      *  
      * @param distance Etäisyyksien määrittelyn toteuttava luokka
-     * @return 
+     * @return Kulunut aika nanosekunteina
      */
     private static long performanceTest(BoardDistanceInterface distance) {
         Game game = JokiniemiApplication.initGame();
@@ -49,6 +54,38 @@ public class Main {
     }
     
     /**
+     * Tekoälyn suorituskykytestin ajaminen
+     * 
+     * Ajaa täyden pelin etsivien hassuilla siirroilla.
+     * Koska tähän liittyy paljon satunnaisuutta, on testi
+     * syytä toistaa. Paluuarvo 0 tarkoittaa testin epäonnistumista 
+     * sen takia, että Mr X jää kiinni.
+     * 
+     * @param game Peli-olio
+     * @return Kulunut aika nanosekunteina
+     */
+    private static long aiTest(Game game) {
+        int move = 0;
+        long alku = System.nanoTime();
+
+        while (game.gameStatus() == Game.GameStatus.RUNNING) {
+            int detective = move % 4 + 1;
+            int position = game.log().currentPosition(detective);
+            int index = move % game.gameBoard().connectionsCount(position);
+
+            int nextPosition = game.gameBoard().connectionTo(position, index);
+            Vehicle nextVehicle = game.gameBoard().connectionVehicle(position, index);
+
+            game.doMove(detective, nextPosition, nextVehicle, false);
+
+            move++;
+        }
+        long loppu = System.nanoTime();
+
+        return (game.gameStatus() == Game.GameStatus.MRX_WINS ? loppu - alku : 0);                         
+    }
+    
+    /**
      * Suorituskykytestin ajaminen
      * 
      * @param algorithm Suorituskykytestin nimi
@@ -59,11 +96,28 @@ public class Main {
             System.out.println("Floyd-Warshall " + 1.0 * performanceTest(new FloydWarshallDistance()) / 1e9 + " s.");
         } else if (algorithm.equals("TA")) {
             System.out.println("Ticket Aware " + 1.0 * performanceTest(new TicketAwareDistance()) / 1e9 + " s.");    
+        } else if (algorithm.equals("HA")) {
+            Game game = JokiniemiApplication.initGame();
+            BoardDistanceInterface distances = new FloydWarshallDistance();
+            distances.init(game.gameBoard());
+            AIInterface ai = new SimpleHeuristicAI(distances);   
+            game.startGame(4, ai);
+            System.out.println("Heuristic AI " + 1.0 * aiTest(game) / 1e9 + " s.");
+        } else if (algorithm.equals("SA")) {
+            Game game = JokiniemiApplication.initGame();
+            AIInterface ai = new VeryStupidAI(new LinearCongruentialGenerator());
+            game.startGame(4, ai);
+            System.out.println("Stupid AI " + 1.0 * aiTest(game) / 1e9 + " s.");
         }
     }    
     
+    /**
+     * Pääfunktio
+     * 
+     * @param args Käynnistysparametrit (test FW ja test TA suorituskykytesteihin)
+     */
     public static void main(String[] args) {
-        if (args.length > 1 && args[0].equals("test")){
+        if (args.length > 1 && args[0].equals("test")) {
             testPerformance(args[1]);
         } else {
             JokiniemiApplication.main(args);

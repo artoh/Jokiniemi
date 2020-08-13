@@ -62,28 +62,3 @@ Algoritminen vaativuus projektissa perustuisi kuitenkin enemmän verkon käsitte
 Aikavaativuus pahimmillaan: O(n<sup>m</sup>)
 
 Tilavaativuus: O(m)
-
-
-## Alustava arkkitehtuuri
-**Tämä osio siirretään myöhemmin toteutusdokumenttiin**
-
-- jokiniemi.game
-  - pelilauta
-  - aloitussijaintien arvonta
-  - pelitilanne (nappuloiden sijainnit)
-  - pelitila (kenen vuoro, voitto, häviö)
-- jokiniemi.algorithm
-  - verkon etäisyyksien laskenta
-  - satunnaislukugeneraattori
-- jokiniemi.ai
-  - herra X:n siirtojen päättäminen
-    - siirtovaihtoehtojen heuristiikka
-    - valinnan tekeminen eri vaihtoehdoista
-  - parametrien avulla "älykkyys" säädettävissä
-- jokiniemi.ui
-  - käyttöliittymä
-    - pelivalinnat, pelin käynnistäminen
-    - pelitilanteen esittäminen käyttäjälle
-    - etsivien siirtojen tekeminen
-
-Palikat liitetään toisiinsa riippuvuuksien injektointia käyttäen.

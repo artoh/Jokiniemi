@@ -21,8 +21,8 @@ import artoh.jokiniemi.game.Vehicle;
  * 
  * Reittiä ei tallenneta
  * 
- * Aikavaativuus O(n^m)  
- * Tilavaativuus O(m)
+ * Aikavaativuus O(m^n)  
+ * Tilavaativuus O(n)
  * 
  * Haku on hidas, jos kohderuutua ei saavuteta kohtuullisella hakusyvyydellä (erityisesti
  * silloin, kun kohderuutua ei saavuteta ollenkaan, ja algoritmi hakee kaikkia mahdollisia

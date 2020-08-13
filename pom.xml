@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>artoh</groupId>
     <artifactId>Jokiniemi</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>viikko4</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

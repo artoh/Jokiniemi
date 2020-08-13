@@ -10,11 +10,11 @@ package artoh.jokiniemi.algorithm;
  * 
  * @author arto
  */
-public class LinealCongruentialGenerator implements RandomizeInterface {
+public class LinearCongruentialGenerator implements RandomizeInterface {
 
     
-    public LinealCongruentialGenerator() {
-        this.state = System.nanoTime();
+    public LinearCongruentialGenerator() {
+        this.state = System.nanoTime() % modulus;
     }
     
     @Override

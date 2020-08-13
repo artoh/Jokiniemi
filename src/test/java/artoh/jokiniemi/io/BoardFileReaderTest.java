@@ -5,7 +5,7 @@
  */
 package artoh.jokiniemi.io;
 
-import artoh.jokiniemi.algorithm.LinealCongruentialGenerator;
+import artoh.jokiniemi.algorithm.LinearCongruentialGenerator;
 import artoh.jokiniemi.game.Game;
 import artoh.jokiniemi.game.GameBoard;
 import artoh.jokiniemi.game.GameBoardInterface;

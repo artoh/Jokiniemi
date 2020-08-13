@@ -8,6 +8,8 @@
 ## Dokumentaatio
 
 - [Määrittelydokumentti](dokumentaatio/maarittely.md)
+- [Toteutusdokumentti](dokumentaatio/toteutus.md)
+- [Testausdokumentti](dokumentaatio/testaus.md)
 - [Käyttöohje](dokumentaatio/kayttoohje.md)
 
 ## Viikkoraportit
@@ -15,3 +17,4 @@
 - [Viikko 1](dokumentaatio/viikko1/viikko1.md)
 - [Viikko 2](dokumentaatio/viikko2/viikko2.md)
 - [Viikko 3](dokumentaatio/viikko3/viikko3.md)
+- [Viikko 4](dokumentaatio/viikko4/viikko4.md)

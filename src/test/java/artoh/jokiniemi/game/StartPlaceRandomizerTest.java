@@ -5,7 +5,7 @@
  */
 package artoh.jokiniemi.game;
 
-import artoh.jokiniemi.algorithm.LinealCongruentialGenerator;
+import artoh.jokiniemi.algorithm.LinearCongruentialGenerator;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -60,7 +60,7 @@ public class StartPlaceRandomizerTest {
     
     @Test
     public void uniqueDetectiveStartPlaces() {
-        RandomizeInterface randomizer = new LinealCongruentialGenerator();
+        RandomizeInterface randomizer = new LinearCongruentialGenerator();
         StartPlaceRandomizer starter = new StartPlaceRandomizer(randomizer);
         
         starter.addStartPlace(true, 10);

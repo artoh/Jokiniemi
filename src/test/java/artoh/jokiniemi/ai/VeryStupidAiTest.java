@@ -5,7 +5,7 @@
  */
 package artoh.jokiniemi.ai;
 
-import artoh.jokiniemi.algorithm.LinealCongruentialGenerator;
+import artoh.jokiniemi.algorithm.LinearCongruentialGenerator;
 import artoh.jokiniemi.game.Game;
 import artoh.jokiniemi.game.StartPlaceInterface;
 import artoh.jokiniemi.game.Vehicle;
@@ -36,7 +36,7 @@ public class VeryStupidAiTest {
     @Before
     public void setUp() {
         game = new Game(new MockStarter());
-        ai = new VeryStupidAI(new LinealCongruentialGenerator());
+        ai = new VeryStupidAI(new LinearCongruentialGenerator());
         
         game.log().init(5);
         game.gameBoard().init(6);

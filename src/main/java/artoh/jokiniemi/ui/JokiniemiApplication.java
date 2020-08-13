@@ -1,10 +1,8 @@
 package artoh.jokiniemi.ui;
 
-import artoh.jokiniemi.algorithm.BoardDistanceInterface;
-import artoh.jokiniemi.algorithm.LinealCongruentialGenerator;
+import artoh.jokiniemi.algorithm.LinearCongruentialGenerator;
 import artoh.jokiniemi.algorithm.RandomizeInterface;
 import artoh.jokiniemi.game.Game;
-import artoh.jokiniemi.game.StartPlaceInterface;
 import artoh.jokiniemi.game.StartPlaceRandomizer;
 import artoh.jokiniemi.io.BoardFileReader;
 import javafx.application.Application;
@@ -35,7 +33,7 @@ public class JokiniemiApplication extends Application {
      * @return Alustettu peliolio
      */
     public static Game initGame() {
-        RandomizeInterface randomizer = new LinealCongruentialGenerator();
+        RandomizeInterface randomizer = new LinearCongruentialGenerator();
         StartPlaceRandomizer starter = new StartPlaceRandomizer(randomizer);
         BoardFileReader loader = new BoardFileReader();
         
