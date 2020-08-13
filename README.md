@@ -18,3 +18,6 @@
 - [Viikko 2](dokumentaatio/viikko2/viikko2.md)
 - [Viikko 3](dokumentaatio/viikko3/viikko3.md)
 - [Viikko 4](dokumentaatio/viikko4/viikko4.md)
+
+## JAR-paketti
+[Viikko 4](https://github.com/artoh/Jokiniemi/releases/download/viikko4/jokiniemi-viikko4.jar)

@@ -34,3 +34,4 @@ Tässä vaiheessa alkaa tulle vastaan ohjelmointiprojektin tyypillinen ongelma: 
 - Floydin-Warshallin algoritmi on nyt toteutettu oppikirjatoteutuksena: mahtaisiko reittien symmetrisyys ja yhteyksien samanpainoisuus antaa mahdollisuuden vielä tuunata algoritmin toteutusta?
 - Tekoälyn heikkouksien paikantamista ja parantamista
 - Testien täydentämistä
+- Jos tältä listalta puuttuu jotain kurssin kannalta olennaista, niin olisi kiva kuulla ;)
