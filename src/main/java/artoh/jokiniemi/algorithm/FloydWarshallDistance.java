@@ -29,8 +29,7 @@ public class FloydWarshallDistance implements BoardDistanceInterface {
         for (int i = 1; i < squares; i++) {
             for (int j = 1; j < squares; j++) {
                 distances[i][j] = squares;
-            }
-            
+            }            
             
             for (int c = 0; c < gameboard.connectionsCount(i); c++) {
                 if (gameboard.connectionVehicle(i, c) != Vehicle.FERRY) {
@@ -38,8 +37,7 @@ public class FloydWarshallDistance implements BoardDistanceInterface {
                     distances[i][gameboard.connectionTo(i, c)] = 1;
                 }
             }            
-        }
-        
+        }        
         
         for (int k = 1; k < squares; k++) {
             for (int i = 1; i < squares; i++) {

@@ -1,14 +1,16 @@
-package artoh.jokiniemi.ui;
+package artoh.jokiniemi;
 
 import artoh.jokiniemi.ai.AIInterface;
 import artoh.jokiniemi.ai.SimpleHeuristicAI;
 import artoh.jokiniemi.ai.VeryStupidAI;
+import artoh.jokiniemi.algorithm.AppliedFloydWarshallDistance;
 import artoh.jokiniemi.algorithm.BoardDistanceInterface;
 import artoh.jokiniemi.algorithm.FloydWarshallDistance;
 import artoh.jokiniemi.algorithm.LinearCongruentialGenerator;
 import artoh.jokiniemi.algorithm.TicketAwareDistance;
 import artoh.jokiniemi.game.Game;
 import artoh.jokiniemi.game.Vehicle;
+import artoh.jokiniemi.ui.JokiniemiApplication;
 
 /**
  * Ohjelman käynnistämiseen tarvittava luokka
@@ -94,9 +96,11 @@ public class Main {
             System.out.println("Floyd-Warshall " + 1.0 * performanceTest(new FloydWarshallDistance()) / 1e9 + " s.");
         } else if (algorithm.equals("TA")) {
             System.out.println("Ticket Aware " + 1.0 * performanceTest(new TicketAwareDistance()) / 1e9 + " s.");    
+        } else if (algorithm.equals("AF")) {
+            System.out.println("Applied Floyd-Warshall " + 1.0 * performanceTest(new AppliedFloydWarshallDistance()) / 1e9 + " s.");
         } else if (algorithm.equals("HA")) {
             Game game = JokiniemiApplication.initGame();
-            BoardDistanceInterface distances = new FloydWarshallDistance();
+            BoardDistanceInterface distances = new AppliedFloydWarshallDistance();
             distances.init(game.gameBoard());
             AIInterface ai = new SimpleHeuristicAI(distances);   
             game.startGame(4, ai);

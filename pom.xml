@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>artoh</groupId>
     <artifactId>Jokiniemi</artifactId>
-    <version>viikko4</version>
+    <version>viikko5</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -40,6 +40,7 @@
             <version>1.4.11</version>
             <configuration>
                 <excludedClasses>
+                    <param>artoh.jokiniemi.Main</param>
                     <param>artoh.jokiniemi.ui.**</param>
                 </excludedClasses>   
             </configuration>
@@ -58,7 +59,7 @@
                 <configuration>
                         <archive>
                                 <manifest>
-                                        <mainClass>artoh.jokiniemi.ui.Main</mainClass>
+                                        <mainClass>artoh.jokiniemi.Main</mainClass>
                                 </manifest>
                         </archive>
                 </configuration>
@@ -70,7 +71,7 @@
                   <archive>
                         <manifest>
                                 <!-- Jar file entry point -->
-                                <mainClass>artoh.jokiniemi.ui.Main</mainClass>
+                                <mainClass>artoh.jokiniemi.Main</mainClass>
                         </manifest>
                   </archive>
                 </configuration>

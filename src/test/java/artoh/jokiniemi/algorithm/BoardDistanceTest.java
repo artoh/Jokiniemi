@@ -93,6 +93,13 @@ public abstract class BoardDistanceTest {
         assertEquals(Integer.MAX_VALUE, di.distance(-1, -1));
     }
     
+    @Test
+    public final void distanceToSelf() {
+        BoardDistanceInterface di = initSimple();
+        assertEquals(0, di.distance(1, 1));
+        assertEquals(0, di.distance(3, 3));    
+    }
+    
     /**
      * Init with real gameboard
      * @return 
