@@ -9,8 +9,6 @@ import artoh.jokiniemi.algorithm.LinearCongruentialGenerator;
 import artoh.jokiniemi.algorithm.TicketAwareDistance;
 import artoh.jokiniemi.game.Game;
 import artoh.jokiniemi.game.Vehicle;
-import static artoh.jokiniemi.ui.JokiniemiApplication.initGame;
-import java.util.Arrays;
 
 /**
  * Ohjelman käynnistämiseen tarvittava luokka
