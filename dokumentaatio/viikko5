@@ -12,6 +12,8 @@ Valmistauduin suorituskykytesteihin kirjoittamalla skriptin jolla suorituskykyte
 
 Ohjelman muutokset ovat tällä viikolla olleet sisäisiä, ohjelma on käyttökunnossa (ja tekoäly yhtä tyhmä kuin ennenkin).
 
+Testien rivikattavuus on 98 %
+
 # Mitä opin
 
 Algoritmin optimoimisessa joutuu tekemään valintoja aika- ja tilavaativuuden välillä. Tämän kokoisella datamäärällä tilaoptimointi ei ole suorituskyvyn kannalta järkevää, mutta tuli nyt tehtyä ihan oppimisen kannalta. Huomasin myös, kuinka suunnaton hyöty on ollut rajapintaa vastaan tehdyistä yksikkötesteistä.
