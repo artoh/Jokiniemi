@@ -85,7 +85,7 @@ public class NearestDetectiveCache {
      * @return Etäisyys vuoroina
      */
     public int detectiveDistance(int detective, int square, int limit) {
-        int distance = this.distancer.distance(square, game.log().currentPosition(detective));
+        int distance = this.distancer.distance(square, game.log().currentPosition(detective));        
         if (distance > tickets && detective > this.game.bobbies()) {
             distance = this.ticketDistancer.distanceWithTickets(square, game.log().currentPosition(detective), 
                     game.ticketsLeft(Vehicle.TAXI), game.ticketsLeft(Vehicle.BUS), game.ticketsLeft(Vehicle.UNDERGROUD), distance, limit);            
