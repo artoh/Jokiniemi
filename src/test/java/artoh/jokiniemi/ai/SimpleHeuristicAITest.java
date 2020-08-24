@@ -119,12 +119,12 @@ public class SimpleHeuristicAITest {
     public void blackScaleInBegin() {
         assertEquals(10, ai.blackCardScale(30, Vehicle.TAXI));
     }
-    
+       
     @Test
     public void doubleScaleInBegin() {
         assertEquals(10, ai.doubleCardScale(40, 1));
     }
-    
+        
     @Test
     public void safeLocation() {
         PossibleLocationsSet set = new PossibleLocationsSet(game);

@@ -88,7 +88,7 @@ public class BoardFileReaderTest {
         board.init(10);
         BoardFileReader reader = new BoardFileReader();
         
-        reader.addConnectionLine(board, "1T2B3M4F5");
+        reader.addConnectionLine(board, "1T2B3M4F5X4");
         
         assertEquals(4, board.connectionsCount(1));
         assertEquals(1, board.connectionsCount(2));
@@ -96,5 +96,5 @@ public class BoardFileReaderTest {
         assertEquals(Vehicle.FERRY, board.connectionVehicle(5, 0));
         assertEquals(Vehicle.UNDERGROUD, board.connectionVehicle(4, 0));
     }
-    
+        
 }

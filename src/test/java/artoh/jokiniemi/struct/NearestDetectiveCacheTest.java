@@ -5,6 +5,7 @@
  */
 package artoh.jokiniemi.struct;
 
+import artoh.jokiniemi.algorithm.AppliedFloydWarshallDistance;
 import artoh.jokiniemi.algorithm.BoardDistanceInterface;
 import artoh.jokiniemi.algorithm.TicketAwareDistance;
 import artoh.jokiniemi.game.Game;
@@ -39,7 +40,7 @@ public class NearestDetectiveCacheTest {
         }
         game.gameBoard().addConnection(Vehicle.TAXI, 9, 10);
         
-        BoardDistanceInterface distancer = new TicketAwareDistance();
+        BoardDistanceInterface distancer = new AppliedFloydWarshallDistance();
         distancer.init(game.gameBoard());
         
         this.cache = new NearestDetectiveCache(game, distancer);
@@ -55,7 +56,6 @@ public class NearestDetectiveCacheTest {
         assertEquals(1, cache.countDistance(3));
         assertEquals(2, cache.countDistance(6));
         assertEquals(0, cache.countDistance(8));
-        assertEquals(5, cache.countDistance(9));
     }
     
     @Test
@@ -72,13 +72,18 @@ public class NearestDetectiveCacheTest {
         assertEquals(0, cache.distance(1));
         assertEquals(1, cache.distance(3));
         assertEquals(2, cache.countDistance(6));
-        assertEquals(5, cache.countDistance(9));
         game.move();
         cache.invalidate();
         assertEquals(1, cache.distance(1));
         assertEquals(1, cache.distance(3));        
-        assertEquals(1, cache.countDistance(6));
-        assertEquals(4, cache.countDistance(9));
+        assertEquals(1, cache.countDistance(6));        
+    }
+    
+    @Test
+    public void minTicketsCount() {
+        assertEquals(8, cache.minTickets());
+        game.testingTickets = true;
+        assertEquals(2, cache.minTickets());
     }
     
     private NearestDetectiveCache cache;
@@ -100,7 +105,7 @@ public class NearestDetectiveCacheTest {
         
         public void move() {
             this.moves++;
-        }
+        }        
         
         private int moves = 0;                
     }
@@ -124,8 +129,21 @@ public class NearestDetectiveCacheTest {
                 
         public void move() {
             this.mockLog.move();
+        }       
+        
+        @Override
+        public int ticketsLeft(Vehicle ticket) {
+            if (testingTickets) {
+                return ticket == Vehicle.UNDERGROUD ? 16 : 
+                    ticket == Vehicle.BUS ? 8 : 2;                    
+                
+            } else {
+                return ticket == Vehicle.UNDERGROUD ? 8 : 
+                    ticket == Vehicle.BUS ? 16 : 22;                                    
+            }
         }
         
         private MockLog mockLog;
+        boolean testingTickets = false;
     }
 }

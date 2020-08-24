@@ -108,7 +108,6 @@ public class SimpleHeuristicAI implements AIInterface {
             this.bestAlternative = 
                 new ScoredAlternative(firstTicket, firstTarget, secondTicket, secondTarget, score);
         }
-        System.out.println("" + score + " \t" + firstTicket + " \t" + firstTarget + " \t" + secondTicket + " \t" + secondTarget);
     }
       
     @Override
@@ -180,8 +179,6 @@ public class SimpleHeuristicAI implements AIInterface {
         
         int connections = game.gameBoard().connectionsCount(currentPosition);
         boolean onlyTaxi = possibles.onlyTaxiPossible();
-
-        System.out.println("Turn " + game.log().currentTurn() + " " + game.log().turnsLeft() + " left " + (onlyTaxi ? "TAXI" : " ") + currentPosition);        
 
         for (int i = 0; i < connections; i++) {
             int squareTo = game.gameBoard().connectionTo(currentPosition, i);
@@ -275,7 +272,6 @@ public class SimpleHeuristicAI implements AIInterface {
         if (deep >= nearestDetectiveDistance(square)) {
             return false;
         } else if (turn == game.log().turnsTotal()) {
-            System.out.println("*** Safe end ***");
             return true;
         }
         
@@ -519,9 +515,7 @@ public class SimpleHeuristicAI implements AIInterface {
         } else if (jumPoints < 100) {
             total = total / 3;
         }               
-        
-        System.out.println(square + " \t" + jumPoints + " J\t" + hiddenScores + " H (" + newPossibilities + ")\t" + nearPoints + " N\t " + connectionPoints + " C\t = " + total);
-        
+                
         return total;
     }
     

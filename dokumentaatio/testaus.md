@@ -6,7 +6,7 @@ Käyttöliittymää lukuun ottamatta ohjelmalle on toteutettu kattavat JUnit-yks
 
 Yksikkötestejä ei ole toteutettu niille tapahtumille, joita ohjelmassa ei ole mahdollista tulla vastaan (esim. pelilaudan lukemisessa tiedoston puuttumiselle, koska tiedosto on sisällytetty jar-pakettiin). Tekoälyä testattaessa ei juurikaan testata sitä, tekeekö teköäly aina tarkoituksenmukaisen siirron.
 
-Testien rivikattavuus (käyttöliittymä pois luettuna) on tällä hetkellä 96%.
+Testien rivikattavuus (käyttöliittymä pois luettuna) on 99%.
 
 ## Integraatiotestaus
 
@@ -22,9 +22,10 @@ Tekoälyn haastavuutta on testattu myös seitsemänvuotiaalla testipelaajalla, j
 
 Ohjelmaan on integroitu yksinkertaiset suorituskykytestit etäisyyksien hakemiselle ja tekoälylle.
 
-Testiparametri    |    Testattava asia   |  Tyypillinen tulos
+Testiparametri    |    Testattava asia   |  Tyypillinen tulos (fuksiläppärillä)
 ----------------|----------------------|--------------------------------
-test FW         | Floydin-Warshallin etäisyyksien haku |  0,02 s.
+test FW         | Floydin-Warshallin etäisyyksien haku |  0,020 s.
+test AF         | Sovellettu Floydin-Warshallin etäisyyksien haku | 0,020 s.
 test TA         | Lippujen määrät huomioiva etäisyyksien haku | 1,2 s.
 test SA         | Yksinkertainen tekoäly  | 0,001 s.
 test HA         | Heuristinen tekoäly     | 1 ... 20 s.

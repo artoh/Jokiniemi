@@ -64,13 +64,14 @@ public class NearestDetectiveCache {
      * @return Vähin määrä lippuja
      */
     int minTickets() {
-        int minTickets = this.game.ticketsLeft(Vehicle.UNDERGROUD);
-        if (this.game.ticketsLeft(Vehicle.BUS) < minTickets) {
-            minTickets = this.game.ticketsLeft(Vehicle.BUS);
-        } else if (this.game.ticketsLeft(Vehicle.TAXI) < minTickets) {
-            minTickets = this.game.ticketsLeft(Vehicle.TAXI);
+        int tickets = this.game.ticketsLeft(Vehicle.UNDERGROUD);
+        if (this.game.ticketsLeft(Vehicle.BUS) < tickets) {
+            tickets = this.game.ticketsLeft(Vehicle.BUS);
+        } 
+        if (this.game.ticketsLeft(Vehicle.TAXI) < tickets) {
+            tickets = this.game.ticketsLeft(Vehicle.TAXI);
         }
-        return minTickets;
+        return tickets;
     }    
     
     /**
@@ -102,7 +103,7 @@ public class NearestDetectiveCache {
         int nearest = Integer.MAX_VALUE;
         
         for (int detective = 1; detective <= this.game.detectives(); detective++) {
-            int distance = detectiveDistance(detective, square, 10);
+            int distance = detectiveDistance(detective, square, 7);
             if (distance < nearest) {
                 nearest = distance;
             }

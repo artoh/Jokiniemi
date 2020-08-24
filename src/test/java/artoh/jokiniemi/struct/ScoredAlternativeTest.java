@@ -70,7 +70,6 @@ public class ScoredAlternativeTest {
         
         @Override
         public GameStatus doMove(int player, int square, Vehicle vehicle, boolean doubled) {
-            System.out.println("doMove " + vehicle + " " + square);
             this.target = square;
             this.vehicle = vehicle;
             return Game.GameStatus.RUNNING;

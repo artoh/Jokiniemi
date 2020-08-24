@@ -43,7 +43,6 @@ public class ScoredAlternative {
         if (this.secondTarget > 0) {
             game.doMove(0, this.secondTarget, this.secondTicket, false);
         }
-        System.out.println("---> " + firstTicket + " " + firstTarget + " ---> " + secondTarget);
     }
 
 

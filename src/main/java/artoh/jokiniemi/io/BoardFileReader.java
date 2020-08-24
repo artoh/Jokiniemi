@@ -27,7 +27,7 @@ public class BoardFileReader {
      * 
      * @param game Game-olio
      * @param starter Aloitussijainnit arpova olio
-     * @return 
+     * @return Onnistuiko tiedoston avaaminen
      */
     public boolean readBoard(Game game, StartPlaceRandomizer starter) {
         
@@ -56,7 +56,6 @@ public class BoardFileReader {
             
             return true;
         } catch (FileNotFoundException ex) {
-            System.out.println(ex);
             return false;
         } catch (IOException ex) {
             return false;
@@ -155,6 +154,7 @@ public class BoardFileReader {
                         vehicle = Vehicle.FERRY;
                         break;
                     default:
+                        vehicle = Vehicle.START_SQUARE;
                         break;
                 }
                 
