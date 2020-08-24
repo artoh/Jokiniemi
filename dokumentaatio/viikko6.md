@@ -4,7 +4,7 @@ Aikaa on tällä viikolla käytetty n. 8 tuntia + vertaisarviointi 2 tuntia
 
 ## Mitä olen tehnyt
 
-Täydensin vielä hieman testejä (ja huomasin, että vielä rivikattavuuden ollessa 98 % oli testeistä puuttuvalla rivillä eräs varsin ikävä bugi..)
+Täydensin vielä hieman testejä (ja huomasin, että vielä rivikattavuuden ollessa 98 % oli testeistä puuttuvalla rivillä vielä eräs varsin ikävä bugi..)
 
 Ajoin suorituskykytestit, analysoin niiden tuloksia ja täydensin testiraportteja.
 
@@ -18,4 +18,4 @@ Lisäksi oli mielenkiintoista havainnoida, kuinka tietokone vaikutti suorituskyk
 
 ## Mitä teen seuraavaksi
 
-Ellei viimeisestä vertaisarvioinnista tule korjausehdotuksia, taitaa projekti olla tässä.
+Ellei viimeisestä vertaisarvioinnista tule korjausehdotuksia, taitaa projekti olla sitten tässä.

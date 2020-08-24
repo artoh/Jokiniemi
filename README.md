@@ -4,6 +4,8 @@
 
 [Jokiniemi](https://goo.gl/maps/pHLbsLvxCWHvN65N9) on [Scotland Yard](https://fi.wikipedia.org/wiki/Scotland_Yard_(lautapeli)) -lautapeliin tehty tekoälysovellus, jossa tietokone valitsee herra X:n siirrot. Näin peliä voi pelata tietokonetta vastaan niin, että pelattaessa tarvitaan kuitenkin alkuperäistä lautapeliä.
 
+- [Suoritettava ohjelma (JAR-paketti)](https://github.com/artoh/Jokiniemi/releases/download/viikko6/jokiniemi.jar)
+- [Testikattavuus (pit)](https://artoh.github.io/Jokiniemi/pit/)
 
 ### Dokumentaatio
 
@@ -21,7 +23,3 @@
 - [Viikko 4](dokumentaatio/viikko4/viikko4.md)
 - [Viikko 5](dokumentaatio/viikko5.md)
 - [Viikko 6](dokumentaatio/viikko6.md)
-
-
-[JAR-paketti](https://github.com/artoh/Jokiniemi/releases/download/viikko6/jokiniemi.jar)
-[Testikattavuus (pit)](https://artoh.github.io/Jokiniemi/pit/)
