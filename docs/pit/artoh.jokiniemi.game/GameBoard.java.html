@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<body>
+
+
+<h1>GameBoard.java</h1>
+
+<table class="src">
+
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_1'/>
+1
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_1'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>package artoh.jokiniemi.game;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_2'/>
+2
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_2'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_3'/>
+3
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_3'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>/**</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_4'/>
+4
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_4'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * Pelilaudan toteutus</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_5'/>
+5
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_5'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * </span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_6'/>
+6
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_6'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> * @author arto</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_7'/>
+7
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_7'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''> */</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_8'/>
+8
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_8'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>public class GameBoard implements GameBoardInterface {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_9'/>
+9
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_9'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_10'/>
+10
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_10'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_11'/>
+11
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_11'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void init(int squares) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_12'/>
+12
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_12'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>        this.squares = new Square[squares];</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_13'/>
+13
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_13'>3</a>
+<span>
+1. init : changed conditional boundary &rarr; KILLED<br/>
+2. init : Changed increment from 1 to -1 &rarr; KILLED<br/>
+3. init : negated conditional &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        for (int i = 0; i &#60; squares; i++) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_14'/>
+14
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_14'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>            this.squares[i] = new Square();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_15'/>
+15
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_15'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        }</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_16'/>
+16
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_16'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_17'/>
+17
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_17'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_18'/>
+18
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_18'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_19'/>
+19
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_19'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public void addConnection(Vehicle vehicle, int from, int to) {</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_20'/>
+20
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_20'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>        // All the connections all two-directionals</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_21'/>
+21
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_21'>2</a>
+<span>
+1. addConnection : Replaced integer subtraction with addition &rarr; KILLED<br/>
+2. addConnection : removed call to artoh/jokiniemi/game/Square::addConnection &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        this.squares[from - 1].addConnection(vehicle, to);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_22'/>
+22
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_22'>2</a>
+<span>
+1. addConnection : Replaced integer subtraction with addition &rarr; KILLED<br/>
+2. addConnection : removed call to artoh/jokiniemi/game/Square::addConnection &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        this.squares[to - 1].addConnection(vehicle, from);</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_23'/>
+23
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_23'></a>
+<span>
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_24'/>
+24
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_24'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_25'/>
+25
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_25'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_26'/>
+26
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_26'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public int squareCount() {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_27'/>
+27
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_27'>1</a>
+<span>
+1. squareCount : replaced int return with 0 for artoh/jokiniemi/game/GameBoard::squareCount &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return this.squares.length;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_28'/>
+28
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_28'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_29'/>
+29
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_29'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_30'/>
+30
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_30'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_31'/>
+31
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_31'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public int connectionsCount(int square) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_32'/>
+32
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_32'>2</a>
+<span>
+1. connectionsCount : Replaced integer subtraction with addition &rarr; KILLED<br/>
+2. connectionsCount : replaced int return with 0 for artoh/jokiniemi/game/GameBoard::connectionsCount &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return this.squares[square - 1].connectionsCount();</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_33'/>
+33
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_33'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_34'/>
+34
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_34'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_35'/>
+35
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_35'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_36'/>
+36
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_36'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public int connectionTo(int square, int index) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_37'/>
+37
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_37'>2</a>
+<span>
+1. connectionTo : Replaced integer subtraction with addition &rarr; KILLED<br/>
+2. connectionTo : replaced int return with 0 for artoh/jokiniemi/game/GameBoard::connectionTo &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return this.squares[ square - 1].connectionTo(index);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_38'/>
+38
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_38'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_39'/>
+39
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_39'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''></span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_40'/>
+40
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_40'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    @Override</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_41'/>
+41
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_41'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    public Vehicle connectionVehicle(int square, int index) {</span></pre></td></tr>
+
+
+<tr>
+<td class='covered'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_42'/>
+42
+</td>
+<td class='killed'>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_42'>2</a>
+<span>
+1. connectionVehicle : Replaced integer subtraction with addition &rarr; KILLED<br/>
+2. connectionVehicle : replaced return value with null for artoh/jokiniemi/game/GameBoard::connectionVehicle &rarr; KILLED<br/>
+
+</span>
+</span>
+</td>
+<td class='covered'><pre><span  class='killed'>        return this.squares[square - 1].connectionVehicle(index);</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_43'/>
+43
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_43'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    }</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_44'/>
+44
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_44'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_45'/>
+45
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_45'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    private Square[] squares;</span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_46'/>
+46
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_46'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>    </span></pre></td></tr>
+
+
+<tr>
+<td class='na'>
+<a name='org.pitest.mutationtest.report.html.SourceFile@2d607072_47'/>
+47
+</td>
+<td class=''>
+<span class='pop'>
+<a href='#grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_47'></a>
+<span>
+</span>
+</span>
+</td>
+<td class=''><pre><span  class=''>}</span></pre></td></tr>
+
+
+
+<tr><td></td><td></td><td><h2>Mutations</h2></td></tr>
+
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@2d607072_13'>13</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_13'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>init<br/><b>Killed by : </b>artoh.jokiniemi.game.GameBoardTest.smallBoard(artoh.jokiniemi.game.GameBoardTest)</span></span> changed conditional boundary &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>init<br/><b>Killed by : </b>artoh.jokiniemi.game.GameBoardTest.smallBoard(artoh.jokiniemi.game.GameBoardTest)</span></span> Changed increment from 1 to -1 &rarr; KILLED</p> <p class='KILLED'><span class='pop'>3.<span><b>3</b><br/><b>Location : </b>init<br/><b>Killed by : </b>artoh.jokiniemi.game.GameBoardTest.smallBoard(artoh.jokiniemi.game.GameBoardTest)</span></span> negated conditional &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@2d607072_21'>21</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_21'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>addConnection<br/><b>Killed by : </b>artoh.jokiniemi.game.GameBoardTest.smallBoard(artoh.jokiniemi.game.GameBoardTest)</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>addConnection<br/><b>Killed by : </b>artoh.jokiniemi.game.GameBoardTest.smallBoard(artoh.jokiniemi.game.GameBoardTest)</span></span> removed call to artoh/jokiniemi/game/Square::addConnection &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@2d607072_22'>22</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_22'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>addConnection<br/><b>Killed by : </b>artoh.jokiniemi.game.GameBoardTest.smallBoard(artoh.jokiniemi.game.GameBoardTest)</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>addConnection<br/><b>Killed by : </b>artoh.jokiniemi.game.GameBoardTest.smallBoard(artoh.jokiniemi.game.GameBoardTest)</span></span> removed call to artoh/jokiniemi/game/Square::addConnection &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@2d607072_27'>27</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_27'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>squareCount<br/><b>Killed by : </b>artoh.jokiniemi.game.GameBoardTest.smallBoard(artoh.jokiniemi.game.GameBoardTest)</span></span> replaced int return with 0 for artoh/jokiniemi/game/GameBoard::squareCount &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@2d607072_32'>32</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_32'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>connectionsCount<br/><b>Killed by : </b>artoh.jokiniemi.game.GameBoardTest.smallBoard(artoh.jokiniemi.game.GameBoardTest)</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>connectionsCount<br/><b>Killed by : </b>artoh.jokiniemi.game.GameBoardTest.smallBoard(artoh.jokiniemi.game.GameBoardTest)</span></span> replaced int return with 0 for artoh/jokiniemi/game/GameBoard::connectionsCount &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@2d607072_37'>37</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_37'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>connectionTo<br/><b>Killed by : </b>artoh.jokiniemi.game.GameBoardTest.smallBoard(artoh.jokiniemi.game.GameBoardTest)</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>connectionTo<br/><b>Killed by : </b>artoh.jokiniemi.game.GameBoardTest.smallBoard(artoh.jokiniemi.game.GameBoardTest)</span></span> replaced int return with 0 for artoh/jokiniemi/game/GameBoard::connectionTo &rarr; KILLED</p> 
+</td>
+</tr>
+<tr>
+<td><a href='#org.pitest.mutationtest.report.html.SourceFile@2d607072_42'>42</a></td> 
+<td></td>
+<td>
+
+<a name='grouporg.pitest.mutationtest.report.html.SourceFile@2d607072_42'/> 
+
+<p class='KILLED'><span class='pop'>1.<span><b>1</b><br/><b>Location : </b>connectionVehicle<br/><b>Killed by : </b>artoh.jokiniemi.game.GameBoardTest.smallBoard(artoh.jokiniemi.game.GameBoardTest)</span></span> Replaced integer subtraction with addition &rarr; KILLED</p> <p class='KILLED'><span class='pop'>2.<span><b>2</b><br/><b>Location : </b>connectionVehicle<br/><b>Killed by : </b>artoh.jokiniemi.game.GameBoardTest.smallBoard(artoh.jokiniemi.game.GameBoardTest)</span></span> replaced return value with null for artoh/jokiniemi/game/GameBoard::connectionVehicle &rarr; KILLED</p> 
+</td>
+</tr>
+
+</table>
+
+
+<h2>Active mutators</h2>
+<ul>
+<li class='mutator'>BOOLEAN_FALSE_RETURN</li>
+<li class='mutator'>BOOLEAN_TRUE_RETURN</li>
+<li class='mutator'>CONDITIONALS_BOUNDARY_MUTATOR</li>
+<li class='mutator'>EMPTY_RETURN_VALUES</li>
+<li class='mutator'>INCREMENTS_MUTATOR</li>
+<li class='mutator'>INVERT_NEGS_MUTATOR</li>
+<li class='mutator'>MATH_MUTATOR</li>
+<li class='mutator'>NEGATE_CONDITIONALS_MUTATOR</li>
+<li class='mutator'>NULL_RETURN_VALUES</li>
+<li class='mutator'>PRIMITIVE_RETURN_VALS_MUTATOR</li>
+<li class='mutator'>VOID_METHOD_CALL_MUTATOR</li>
+
+</ul>
+
+<h2>Tests examined</h2>
+<ul>
+<li>artoh.jokiniemi.algorithm.FloydWarshallDistanceTest.testRealDirectConnections(artoh.jokiniemi.algorithm.FloydWarshallDistanceTest) (10 ms)</li><li>artoh.jokiniemi.algorithm.FloydWarshallDistanceTest.testRealCombinedConnections(artoh.jokiniemi.algorithm.FloydWarshallDistanceTest) (11 ms)</li><li>artoh.jokiniemi.ai.SimpleHeuristicAITest.safeAt2(artoh.jokiniemi.ai.SimpleHeuristicAITest) (1 ms)</li><li>artoh.jokiniemi.algorithm.AppliedFloydWarshallDistanceTest.negativeConnection(artoh.jokiniemi.algorithm.AppliedFloydWarshallDistanceTest) (0 ms)</li><li>artoh.jokiniemi.ai.SimpleHeuristicAITest.aiDoublesInTrouble(artoh.jokiniemi.ai.SimpleHeuristicAITest) (2 ms)</li><li>artoh.jokiniemi.game.GameBoardTest.hugeBoard(artoh.jokiniemi.game.GameBoardTest) (14 ms)</li><li>artoh.jokiniemi.struct.PossibleLocationSetTest.oneSquareAfterInitialization(artoh.jokiniemi.struct.PossibleLocationSetTest) (0 ms)</li><li>artoh.jokiniemi.algorithm.TicketAwareDistanceTest.negativeConnection(artoh.jokiniemi.algorithm.TicketAwareDistanceTest) (0 ms)</li><li>artoh.jokiniemi.algorithm.AppliedFloydWarshallDistanceTest.count2000Distances(artoh.jokiniemi.algorithm.AppliedFloydWarshallDistanceTest) (43 ms)</li><li>artoh.jokiniemi.StupidDetectiveTest.testWithHeuristicAI(artoh.jokiniemi.StupidDetectiveTest) (10586 ms)</li><li>artoh.jokiniemi.struct.PossibleLocationSetTest.movingWithBus(artoh.jokiniemi.struct.PossibleLocationSetTest) (0 ms)</li><li>artoh.jokiniemi.struct.NearestDetectiveCacheTest.distancesWithCacheWithoutInvalidate(artoh.jokiniemi.struct.NearestDetectiveCacheTest) (0 ms)</li><li>artoh.jokiniemi.game.GameBoardTest.smallBoard(artoh.jokiniemi.game.GameBoardTest) (0 ms)</li><li>artoh.jokiniemi.algorithm.FloydWarshallDistanceTest.combinedConnections(artoh.jokiniemi.algorithm.FloydWarshallDistanceTest) (0 ms)</li><li>artoh.jokiniemi.io.BoardFileReaderTest.canReadFile(artoh.jokiniemi.io.BoardFileReaderTest) (0 ms)</li><li>artoh.jokiniemi.struct.PossibleLocationSetTest.moreMoves(artoh.jokiniemi.struct.PossibleLocationSetTest) (1 ms)</li><li>artoh.jokiniemi.struct.PossibleLocationSetTest.movingWithTaxiCleaningDetectives(artoh.jokiniemi.struct.PossibleLocationSetTest) (0 ms)</li><li>artoh.jokiniemi.algorithm.TicketAwareDistanceTest.directConnections(artoh.jokiniemi.algorithm.TicketAwareDistanceTest) (1 ms)</li><li>artoh.jokiniemi.ai.SimpleHeuristicAITest.jumPointsAt5(artoh.jokiniemi.ai.SimpleHeuristicAITest) (0 ms)</li><li>artoh.jokiniemi.struct.PossibleLocationSetTest.onlyTaxi3(artoh.jokiniemi.struct.PossibleLocationSetTest) (0 ms)</li><li>artoh.jokiniemi.algorithm.AppliedFloydWarshallDistanceTest.distanceToSelf(artoh.jokiniemi.algorithm.AppliedFloydWarshallDistanceTest) (0 ms)</li><li>artoh.jokiniemi.algorithm.AppliedFloydWarshallDistanceTest.indexesForTriangle(artoh.jokiniemi.algorithm.AppliedFloydWarshallDistanceTest) (0 ms)</li><li>artoh.jokiniemi.algorithm.TicketAwareDistanceTest.combinedDistances(artoh.jokiniemi.algorithm.TicketAwareDistanceTest) (0 ms)</li><li>artoh.jokiniemi.ai.SimpleHeuristicAITest.nearestDetectiveAtStart(artoh.jokiniemi.ai.SimpleHeuristicAITest) (0 ms)</li><li>artoh.jokiniemi.algorithm.AppliedFloydWarshallDistanceTest.testRealDirectConnections(artoh.jokiniemi.algorithm.AppliedFloydWarshallDistanceTest) (24 ms)</li><li>artoh.jokiniemi.struct.PossibleLocationSetTest.busToo(artoh.jokiniemi.struct.PossibleLocationSetTest) (0 ms)</li><li>artoh.jokiniemi.ai.SimpleHeuristicAITest.moveAndScore(artoh.jokiniemi.ai.SimpleHeuristicAITest) (1 ms)</li><li>artoh.jokiniemi.algorithm.FloydWarshallDistanceTest.lineDistances(artoh.jokiniemi.algorithm.FloydWarshallDistanceTest) (1262 ms)</li><li>artoh.jokiniemi.ai.SimpleHeuristicAITest.inTrouble(artoh.jokiniemi.ai.SimpleHeuristicAITest) (1 ms)</li><li>artoh.jokiniemi.algorithm.TicketAwareDistanceTest.testRealCombinedConnections(artoh.jokiniemi.algorithm.TicketAwareDistanceTest) (13 ms)</li><li>artoh.jokiniemi.struct.JumArrayTest.jumsAt193(artoh.jokiniemi.struct.JumArrayTest) (0 ms)</li><li>artoh.jokiniemi.StupidDetectiveTest.testWithStupidAI(artoh.jokiniemi.StupidDetectiveTest) (1 ms)</li><li>artoh.jokiniemi.ai.SimpleHeuristicAITest.doubleScaleInBegin(artoh.jokiniemi.ai.SimpleHeuristicAITest) (0 ms)</li><li>artoh.jokiniemi.algorithm.TicketAwareDistanceTest.lineDistances(artoh.jokiniemi.algorithm.TicketAwareDistanceTest) (1463 ms)</li><li>artoh.jokiniemi.struct.PossibleLocationSetTest.ferry2(artoh.jokiniemi.struct.PossibleLocationSetTest) (0 ms)</li><li>artoh.jokiniemi.struct.PossibleLocationSetTest.movingWithBlack(artoh.jokiniemi.struct.PossibleLocationSetTest) (0 ms)</li><li>artoh.jokiniemi.algorithm.AppliedFloydWarshallDistanceTest.combinedConnections(artoh.jokiniemi.algorithm.AppliedFloydWarshallDistanceTest) (0 ms)</li><li>artoh.jokiniemi.struct.NearestDetectiveCacheTest.distancesWithCacheWithInvalidate(artoh.jokiniemi.struct.NearestDetectiveCacheTest) (1 ms)</li><li>artoh.jokiniemi.algorithm.TicketAwareDistanceTest.realDistancesWithTickets(artoh.jokiniemi.algorithm.TicketAwareDistanceTest) (179 ms)</li><li>artoh.jokiniemi.ai.SimpleHeuristicAITest.notSafeAt3(artoh.jokiniemi.ai.SimpleHeuristicAITest) (0 ms)</li><li>artoh.jokiniemi.struct.PossibleLocationSetTest.allAvailableAfterFill(artoh.jokiniemi.struct.PossibleLocationSetTest) (0 ms)</li><li>artoh.jokiniemi.algorithm.TicketAwareDistanceTest.taxiOnlyDistances(artoh.jokiniemi.algorithm.TicketAwareDistanceTest) (0 ms)</li><li>artoh.jokiniemi.ai.SimpleHeuristicAITest.blackScaleInBegin(artoh.jokiniemi.ai.SimpleHeuristicAITest) (0 ms)</li><li>artoh.jokiniemi.ai.SimpleHeuristicAITest.safeLocation(artoh.jokiniemi.ai.SimpleHeuristicAITest) (0 ms)</li><li>artoh.jokiniemi.ai.SimpleHeuristicAITest.notInTrouble(artoh.jokiniemi.ai.SimpleHeuristicAITest) (1 ms)</li><li>artoh.jokiniemi.ai.VeryStupidAiTest (0 ms)</li><li>artoh.jokiniemi.ai.SimpleHeuristicAITest.playAllMovesAndWin(artoh.jokiniemi.ai.SimpleHeuristicAITest) (1 ms)</li><li>artoh.jokiniemi.struct.PossibleLocationSetTest.dontFerry6(artoh.jokiniemi.struct.PossibleLocationSetTest) (0 ms)</li><li>artoh.jokiniemi.algorithm.AppliedFloydWarshallDistanceTest.testRealCombinedConnections(artoh.jokiniemi.algorithm.AppliedFloydWarshallDistanceTest) (26 ms)</li><li>artoh.jokiniemi.algorithm.TicketAwareDistanceTest.combinedConnections(artoh.jokiniemi.algorithm.TicketAwareDistanceTest) (0 ms)</li><li>artoh.jokiniemi.algorithm.TicketAwareDistanceTest.testRealDirectConnections(artoh.jokiniemi.algorithm.TicketAwareDistanceTest) (1 ms)</li><li>artoh.jokiniemi.struct.NearestDetectiveCacheTest.distanceCounting(artoh.jokiniemi.struct.NearestDetectiveCacheTest) (0 ms)</li><li>artoh.jokiniemi.ai.SimpleHeuristicAITest.connectionVehiclePoints(artoh.jokiniemi.ai.SimpleHeuristicAITest) (1 ms)</li><li>artoh.jokiniemi.algorithm.TicketAwareDistanceTest.count2000Distances(artoh.jokiniemi.algorithm.TicketAwareDistanceTest) (1844 ms)</li><li>artoh.jokiniemi.algorithm.FloydWarshallDistanceTest.negativeConnection(artoh.jokiniemi.algorithm.FloydWarshallDistanceTest) (0 ms)</li><li>artoh.jokiniemi.algorithm.AppliedFloydWarshallDistanceTest.directConnections(artoh.jokiniemi.algorithm.AppliedFloydWarshallDistanceTest) (1 ms)</li><li>artoh.jokiniemi.algorithm.TicketAwareDistanceTest.distanceToSelf(artoh.jokiniemi.algorithm.TicketAwareDistanceTest) (0 ms)</li><li>artoh.jokiniemi.struct.JumArrayTest.jumsAt18(artoh.jokiniemi.struct.JumArrayTest) (1 ms)</li><li>artoh.jokiniemi.struct.PossibleLocationSetTest.zeroSquaresAfterCleaning(artoh.jokiniemi.struct.PossibleLocationSetTest) (0 ms)</li><li>artoh.jokiniemi.struct.JumArrayTest.jumsAt17(artoh.jokiniemi.struct.JumArrayTest) (0 ms)</li><li>artoh.jokiniemi.algorithm.FloydWarshallDistanceTest.distanceToSelf(artoh.jokiniemi.algorithm.FloydWarshallDistanceTest) (0 ms)</li><li>artoh.jokiniemi.algorithm.AppliedFloydWarshallDistanceTest.lineDistances(artoh.jokiniemi.algorithm.AppliedFloydWarshallDistanceTest) (3735 ms)</li><li>artoh.jokiniemi.ai.SimpleHeuristicAITest.doAiMove(artoh.jokiniemi.ai.SimpleHeuristicAITest) (0 ms)</li><li>artoh.jokiniemi.struct.PossibleLocationSetTest.movingWithTaxi(artoh.jokiniemi.struct.PossibleLocationSetTest) (0 ms)</li><li>artoh.jokiniemi.algorithm.FloydWarshallDistanceTest.directConnections(artoh.jokiniemi.algorithm.FloydWarshallDistanceTest) (1 ms)</li><li>artoh.jokiniemi.algorithm.FloydWarshallDistanceTest.count2000Distances(artoh.jokiniemi.algorithm.FloydWarshallDistanceTest) (38 ms)</li><li>artoh.jokiniemi.io.BoardFileReaderTest.addConnections(artoh.jokiniemi.io.BoardFileReaderTest) (1 ms)</li><li>artoh.jokiniemi.struct.NearestDetectiveCacheTest.minTicketsCount(artoh.jokiniemi.struct.NearestDetectiveCacheTest) (0 ms)</li>
+</ul>
+
+<br/>
+
+Report generated by <a href='http://pitest.org'>PIT</a> 1.4.11
+
+</body>
+</html>

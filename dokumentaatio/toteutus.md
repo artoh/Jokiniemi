@@ -8,7 +8,7 @@ Pelilogiikka ei tarkasta, että pelaajan siirrot ovat laillisia, vaan luottaa t�
 
 ## Toteutetut algoritmit
 
-Kaikki algoritmit on kuvattu tarkemmin luokan dokumentaatiossa. Algoritmien väliset empiiriset tehokkuusvertailut on esitetty [testausdokumentaatiossa](testaus.md).
+Kaikki algoritmit on kuvattu tarkemmin luokan [dokumentaatiossa](https://artoh.github.io/Jokiniemi/apidocs/). Algoritmien väliset empiiriset tehokkuusvertailut on esitetty [testausdokumentaatiossa](testaus.md).
 
 ### Peliruutujen välisien etäisyyksien laskeminen
 
@@ -28,7 +28,7 @@ Sen jälkeen kun etäisyydet on laskettu, on etäisyyksien hakemisen aikavaativu
 Algoritmia on sovellettu ottamaan huomioon se, että kaikki yhteydet ovat kaksisuuntaisia. Etäisyysmatriisina käytetään neliön puolikasta, joka tallennetaan tilatehokkaasti taulukoksi.
 
 Tilavaativuus  O(n<sup>2</sup>) n. 50 % Floydin-Warshallin algoritmista  
-Aikavaativuus  O(n<sup>3</sup>) 
+Aikavaativuus  O(n<sup>3</sup>)
 
 #### Jäljellä olevien lippujen määrän huomioiva algoritmi
 

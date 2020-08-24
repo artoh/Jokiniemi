@@ -8,6 +8,8 @@ Yksikkötestejä ei ole toteutettu niille tapahtumille, joita ohjelmassa ei ole 
 
 Testien rivikattavuus (käyttöliittymä pois luettuna) on 99%.
 
+![Testikattavuus](pit.png)
+
 ## Integraatiotestaus
 
 StupidDetectiveTest -integraatiotestit suorittavat koko pelin läpi niin, että simuloitu käyttäjä tekee satunnaisia siirtoja.  
