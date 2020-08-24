@@ -23,7 +23,7 @@ Aikavaativuus O(n<sup>3</sup>)
 
 Sen jälkeen kun etäisyydet on laskettu, on etäisyyksien hakemisen aikavaativuus O(1).
 
-### Sovellettu Floydin-Warshallin algoritmi
+#### Sovellettu Floydin-Warshallin algoritmi
 
 Algoritmia on sovellettu ottamaan huomioon se, että kaikki yhteydet ovat kaksisuuntaisia. Etäisyysmatriisina käytetään neliön puolikasta, joka tallennetaan tilatehokkaasti taulukoksi.
 
