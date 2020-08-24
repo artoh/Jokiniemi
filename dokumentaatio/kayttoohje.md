@@ -8,13 +8,13 @@ Peli noudattaa sääntöjen *Peliohje kahdelle pelaajalle* -variaatiota.
 
 ## Käynnistäminen
 
-Ohjelma käynnistetään komennolla
+Lataa [JAR-paketti](https://github.com/artoh/Jokiniemi/releases/download/viikko6/jokiniemi.jar) ja käynnistä ohjelma komennolla
 
 ```
 java -jar jokiniemi.jar
 ```
 
-Jos jar-pakettia ei ole saatavilla, voidaan ohjelma käynnistää myös komennolla
+Ilman jar-pakettia ohjelma voidaan käynnistää komennolla
 
 ```
 mvn compile exec:java -Dexec.mainClass=artoh.jokiniemi.ui.Main
@@ -55,3 +55,7 @@ Mr. X saa käyttää viisi kertaa pelin aikana mustaa lippua (jolla voi käyttä
 Jos etsivä päätyy samaan ruutuun Mr X:n kanssa, peli päättyy etsivien voittoon. Mr X voittaa jos hän selviää kaikki 24 kierrosta jäämättä kiinni.
 
 Kun peli päättyy, näytetään myös kaikki Mr X:n tekemät siirrot.
+
+## Suorituskykytestit
+
+Suorituskykytestien ajaminen on kuvattu [testausdokumentissa](testaus.md)

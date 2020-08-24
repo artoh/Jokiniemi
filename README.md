@@ -23,5 +23,5 @@
 - [Viikko 6](dokumentaatio/viikko6.md)
 
 
-[JAR-paketti]
-[Testikattavuus (pit)]
+[JAR-paketti](https://github.com/artoh/Jokiniemi/releases/download/viikko6/jokiniemi.jar)
+[Testikattavuus (pit)](https://artoh.github.io/Jokiniemi/pit/)
