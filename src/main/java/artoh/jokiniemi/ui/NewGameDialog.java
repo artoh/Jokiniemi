@@ -8,6 +8,7 @@ import artoh.jokiniemi.algorithm.BoardDistanceInterface;
 import artoh.jokiniemi.algorithm.FloydWarshallDistance;
 import artoh.jokiniemi.algorithm.LinearCongruentialGenerator;
 import artoh.jokiniemi.game.Game;
+import javafx.application.Platform;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
@@ -48,7 +49,14 @@ public class NewGameDialog {
         dialog.getDialogPane().setContent(vbox);
         
         ButtonType startButtonType = new ButtonType("Aloita peli", ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().add(startButtonType);        
+        dialog.getDialogPane().getButtonTypes().add(startButtonType);  
+        
+        // Jotta KDE-ympäristössä dialogi näkyisi kokonaan
+        // https://stackoverflow.com/questions/55190380/javafx-creates-alert-dialog-which-is-too-small
+        dialog.setResizable(true);
+        dialog.onShownProperty().addListener(e -> {
+            Platform.runLater(() -> dialog.setResizable(false));
+        });
         
     }
     
