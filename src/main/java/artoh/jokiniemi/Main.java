@@ -58,7 +58,7 @@ public class Main {
      * 
      * Ajaa täyden pelin etsivien hassuilla siirroilla.
      * Koska tähän liittyy paljon satunnaisuutta, on testi
-     * syytä toistaa. Paluuarvo 0 tarkoittaa testin epäonnistumista 
+     * syytä toistaa. Paluuarvo -1 tarkoittaa testin epäonnistumista 
      * sen takia, että Mr X jää kiinni.
      * 
      * @param game Peli-olio
@@ -82,7 +82,7 @@ public class Main {
         }
         long loppu = System.nanoTime();
 
-        return (game.gameStatus() == Game.GameStatus.MRX_WINS ? loppu - alku : 0);                         
+        return (game.gameStatus() == Game.GameStatus.MRX_WINS ? loppu - alku : -1);                         
     }
     
     /**

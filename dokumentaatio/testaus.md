@@ -27,13 +27,20 @@ Testiparametri    |    Testattava asia   |  Tyypillinen tulos (fuksiläppärill�
 test FW         | Floydin-Warshallin etäisyyksien haku |  0,020 s.
 test AF         | Sovellettu Floydin-Warshallin etäisyyksien haku | 0,020 s.
 test TA         | Lippujen määrät huomioiva etäisyyksien haku | 1,2 s.
+test AF         | Sovellettu Floydin-Warshallin etäisyyksien haku | 0,020 s.
 test SA         | Yksinkertainen tekoäly  | 0,001 s.
 test HA         | Heuristinen tekoäly     | 1 ... 20 s.
-
-**Tähän diagrammi heuristisen tekoälyn testin vaihtelusta**
 
 Testi suoritetaan antamalla yllä oleva parametri, esim ```java -jar jokiniemi.jar test FW```.
 
 Etäisyystesti hakee 20 000 kahden ruudun välistä etäisyyttä (eli noin puolet ruutujen välisistä etäisyyksistä). Ei liene yllättävää, että kaikki etäisyydet taulukkoon hakeva algoritmi on ylivoimainen verrattuna algoritmiin, jossa syvyyshakuun on yhdistetty joukko kolmeen eri lippulajiin liittyviä tarkastuksia.
 
-Tekoälyn testi suorittaa koko 24 vuoroa kestävän pelin niin, että simuloitu käyttäjä tekee satunnaisia valintoja (vastaa ohjelman integraatiotestiä). Heuristisen tekoälyn testin suuri hajonta johtuu testiin liittyvästä satunnaisuudesta: pelin tekoäly hidastuu huomattavasti silloin, kun se joutuu käyttämään hitaampaa lippujen määrän huomioivaa algoritmia arvioidessaan etsivien uhkaa Mr X:lle ja etsivät sattuvat olemaan algoritmin kannalta äärimmäisissä sijanneissa. Ihmispelaajaa vasten pelattaessa 0,5 - 1 sekunnin siirtoviive on kuitenkin täysin hyväksyttävissä. Käytännössä tästä testistä oli suurta hyötyä määriteltäessä saarretuksen joutumisen vaaraa arvoivan algoritmin hakusyvyyttä niin, että peli ei hidastu liikaa.
+Tekoälyn testi suorittaa koko 24 vuoroa kestävän pelin niin, että simuloitu käyttäjä tekee satunnaisia valintoja (vastaa ohjelman integraatiotestiä).
+
+### Heuristisen tekoälyn suorituskykytesti
+
+**Tähän diagrammi heuristisen tekoälyn testin vaihtelusta**
+
+Testin voi suorittaa tilasto.py-apuskriptillä: ```python3 tilasto.py 1000 0 java -jar jokiniemi test AF``` suorittaa testin tuhat kertaa ja esittää ajan frekfrensiivit eri sekunneille kokonaislukuina (nollan desimaalin tarkkuus).
+
+Heuristisen tekoälyn testin suuri hajonta johtuu testiin liittyvästä satunnaisuudesta: pelin tekoäly hidastuu huomattavasti silloin, kun se joutuu käyttämään hitaampaa lippujen määrän huomioivaa algoritmia arvioidessaan etsivien uhkaa Mr X:lle ja etsivät sattuvat olemaan algoritmin kannalta äärimmäisissä sijanneissa. Ihmispelaajaa vasten pelattaessa 0,5 - 1 sekunnin siirtoviive on kuitenkin täysin hyväksyttävissä. Käytännössä tästä testistä oli suurta hyötyä määriteltäessä saarretuksen joutumisen vaaraa arvoivan algoritmin hakusyvyyttä niin, että peli ei hidastu liikaa.
