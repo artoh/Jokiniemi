@@ -28,8 +28,7 @@ Sen jälkeen kun etäisyydet on laskettu, on etäisyyksien hakemisen aikavaativu
 Algoritmia on sovellettu ottamaan huomioon se, että kaikki yhteydet ovat kaksisuuntaisia. Etäisyysmatriisina käytetään neliön puolikasta, joka tallennetaan tilatehokkaasti taulukoksi.
 
 Tilavaativuus  O(n<sup>2</sup>) n. 50 % Floydin-Warshallin algoritmista  
-Aikavaativuus  O(n<sup>3</sup>) n. 80 % Floydin-Warshallin algoritmista
-
+Aikavaativuus  O(n<sup>3</sup>) 
 
 #### Jäljellä olevien lippujen määrän huomioiva algoritmi
 

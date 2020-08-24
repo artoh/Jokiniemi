@@ -12,6 +12,7 @@ import re
 
 if len(sys.argv) < 3 :
 	print("Käytä: tilasto [toistokerrat] [desimaalit] komento")
+	quit()
 
 d = {}
 
@@ -20,14 +21,21 @@ desimaalit = int(sys.argv[2])
 
 for i in range(0,n) :
 	out = str(subprocess.check_output(sys.argv[3:]))	
-	aikastr = re.search("(\d+\\.\d+) s", out).group(1)
-	aika = round(float(aikastr),desimaalit)
+	aikasearch = re.search("(\d+\\.\d+) s", out)
 	
-	if aika in d:
-		d[aika] = d[aika] + 1
-	else :
-		d[aika] = 1
+	if aikasearch:
+		aikastr = aikasearch.group(1)
+		aika = round(float(aikastr),desimaalit)
 	
+		if aika in d:
+			d[aika] = d[aika] + 1
+		else :
+			d[aika] = 1
+			
+		print(".", end="")
+		sys.stdout.flush()
+	
+print("\nTulokset")	
 for k in sorted(d) :
 	print("{}\t{}".format(k,d[k]))
 
